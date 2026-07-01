@@ -1,26 +1,32 @@
 {
-  "name": "krishna-ai",
-  "version": "1.0.0",
-  "description": "An interactive web application designed to teach children the stories and teachings of Krishna from the Bhagwat Gita in a fun and engaging way. The app combines colorful, kid-friendly story pages with an AI-powered Krishna assistant that answers questions and helps children explore the stories in depth.",
-  "main": "index.js",
+  "name": "krishna-leela",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run lint && npm run typecheck && npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/prashma03/bhagwatGita_kidsApp.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/prashma03/bhagwatGita_kidsApp/issues"
-  },
-  "homepage": "https://github.com/prashma03/bhagwatGita_kidsApp#readme",
   "dependencies": {
-    "next": "^16.2.2",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "next": "16.2.2",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "description": "A responsive collection of Krishna stories and simplified Bhagavad Gita wisdom.",
+  "engines": {
+    "node": ">=20.9.0"
   }
 }

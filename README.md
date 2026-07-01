@@ -1,30 +1,34 @@
-# bhagwatGita_kidsApp
+# Leela — Stories of Krishna
 
-An interactive web application designed to teach children the stories and teachings of Krishna from the Bhagwat Gita in a fun and engaging way. The app combines colorful, kid-friendly story pages with an AI-powered Krishna assistant that answers questions and helps children explore the stories in depth.
-
-# Bhagwat Gita Kids App
-
-A fun and interactive web app designed for kids to learn stories from the Bhagwat Gita and Krishna’s life.  
-It features a Krishna AI assistant that can answer questions about the stories, making learning engaging and educational.
+A responsive Next.js experience with little Krishna stories and simplified Bhagavad Gita wisdom in clear, welcoming English.
 
 ## Features
 
-- **Story Library**: Interactive stories from the Bhagwat Gita for kids
-- **Krishna AI Assistant**: Answers questions and explains concepts in simple language
-- **Kid-Friendly Design**: Colorful, intuitive interface with illustrations
-- **Responsive**: Works on both desktop and mobile
+- Six interactive Krishna stories with gentle life lessons
+- Simplified Bhagavad Gita reflections organized by theme
+- Read-aloud support through the browser's speech engine
+- A kid-friendly story corner and quiz
+- Saved reflections and responsive mobile navigation
 
-## Tech Stack
+## Run locally
 
-- **Frontend**: React / Next.js
-- **Backend**: Node.js / Express (if any)
-- **AI Integration**: OpenAI API or other chatbot API
-- **Styling**: Tailwind CSS / CSS modules
-
-## Getting Started
-
-1. Clone the repo:
+Requirements: Node.js 20.9 or newer.
 
 ```bash
-git clone https://github.com/prashma03/bhagwatGita_kidsApp.git
+npm ci
+npm run dev
 ```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Verify before publishing
+
+```bash
+npm run check
+```
+
+This runs linting, TypeScript validation, and a production build.
+
+## Notes
+
+The Gita text is presented as approachable educational paraphrase, not literal Sanskrit translation.
