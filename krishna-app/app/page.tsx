@@ -1,4 +1,8 @@
 import StoryCard from "../components/StoryCard";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Bhagwat Gita Story time",
+};
 
 export default function Home() {
   const stories = [

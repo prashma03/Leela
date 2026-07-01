@@ -27,7 +27,16 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <div>
+          <img
+            src="/logo/krishna.png"
+            alt="Krishna Logo"
+            style={{ height: "50px" }}
+          />
+        </div>
+      </body>
     </html>
   );
 }
