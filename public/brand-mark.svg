@@ -1,0 +1,21 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Krishna-inspired brand mark</title>
+  <desc id="desc">A sacred teal and gold mark with a peacock feather, moon, flute, and soft storybook glow.</desc>
+  <circle cx="48" cy="48" r="45" fill="#073F40"/>
+  <circle cx="48" cy="48" r="39" stroke="#F0D28E" stroke-width="1.6" opacity=".58"/>
+  <circle cx="66" cy="28" r="10" fill="#F7DF9F"/>
+  <circle cx="70" cy="24" r="10" fill="#073F40"/>
+  <path d="M27 67C39 59 55 58 70 66" stroke="#6C9B8F" stroke-width="3" stroke-linecap="round" opacity=".82"/>
+  <path d="M24 75C39 69 57 69 73 75" stroke="#D8AD5F" stroke-width="2.2" stroke-linecap="round" opacity=".9"/>
+  <path d="M35 67C42 47 54 34 73 21" stroke="#E8C776" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M65 22C49 27 41 40 43 56C59 54 73 41 78 26C75 23 70 21 65 22Z" fill="#79A06E"/>
+  <path d="M65 30C56 34 52 42 53 51C62 50 70 42 73 33C71 31 68 30 65 30Z" fill="#2E8791"/>
+  <path d="M65 37C60 39 58 43 59 48C64 47 68 43 69 38C68 37 67 36 65 37Z" fill="#D8AD5F"/>
+  <circle cx="65" cy="42" r="3.8" fill="#123B42"/>
+  <path d="M28 57L72 45" stroke="#D8AD5F" stroke-width="5.2" stroke-linecap="round"/>
+  <path d="M28 57L72 45" stroke="#F2D989" stroke-width="2" stroke-linecap="round" opacity=".75"/>
+  <circle cx="43" cy="53" r="1.8" fill="#70451F"/>
+  <circle cx="55" cy="50" r="1.8" fill="#70451F"/>
+  <path d="M23 25L26 31L32 33L26 35L23 41L20 35L14 33L20 31L23 25Z" fill="#D8AD5F"/>
+  <path d="M74 65L76 69L81 71L76 72L74 77L72 72L67 71L72 69L74 65Z" fill="#F0D28E" opacity=".85"/>
+</svg>
