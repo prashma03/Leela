@@ -1,7 +1,38 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { FormEvent, useState } from "react";
 
 export default function LoginPage() {
+  const [mode, setMode] = useState<"login" | "signup">("login");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [status, setStatus] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (busy) return;
+    setBusy(true);
+    setStatus("");
+    try {
+      const response = await fetch("/api/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mode, name, email, password }),
+      });
+      const data = (await response.json()) as { error?: string };
+      if (!response.ok) throw new Error(data.error || "Unable to continue.");
+      window.location.href = "/";
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : "Unable to continue.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return (
     <main className="login-page">
       <section className="login-art" aria-hidden="true">
@@ -24,21 +55,55 @@ export default function LoginPage() {
           Back to Leela
         </Link>
         <Image src="/brand-mark.svg" alt="Leela symbol" width={54} height={54} priority />
-        <p>Continue your journey</p>
-        <h2 id="login-title">Sign in</h2>
-        <form>
+        <p>{mode === "login" ? "Continue your journey" : "Begin your journey"}</p>
+        <h2 id="login-title">{mode === "login" ? "Sign in" : "Create account"}</h2>
+        <form onSubmit={submit}>
+          {mode === "signup" && (
+            <label>
+              Name
+              <input
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                name="name"
+                placeholder="Little friend"
+                autoComplete="name"
+              />
+            </label>
+          )}
           <label>
             Email
-            <input type="email" name="email" placeholder="you@example.com" autoComplete="email" />
+            <input
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              autoComplete="email"
+              required
+            />
           </label>
           <label>
             Password
-            <input type="password" name="password" placeholder="••••••••" autoComplete="current-password" />
+            <input
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              type="password"
+              name="password"
+              placeholder="At least 8 characters"
+              autoComplete={mode === "login" ? "current-password" : "new-password"}
+              required
+            />
           </label>
-          <button type="button">Login</button>
+          <button type="submit" disabled={busy}>
+            {busy ? "Please wait..." : mode === "login" ? "Login" : "Create account"}
+          </button>
         </form>
+        {status && <strong className="login-status">{status}</strong>}
         <small>
-          New here? <a href="#">Create an account</a>
+          {mode === "login" ? "New here?" : "Already have an account?"}{" "}
+          <button type="button" onClick={() => setMode(mode === "login" ? "signup" : "login")}>
+            {mode === "login" ? "Create an account" : "Sign in"}
+          </button>
         </small>
       </section>
     </main>
