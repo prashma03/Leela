@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
+import { tmpdir } from "node:os";
 
 export type AccountMemory = {
   name?: string;
@@ -32,7 +33,10 @@ type StoreShape = {
   users: StoredAccount[];
 };
 
-const storePath = join(process.cwd(), ".data", "leela-users.json");
+const storePath = join(
+  process.env.LEELA_DATA_DIR || (process.env.VERCEL ? tmpdir() : join(process.cwd(), ".data")),
+  "leela-users.json",
+);
 
 function emptyStore(): StoreShape {
   return { users: [] };
