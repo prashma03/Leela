@@ -5,7 +5,7 @@ A responsive Next.js experience with little Krishna stories and simplified Bhaga
 ## Features
 
 - Two hundred interactive Krishna stories with gentle life lessons
-- Krishna AI chat guide with story and Gita-based responses
+- Ask Leela chat guide with story and Gita-based responses
 - Simplified Bhagavad Gita reflections organized by theme
 - Read-aloud support through the browser's speech engine
 - A kid-friendly story corner and quiz
@@ -32,7 +32,7 @@ This runs linting, TypeScript validation, and a production build.
 
 ## Notes
 
-The Gita text is presented as approachable educational paraphrase, not literal Sanskrit translation.
+The Gita text is presented as approachable educational paraphrase, not literal Sanskrit translation. Leela should keep this distinction visible anywhere Gita content is surfaced.
 
 ## Artwork
 

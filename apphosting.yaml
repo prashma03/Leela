@@ -1,0 +1,12 @@
+runConfig:
+  minInstances: 0
+  maxInstances: 3
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+
+env:
+  - variable: LEELA_DATA_DIR
+    value: /tmp
+    availability:
+      - RUNTIME
