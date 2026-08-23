@@ -10,6 +10,13 @@ import {
 } from "@/app/lib/account-store";
 
 const sessionCookie = "leela_session";
+const demoSession = "leela-demo";
+const demoUser = {
+  id: "demo",
+  name: "Demo visitor",
+  email: "demo@leela.app",
+  memory: {},
+};
 
 async function currentSession() {
   return (await cookies()).get(sessionCookie)?.value;
@@ -26,18 +33,25 @@ function setSession(response: NextResponse, token: string) {
 }
 
 export async function GET() {
-  const user = getAccountBySession(await currentSession());
+  const token = await currentSession();
+  const user = token === demoSession ? demoUser : getAccountBySession(token);
   return NextResponse.json({ user });
 }
 
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as {
-      mode?: "login" | "signup";
+      mode?: "login" | "signup" | "demo";
       name?: string;
       email?: string;
       password?: string;
     };
+
+    if (body.mode === "demo") {
+      const response = NextResponse.json({ user: demoUser });
+      setSession(response, demoSession);
+      return response;
+    }
 
     const user =
       body.mode === "signup"

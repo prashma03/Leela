@@ -39,6 +39,24 @@ export default function LoginPage() {
     }
   }
 
+  async function startDemo() {
+    if (busy) return;
+    setBusy(true);
+    setStatus("");
+    try {
+      const response = await fetch("/api/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mode: "demo" }),
+      });
+      if (!response.ok) throw new Error("Unable to open the demo.");
+      window.location.href = "/";
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : "Unable to open the demo.");
+      setBusy(false);
+    }
+  }
+
   return (
     <main className="login-page">
       <section className="login-art" aria-hidden="true">
@@ -105,9 +123,9 @@ export default function LoginPage() {
           </button>
         </form>
         {status && <strong className="login-status">{status}</strong>}
-        <Link className="entry-signin" href="/?demo=1">
-          Try demo without signing in
-        </Link>
+        <button className="entry-signin" type="button" disabled={busy} onClick={startDemo}>
+          {busy ? "Opening demo..." : "Try demo without a password"}
+        </button>
         <small>
           {mode === "login" ? "New here?" : "Already have an account?"}{" "}
           <button type="button" onClick={() => setMode(mode === "login" ? "signup" : "login")}>
