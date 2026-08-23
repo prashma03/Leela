@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 export default function LoginPage() {
   const [mode, setMode] = useState<"login" | "signup">("login");
@@ -11,6 +11,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("mode") === "signup") {
+      setMode("signup");
+    }
+  }, []);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -99,6 +105,9 @@ export default function LoginPage() {
           </button>
         </form>
         {status && <strong className="login-status">{status}</strong>}
+        <Link className="entry-signin" href="/?demo=1">
+          Try demo without signing in
+        </Link>
         <small>
           {mode === "login" ? "New here?" : "Already have an account?"}{" "}
           <button type="button" onClick={() => setMode(mode === "login" ? "signup" : "login")}>
