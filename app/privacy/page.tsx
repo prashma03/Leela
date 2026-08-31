@@ -21,7 +21,7 @@ export default function PrivacyPage() {
       <h2>Advertising and sales</h2>
       <p>Leela currently contains no advertising SDK, paid download, subscription, or in-app purchase.</p>
       <h2>Your choices</h2>
-      <p>Local journey information can be cleared from My Journey. Adults can sign out at any time. This policy will be updated before broader testing if Leela&apos;s storage providers or data practices change.</p>
+      <p>Local journey information can be cleared from My Journey. Adults can sign out at any time or <a href="/delete-account">permanently delete their account and saved server data</a>. This policy will be updated before broader testing if Leela&apos;s storage providers or data practices change.</p>
       <p><small>Last updated: August 31, 2026</small></p>
     </main>
   );

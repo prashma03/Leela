@@ -6,6 +6,7 @@ import {
   clearSession,
   createAccount,
   createSession,
+  deleteAccountBySession,
   getAccountBySession,
 } from "@/app/lib/account-store";
 
@@ -76,9 +77,25 @@ export async function POST(request: Request) {
   }
 }
 
-export async function DELETE() {
-  clearSession(await currentSession());
-  const response = NextResponse.json({ user: null });
+export async function DELETE(request: Request) {
+  const token = await currentSession();
+  const deleteAccount = new URL(request.url).searchParams.get("deleteAccount") === "true";
+
+  if (deleteAccount) {
+    if (!token || token === demoSession) {
+      return NextResponse.json(
+        { error: "Sign in to a personal account before deleting it." },
+        { status: 400 },
+      );
+    }
+    if (!deleteAccountBySession(token)) {
+      return NextResponse.json({ error: "Account not found." }, { status: 404 });
+    }
+  } else {
+    clearSession(token);
+  }
+
+  const response = NextResponse.json({ user: null, deleted: deleteAccount });
   response.cookies.delete(sessionCookie);
   return response;
 }

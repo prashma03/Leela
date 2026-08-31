@@ -164,6 +164,15 @@ export function clearSession(token?: string) {
   if (changed) writeStore(store);
 }
 
+export function deleteAccountBySession(token?: string) {
+  if (!token) return false;
+  const store = readStore();
+  const remainingUsers = store.users.filter((user) => !user.sessions.includes(token));
+  if (remainingUsers.length === store.users.length) return false;
+  writeStore({ users: remainingUsers });
+  return true;
+}
+
 export function updateAccountMemory(userId: string, memory: AccountMemory) {
   const store = readStore();
   const user = store.users.find((item) => item.id === userId);
