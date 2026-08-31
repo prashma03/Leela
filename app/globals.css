@@ -225,3 +225,10 @@ main{overflow-x:hidden}.topbar{position:sticky;top:0;z-index:80;min-height:72px;
 .entry-back{border:0;background:none;color:var(--teal);padding:0;margin:0 0 24px;display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-size:11px;font-weight:800}
 .entry-back svg{transform:rotate(180deg)}
 @media(max-width:620px){.audience-choices{grid-template-columns:1fr}.audience-choice{min-height:142px!important;padding:18px!important}}
+
+/* Kids Corner exposes only child-appropriate navigation. */
+main:has(.kids-magic) .topbar nav button:not(:nth-child(5)),main:has(.kids-magic) .topbar .head{display:none}
+main:has(.kids-magic) .topbar nav{justify-content:flex-end}
+main:has(.kids-magic) .mobile button:not(:nth-child(5)){display:none}
+main:has(.kids-magic) .mobile{justify-content:center}
+main:has(.kids-magic) .site-footer .footer-links,main:has(.kids-magic) .site-footer .art-credit{display:none}
