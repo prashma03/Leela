@@ -127,7 +127,7 @@ export function authenticateAccount(input: { email: string; password: string }) 
   const store = readStore();
   const user = store.users.find((item) => item.email === email);
   if (!user || !safeCompare(hashPassword(input.password, user.salt), user.passwordHash)) {
-    throw new Error("Email or password is incorrect.");
+    throw new Error("We couldn't sign you in. Check your email and password. If you're new to Leela, create an account first.");
   }
   return toPublic(user);
 }
