@@ -133,7 +133,7 @@ export default function Home(){
  const visibleStories=filteredStories.slice(0,visibleStoryCount);
  const krishnaState:KrishnaAnimationState=isKrishnaThinking?"thinking":krishnaMoment??(isChatFocused||chatInput.trim()?"listening":"idle");
  const gardenSlots=Array.from({length:8},(_,i)=>i);
- const go=(v:string)=>{if(kidsSession&&v!=="kids")return;setView(v);setSelected(null);setVisibleStoryCount(6);window.scrollTo({top:0,behavior:"smooth"})};
+ const go=(v:string)=>{if(kidsSession){if(v==="kids")setShowAuth(true);return}setView(v);setSelected(null);setVisibleStoryCount(6);window.scrollTo({top:0,behavior:"smooth"})};
  const goNeed=(gita:string,story:string)=>{setFilter(gita);setStoryTone(story);go("gita")};
  const goStoryPath=(story:string)=>{setStoryTone(story);go("stories")};
  const enterDemo=async()=>{if(enteringDemo)return;setEnteringDemo(true);try{const response=await fetch("/api/auth",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({mode:"demo"})});const data=await response.json() as {user?:AccountSession;error?:string};if(!response.ok||!data.user)throw new Error(data.error||"Unable to open the demo.");acceptAccount(data.user);setView("home");window.scrollTo({top:0,behavior:"smooth"})}catch(error){tell(error instanceof Error?error.message:"Unable to open the demo.")}finally{setEnteringDemo(false)}};

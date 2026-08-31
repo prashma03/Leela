@@ -232,3 +232,6 @@ main:has(.kids-magic) .topbar nav{justify-content:flex-end}
 main:has(.kids-magic) .mobile button:not(:nth-child(5)){display:none}
 main:has(.kids-magic) .mobile{justify-content:center}
 main:has(.kids-magic) .site-footer .footer-links,main:has(.kids-magic) .site-footer .art-credit{display:none}
+main:has(.kids-magic) .topbar nav button:nth-child(5),main:has(.kids-magic) .mobile button:nth-child(5){font-size:0}
+main:has(.kids-magic) .topbar nav button:nth-child(5):after,main:has(.kids-magic) .mobile button:nth-child(5):after{content:"Parent area";font-size:10px;font-weight:800}
+main:has(.kids-magic) .mobile button:nth-child(5):after{font-size:7px}
