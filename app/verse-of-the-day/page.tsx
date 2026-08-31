@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import NotificationControl from "./notification-control";
 
 const verses = [
   { ref: "Bhagavad Gita 2.47", verse: "Focus on the work in front of you, not on controlling its reward.", meaning: "Give your best to what you can do today. Your effort and intention are yours.", reflection: "What result am I trying too hard to control?" },
@@ -36,6 +37,7 @@ export default function VerseOfTheDayPage() {
       <section><b>Meaning for today</b><p>{daily.meaning}</p></section>
       <section><b>A question to carry</b><p>{daily.reflection}</p></section>
       <button type="button" onClick={listen}>Listen to today&apos;s verse</button>
+      <NotificationControl />
       <small>Leela uses educational paraphrases with references, not literal Sanskrit translations.</small>
     </article>
   </main>;
