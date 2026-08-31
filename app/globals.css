@@ -235,3 +235,5 @@ main:has(.kids-magic) .site-footer .footer-links,main:has(.kids-magic) .site-foo
 main:has(.kids-magic) .topbar nav button:nth-child(5),main:has(.kids-magic) .mobile button:nth-child(5){font-size:0}
 main:has(.kids-magic) .topbar nav button:nth-child(5):after,main:has(.kids-magic) .mobile button:nth-child(5):after{content:"Parent area";font-size:10px;font-weight:800}
 main:has(.kids-magic) .mobile button:nth-child(5):after{font-size:7px}
+.kids-magic .coloring-tools label,.kids-magic .coloring-tools small{display:none}
+.kids-magic .coloring-tools:after{content:"Color choices stay on this device.";font:13px/1.55 var(--serif);color:#66766f}
