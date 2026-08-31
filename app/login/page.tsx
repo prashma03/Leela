@@ -122,7 +122,18 @@ export default function LoginPage() {
             {busy ? "Please wait..." : mode === "login" ? "Login" : "Create account"}
           </button>
         </form>
-        {status && <strong className="login-status">{status}</strong>}
+        {status && (
+          <div className="login-error-box" role="alert">
+            <strong className="login-status">{status}</strong>
+            {mode === "login" && (
+              <div className="login-error-actions">
+                <button type="button" onClick={() => { setStatus(""); setPassword(""); }}>Try again</button>
+                <button type="button" onClick={() => { setMode("signup"); setStatus(""); setPassword(""); }}>Sign up</button>
+                <a href="mailto:hello@leela.app?subject=Leela%20password%20help">Forgot password?</a>
+              </div>
+            )}
+          </div>
+        )}
         <button className="entry-signin" type="button" disabled={busy} onClick={startDemo}>
           {busy ? "Opening demo..." : "Try demo without a password"}
         </button>
