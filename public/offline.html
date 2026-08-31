@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0d5554" />
+    <title>Leela is offline</title>
+    <style>
+      :root { color-scheme: light; font-family: "Segoe UI", sans-serif; }
+      * { box-sizing: border-box; }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: radial-gradient(circle at 50% 20%, #f4dfaa, #fbf7ec 38%);
+        color: #173438;
+      }
+      main {
+        width: min(100%, 440px);
+        padding: 42px 30px;
+        text-align: center;
+        background: #fffdf7;
+        border: 1px solid #e9dfcc;
+        box-shadow: 0 20px 55px rgba(43, 65, 54, 0.12);
+      }
+      .mark {
+        width: 62px;
+        height: 62px;
+        margin: 0 auto 22px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: #0d5554;
+        color: #f0d28e;
+        font-size: 30px;
+      }
+      h1 { margin: 0 0 12px; color: #0d5554; font: 40px/1.05 Georgia, serif; }
+      p { margin: 0 auto 24px; max-width: 330px; color: #667773; line-height: 1.6; }
+      button {
+        min-height: 48px;
+        padding: 0 24px;
+        border: 0;
+        border-radius: 4px;
+        background: #0d5554;
+        color: white;
+        font: 700 13px "Segoe UI", sans-serif;
+        cursor: pointer;
+      }
+      button:focus-visible { outline: 3px solid #d8ad5f; outline-offset: 3px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="mark" aria-hidden="true">L</div>
+      <h1>A quiet pause</h1>
+      <p>Leela cannot connect right now. Check your internet connection, then try again.</p>
+      <button type="button" onclick="location.reload()">Try again</button>
+    </main>
+  </body>
+</html>
