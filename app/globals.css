@@ -189,3 +189,27 @@ main{overflow-x:hidden}.topbar{position:sticky;top:0;z-index:80;min-height:72px;
 .entry-gate .brand{margin-bottom:28px}.entry-gate h1{font-size:clamp(42px,5vw,62px)}.entry-gate article>p:not(.eyebrow){max-width:370px;font-size:16px;line-height:1.55;margin-bottom:24px}.entry-gate small{margin-top:14px}.entry-art:before{background:linear-gradient(90deg,rgba(7,63,64,.62),rgba(7,63,64,.18) 58%,rgba(251,247,236,.08))}
 @media(max-width:900px){.entry-gate{min-height:100vh}.entry-art{min-height:260px}.entry-gate article{margin:20px auto 76px}}
 @media(max-width:620px){.entry-art{min-height:220px}.entry-gate h1{font-size:42px}.entry-gate article>p:not(.eyebrow){font-size:15px}}
+
+/* Keep each destination focused instead of turning it into one long landing page. */
+.app-wisdom,.ask-preview,.kids-home-preview{display:none}
+.library-page .library{max-height:calc(100vh - 330px);min-height:420px;overflow-y:auto;overscroll-behavior:contain;padding:4px 8px 24px 4px;scrollbar-gutter:stable}
+.gita-page .gita-list{max-height:calc(100vh - 350px);min-height:420px;overflow-y:auto;overscroll-behavior:contain;padding-right:8px;scrollbar-gutter:stable}
+.parent-dashboard>section:last-child{max-height:620px;overflow-y:auto;overscroll-behavior:contain}
+.kids-magic{display:flex;flex-direction:column}
+.kids-activities{order:-1;position:sticky;top:84px;z-index:30;margin:0 0 18px;padding:10px;border:1px solid rgba(216,173,95,.2);border-radius:18px;background:rgba(251,247,236,.94);backdrop-filter:blur(14px);box-shadow:0 12px 28px rgba(25,57,53,.08)}
+.kids-magic-top{order:0}.magic-forest-card{order:1}.friendship-card{order:2}.memory-card{order:3}.kids-magic-grid{order:4}
+
+@media(max-width:700px){
+ .home-story-filters+.story-grid .story-card:nth-child(n+3){display:none}
+ .library-page .library,.gita-page .gita-list{max-height:62vh;min-height:360px;padding-right:4px}
+ .kids-activities{top:68px;display:flex;overflow-x:auto;justify-content:flex-start;scroll-snap-type:x proximity;padding:8px;margin-bottom:12px;border-radius:14px}
+ .kids-activities button{flex:0 0 108px;min-height:72px;scroll-snap-align:start}
+ .kids-magic-top{display:block}.daily-blessing{display:none}
+ .friendship-card,.memory-card{display:none}
+ .magic-forest-card{min-height:0}.magic-forest-card .storybook-krishna{display:none}.forest-map{min-height:310px}
+ .kids-magic-grid{display:flex;overflow-x:auto;gap:12px;scroll-snap-type:x mandatory;margin:14px -14px 0;padding:0 14px 18px}
+ .kids-magic-grid>article{display:block!important;flex:0 0 calc(100vw - 44px);max-height:590px;min-height:420px;overflow-y:auto;scroll-snap-align:center}
+ .kids-magic-grid .bedtime .art{height:150px}
+ .treasure-grid{grid-template-columns:repeat(2,1fr)}
+ .site-footer{min-height:130px;padding-block:24px}
+}
