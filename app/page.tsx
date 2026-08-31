@@ -126,7 +126,7 @@ export default function Home(){
  useEffect(()=>writeSaved("leelaTreasures",collectedTreasures),[collectedTreasures]);
  useEffect(()=>writeSaved("leelaSaved",saved),[saved]);
  useEffect(()=>writeSaved("leelaAutoVoice",autoVoice?"true":""),[autoVoice]);
- useEffect(()=>{fetch("/api/memory",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({profileId:"local-child",memory:{name:kidName,mood:kidMood,favoriteAnimal:kidAnimal,favoriteActivity:kidActivity,goodDeeds,treasures:collectedTreasures,savedStories:saved,dailyAdventureDone:adventureDone}})}).catch(()=>{})},[kidName,kidAnimal,kidActivity,kidMood,goodDeeds,collectedTreasures,saved,adventureDone]);
+ useEffect(()=>{if(!account||kidsSession)return;fetch("/api/memory",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({memory:{name:kidName,mood:kidMood,favoriteAnimal:kidAnimal,favoriteActivity:kidActivity,goodDeeds,treasures:collectedTreasures,savedStories:saved,dailyAdventureDone:adventureDone}})}).catch(()=>{})},[account,kidsSession,kidName,kidAnimal,kidActivity,kidMood,goodDeeds,collectedTreasures,saved,adventureDone]);
  const toneLabels=categoryLabels as Record<string,string>;
  const toneOptions=storyCategories.map(([id])=>id);
  const filteredStories=stories.filter(s=>(storyTone==="All"||storyCategory(s)===storyTone)&&[s.title,s.subtitle,s.intro,s.lesson,...s.body].join(" ").toLowerCase().includes(storyQuery.toLowerCase().trim()));
