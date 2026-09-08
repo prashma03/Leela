@@ -5,8 +5,6 @@ runConfig:
   cpu: 1
   memoryMiB: 512
 
-env:
-  - variable: LEELA_DATA_DIR
-    value: /tmp
-    availability:
-      - RUNTIME
+# Configure SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, SUPABASE_SECRET_KEY,
+# and LEELA_APP_URL as runtime environment variables/secrets before deployment.
+# See docs/SUPABASE_SETUP.md. Account data must never be stored in /tmp.

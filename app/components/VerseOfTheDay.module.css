@@ -1,0 +1,72 @@
+.card {
+  width: min(100%, 900px);
+  margin-inline: auto;
+  padding: clamp(var(--space-3, 20px), 3vw, 32px);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--gold);
+  color: var(--ink);
+}
+.heading {
+  margin: 0 0 12px;
+  color: var(--teal);
+  font: 700 12px/1.5 var(--sans);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.content { min-height: 130px; }
+.reference {
+  margin: 0 0 var(--space-1, 8px);
+  color: var(--teal);
+  font: 600 13px/1.5 var(--sans);
+}
+.reflection {
+  max-width: 65ch;
+  margin: 0;
+  font: 400 clamp(20px, 2.1vw, 26px)/1.5 var(--serif);
+  overflow-wrap: anywhere;
+}
+.label, .placeholder {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font: 12px/1.5 var(--sans);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-top: 12px;
+  padding-top: var(--space-1, 8px);
+  border-top: 1px solid var(--line);
+}
+.actions button, .actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1, 8px);
+  min-height: var(--control-height, 44px);
+  min-width: 44px;
+  padding: 4px 0;
+  border: 0;
+  border-radius: var(--control-radius, 4px);
+  background: transparent;
+  color: var(--teal);
+  font: 600 13px/1.5 var(--sans);
+  text-decoration: none;
+  cursor: pointer;
+}
+.actions button[aria-pressed="true"] { text-decoration: underline; }
+.actions button:disabled { opacity: .55; cursor: default; }
+.actions a:hover, .actions button:hover { text-decoration: underline; }
+.actions :focus-visible, .source summary:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 4px;
+}
+.source { color: var(--muted); font: 12px/1.6 var(--sans); }
+.source summary { cursor: pointer; width: fit-content; min-height: 44px; padding-block: 12px; }
+.source p { max-width: 75ch; margin: 4px 0 8px; }
+.audioStatus { margin: 0; color: var(--muted); font: 12px/1.5 var(--sans); }
+.audioStatus:not(:empty) { margin-block: 8px; }
+@media (max-width: 480px) {
+  .content { min-height: 170px; }
+  .actions { gap: 4px 20px; }
+}

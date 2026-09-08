@@ -1,185 +1,82 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
-import { tmpdir } from "node:os";
+import "server-only";
 
-export type AccountMemory = {
-  name?: string;
-  mood?: string;
-  favoriteAnimal?: string;
-  favoriteActivity?: string;
-  goodDeeds?: string[];
-  treasures?: string[];
-  savedStories?: string[];
-  dailyAdventureDone?: boolean;
-};
+import type { SupabaseClient, User } from "@supabase/supabase-js";
+import { AccountError, completeMemory, normalizeEmail, normalizeMemory, type AccountMemory, type PublicAccount } from "./account-memory";
 
-export type PublicAccount = {
-  id: string;
-  name: string;
-  email: string;
-  memory: AccountMemory;
-};
+export type { AccountMemory, PublicAccount } from "./account-memory";
 
-type StoredAccount = PublicAccount & {
-  passwordHash: string;
-  salt: string;
-  sessions: string[];
-  createdAt: string;
-  updatedAt: string;
-};
-
-type StoreShape = {
-  users: StoredAccount[];
-};
-
-const storePath = join(
-  process.env.LEELA_DATA_DIR || (process.env.VERCEL ? tmpdir() : join(process.cwd(), ".data")),
-  "leela-users.json",
-);
-
-function emptyStore(): StoreShape {
-  return { users: [] };
+function authFailure(error: { status?: number; code?: string }, signingUp = false): never {
+  if (error.status === 429) throw new AccountError("Too many attempts. Please wait before trying again.", 429);
+  if (error.status && error.status >= 500) throw new AccountError("Sign-in is temporarily unavailable. Please try again.", 503);
+  if (error.code === "email_not_confirmed") throw new AccountError("Please confirm your email before signing in.", 401);
+  throw new AccountError(signingUp
+    ? "Unable to create the account. Check your email and use a strong password of at least 8 characters."
+    : "We couldn't sign you in. Check your email and password.", signingUp ? 400 : 401);
 }
 
-function readStore(): StoreShape {
-  try {
-    if (!existsSync(storePath)) return emptyStore();
-    return JSON.parse(readFileSync(storePath, "utf8")) as StoreShape;
-  } catch {
-    return emptyStore();
+function credentials(input: { email: unknown; password: unknown }, signup: boolean) {
+  if (typeof input.email !== "string" || typeof input.password !== "string") {
+    throw new AccountError("Email and password are required.");
   }
-}
-
-function writeStore(store: StoreShape) {
-  mkdirSync(dirname(storePath), { recursive: true });
-  writeFileSync(storePath, JSON.stringify(store, null, 2));
-}
-
-function hashPassword(password: string, salt: string) {
-  return scryptSync(password, salt, 64).toString("hex");
-}
-
-function safeCompare(left: string, right: string) {
-  const a = Buffer.from(left, "hex");
-  const b = Buffer.from(right, "hex");
-  return a.length === b.length && timingSafeEqual(a, b);
-}
-
-function toPublic(user: StoredAccount): PublicAccount {
-  return {
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    memory: user.memory || {},
-  };
-}
-
-export function normalizeEmail(email: string) {
-  return email.trim().toLowerCase().slice(0, 180);
-}
-
-export function normalizeMemory(memory: AccountMemory): AccountMemory {
-  return {
-    name: memory.name?.slice(0, 60) || "",
-    mood: memory.mood?.slice(0, 30) || "",
-    favoriteAnimal: memory.favoriteAnimal?.slice(0, 60) || "",
-    favoriteActivity: memory.favoriteActivity?.slice(0, 80) || "",
-    goodDeeds: (memory.goodDeeds || []).slice(-80),
-    treasures: (memory.treasures || []).slice(-30),
-    savedStories: (memory.savedStories || []).slice(-120),
-    dailyAdventureDone: Boolean(memory.dailyAdventureDone),
-  };
-}
-
-export function createAccount(input: { name: string; email: string; password: string }) {
   const email = normalizeEmail(input.email);
-  const name = input.name.trim().slice(0, 60) || "Little friend";
-  if (!email.includes("@")) throw new Error("Please enter a valid email.");
-  if (input.password.length < 8) throw new Error("Password must be at least 8 characters.");
-
-  const store = readStore();
-  if (store.users.some((user) => user.email === email)) {
-    throw new Error("An account with this email already exists.");
+  if (email.length > 320 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    throw new AccountError("Please enter a valid email.");
   }
-
-  const salt = randomBytes(16).toString("hex");
-  const now = new Date().toISOString();
-  const user: StoredAccount = {
-    id: randomBytes(12).toString("hex"),
-    name,
-    email,
-    salt,
-    passwordHash: hashPassword(input.password, salt),
-    sessions: [],
-    memory: { name },
-    createdAt: now,
-    updatedAt: now,
-  };
-
-  store.users.push(user);
-  writeStore(store);
-  return toPublic(user);
-}
-
-export function authenticateAccount(input: { email: string; password: string }) {
-  const email = normalizeEmail(input.email);
-  const store = readStore();
-  const user = store.users.find((item) => item.email === email);
-  if (!user || !safeCompare(hashPassword(input.password, user.salt), user.passwordHash)) {
-    throw new Error("We couldn't sign you in. Check your email and password. If you're new to Leela, create an account first.");
+  if (input.password.length < (signup ? 8 : 1) || input.password.length > 1024) {
+    throw new AccountError("Please enter a password" + (signup ? " of at least 8 characters." : "."));
   }
-  return toPublic(user);
+  return { email, password: input.password };
 }
 
-export function createSession(userId: string) {
-  const store = readStore();
-  const user = store.users.find((item) => item.id === userId);
-  if (!user) throw new Error("Account not found.");
-  const token = randomBytes(32).toString("hex");
-  user.sessions = [token, ...user.sessions].slice(0, 8);
-  user.updatedAt = new Date().toISOString();
-  writeStore(store);
-  return token;
+async function profileForUser(client: SupabaseClient, user: User): Promise<PublicAccount> {
+  const { data, error } = await client.from("leela_profiles").select("id,name,memory").eq("id", user.id).single();
+  if (error || !data) throw new AccountError("Your account is signed in, but its journey could not be loaded. Please try again.", 503);
+  return { id: user.id, email: user.email || "", name: data.name, memory: completeMemory(data.memory, data.name) };
 }
 
-export function getAccountBySession(token?: string) {
-  if (!token) return null;
-  const user = readStore().users.find((item) => item.sessions.includes(token));
-  return user ? toPublic(user) : null;
-}
-
-export function clearSession(token?: string) {
-  if (!token) return;
-  const store = readStore();
-  let changed = false;
-  for (const user of store.users) {
-    const nextSessions = user.sessions.filter((session) => session !== token);
-    if (nextSessions.length !== user.sessions.length) {
-      user.sessions = nextSessions;
-      user.updatedAt = new Date().toISOString();
-      changed = true;
-    }
+export async function getCurrentAccount(client: SupabaseClient) {
+  // getUser validates with Supabase Auth and refreshes expired access tokens.
+  // Never authorize from the unverified user object in getSession().
+  const { data, error } = await client.auth.getUser();
+  if (error) {
+    if (error.name === "AuthSessionMissingError" || error.status === 401 || error.status === 403 ||
+        ["refresh_token_not_found", "refresh_token_already_used", "session_not_found"].includes(error.code || "")) return null;
+    throw new AccountError("Unable to restore your session right now. Please try again.", 503);
   }
-  if (changed) writeStore(store);
+  return data.user ? profileForUser(client, data.user) : null;
 }
 
-export function deleteAccountBySession(token?: string) {
-  if (!token) return false;
-  const store = readStore();
-  const remainingUsers = store.users.filter((user) => !user.sessions.includes(token));
-  if (remainingUsers.length === store.users.length) return false;
-  writeStore({ users: remainingUsers });
-  return true;
+export async function createAccount(client: SupabaseClient, input: {
+  name: unknown; email: unknown; password: unknown;
+}) {
+  const login = credentials(input, true);
+  if (input.name !== undefined && typeof input.name !== "string") throw new AccountError("Please enter a name.");
+  const name = (typeof input.name === "string" ? input.name.trim().slice(0, 60) : "") || "Little friend";
+  const appUrl = process.env.LEELA_APP_URL;
+  if (!appUrl) throw new AccountError("Email confirmation is not configured yet. Please contact Leela support.", 503);
+  const { data, error } = await client.auth.signUp({
+    ...login,
+    options: { data: { name }, emailRedirectTo: new URL("/auth/confirm", appUrl).href },
+  });
+  if (error) authFailure(error, true);
+  // Email confirmation remains enabled; never create an unverified session ourselves.
+  if (!data.session) return { user: null, requiresEmailConfirmation: true,
+    message: "Check your email to confirm your account, then return to Leela and sign in." };
+  if (!data.user) throw new AccountError("Unable to create the account.", 503);
+  return { user: await profileForUser(client, data.user), requiresEmailConfirmation: false };
 }
 
-export function updateAccountMemory(userId: string, memory: AccountMemory) {
-  const store = readStore();
-  const user = store.users.find((item) => item.id === userId);
-  if (!user) throw new Error("Account not found.");
-  user.memory = normalizeMemory({ ...(user.memory || {}), ...memory });
-  user.name = user.memory.name || user.name;
-  user.updatedAt = new Date().toISOString();
-  writeStore(store);
-  return toPublic(user);
+export async function authenticateAccount(client: SupabaseClient, input: { email: unknown; password: unknown }) {
+  const { data, error } = await client.auth.signInWithPassword(credentials(input, false));
+  if (error) authFailure(error);
+  if (!data.user) throw new AccountError("Unable to sign in.", 401);
+  return profileForUser(client, data.user);
+}
+
+export async function updateAccountMemory(client: SupabaseClient, memory: unknown): Promise<AccountMemory> {
+  // Atomic JSON merge avoids a read/write race that could erase unrelated fields.
+  // SQL obtains the owner from auth.uid(), never from a browser-supplied user ID.
+  const { data, error } = await client.rpc("leela_update_memory", { patch: normalizeMemory(memory) });
+  if (error || !data) throw new AccountError("Your journey could not be saved. Please try again.", 503);
+  return completeMemory(data.memory, data.name);
 }

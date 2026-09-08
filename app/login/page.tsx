@@ -16,6 +16,9 @@ export default function LoginPage() {
     if (new URLSearchParams(window.location.search).get("mode") === "signup") {
       setMode("signup");
     }
+    if (new URLSearchParams(window.location.search).get("confirmation") === "error") {
+      setStatus("That confirmation link is invalid or expired. Try signing in if you already confirmed your email, or sign up again to request a new link.");
+    }
   }, []);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -29,8 +32,13 @@ export default function LoginPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mode, name, email, password }),
       });
-      const data = (await response.json()) as { error?: string };
+      const data = (await response.json()) as { error?: string; requiresEmailConfirmation?: boolean; message?: string };
       if (!response.ok) throw new Error(data.error || "Unable to continue.");
+      if (data.requiresEmailConfirmation) {
+        setPassword("");
+        setStatus(data.message || "Check your email to confirm your account, then sign in.");
+        return;
+      }
       window.location.href = "/";
     } catch (error) {
       setStatus(error instanceof Error ? error.message : "Unable to continue.");

@@ -8,15 +8,21 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "check": "npm run lint && npm run typecheck && npm run build"
+    "check": "npm run lint && npm run typecheck && npm run build",
+    "test:daily": "tsc --module commonjs --outDir .next/daily-tests --esModuleInterop --target es2020 --skipLibCheck tests/daily-verse.test.ts && node --test .next/daily-tests/tests/daily-verse.test.js",
+    "test:accounts": "tsc --module commonjs --outDir .next/account-tests --esModuleInterop --target es2020 --skipLibCheck tests/accounts.test.ts && node --conditions=react-server --test .next/account-tests/tests/accounts.test.js",
+    "test:story-images": "node scripts/story-image-tools.mjs --verify"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.0",
     "@capacitor/core": "^8.5.0",
     "@capacitor/local-notifications": "^8.3.1",
+    "@supabase/ssr": "^0.12.5",
+    "@supabase/supabase-js": "^2.115.0",
     "next": "16.2.2",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@capacitor/cli": "^8.5.0",
@@ -31,6 +37,6 @@
   },
   "description": "A responsive collection of Krishna stories and simplified Bhagavad Gita wisdom.",
   "engines": {
-    "node": ">=20.9.0"
+    "node": ">=22.0.0"
   }
 }

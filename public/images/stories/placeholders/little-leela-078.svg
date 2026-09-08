@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 900" role="img" aria-labelledby="title desc">
+  <title id="title">Damodara and the quiet prayer</title><desc id="desc">Temporary original illustration of a glowing evening lamp near quiet temple steps.</desc>
+  <rect width="720" height="900" fill="#f4e3b7"/><circle cx="120" cy="170" r="95" fill="#c7893f" opacity=".34"/>
+  <path d="M0 650 Q140 450 280 600 T720 580 V900 H0Z" fill="#c7893f" opacity=".3"/>
+  <path d="M0 720 Q180 660 360 720 T720 700 V900 H0Z" fill="#245f5b" opacity=".16"/>
+  <g><path d="M220 590 Q360 720 500 590 Z" fill="#245f5b"/><path d="M360 570 C285 490 330 380 390 330 C420 430 450 505 360 570Z" fill="#c7893f"/><circle cx="360" cy="475" r="96" fill="none" stroke="#c7893f" stroke-width="8" opacity=".45"/></g>
+  <rect x="42" y="42" width="636" height="816" rx="22" fill="none" stroke="#245f5b" stroke-width="3" opacity=".22"/>
+  <text x="52" y="790" fill="#245f5b" font-family="Georgia,serif" font-size="34">Damodara and the quiet prayer</text>
+  <text x="54" y="828" fill="#245f5b" opacity=".72" font-family="Arial,sans-serif" font-size="16" letter-spacing="3">TEMPORARY LEELA ARTWORK</text>
+</svg>

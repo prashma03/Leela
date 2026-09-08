@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 900" role="img" aria-labelledby="title desc">
+  <title id="title">Leela story artwork unavailable</title>
+  <desc id="desc">A warm peacock feather marks story artwork that could not be loaded.</desc>
+  <rect width="720" height="900" fill="#f3e7cd"/>
+  <circle cx="360" cy="380" r="230" fill="#0d5554" opacity=".08"/>
+  <path d="M370 165C180 235 145 525 330 650c125-120 205-326 40-485Z" fill="#2f7f79"/>
+  <path d="M350 640C290 720 250 780 210 835" fill="none" stroke="#9c7439" stroke-width="18" stroke-linecap="round"/>
+  <ellipse cx="342" cy="340" rx="90" ry="122" fill="#d8ad5f"/><ellipse cx="342" cy="340" rx="52" ry="72" fill="#173f43"/>
+  <text x="360" y="820" text-anchor="middle" fill="#173f43" font-family="Georgia,serif" font-size="28">Story artwork coming soon</text>
+</svg>

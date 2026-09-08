@@ -16,13 +16,14 @@ export default function PrivacyPage() {
       <p>Ask Leela, account settings, login, and signup are kept outside Kids Corner. Returning to the adult area requires an adult account action.</p>
       <h2>Adult accounts</h2>
       <p>When an adult creates or uses an account, Leela processes the supplied name, email address, password credential, saved items, and the information the adult chooses to keep. Server memory requests require an authenticated account.</p>
+      <p>Adult authentication is handled by Supabase Auth. Adult profiles and saved journeys are stored in Supabase&apos;s database with per-account access rules. Leela uses secure, HTTP-only session cookies in production to restore sign-in. Browser journey data may also remain on the device; no password or login token is stored in localStorage.</p>
       <h2>Ask Leela</h2>
       <p>Ask Leela is an adult-area feature. A message may be sent to Leela&apos;s server and, when the hosted AI service is available, to that service to generate a response. Do not enter private, medical, financial, or identifying information.</p>
       <h2>Advertising and sales</h2>
       <p>Leela currently contains no advertising SDK, paid download, subscription, or in-app purchase.</p>
       <h2>Your choices</h2>
       <p>Local journey information can be cleared from My Journey. Adults can sign out at any time or <a href="/delete-account">permanently delete their account and saved server data</a>. This policy will be updated before broader testing if Leela&apos;s storage providers or data practices change.</p>
-      <p><small>Last updated: August 31, 2026</small></p>
+      <p><small>Last updated: September 3, 2026</small></p>
     </main>
   );
 }
