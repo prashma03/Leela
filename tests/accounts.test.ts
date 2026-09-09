@@ -14,6 +14,7 @@ function fixture() {
   let refreshes = 0;
   let outage = false;
   let missingProfile = false;
+  let duplicateSignup = false;
   let serial = 0;
   const reply = (data: unknown, status = 200) => new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
   const session = () => {
@@ -36,7 +37,7 @@ function fixture() {
       return reply(session());
     }
     if (url.pathname === "/auth/v1/user") return reply(user);
-    if (url.pathname === "/auth/v1/signup") return reply(user);
+    if (url.pathname === "/auth/v1/signup") return reply(duplicateSignup ? { ...user, identities: [] } : user);
     if (url.pathname === "/auth/v1/logout") return new Response(null, { status: 204 });
     if (url.pathname === "/rest/v1/leela_profiles") {
       assert.equal(url.searchParams.get("id"), "eq." + id);
@@ -64,6 +65,7 @@ function fixture() {
     global: { fetch: transport },
   });
   return { client, jar, profile, refreshes: () => refreshes,
+    duplicateSignup: () => { duplicateSignup = true; },
     outage: () => { outage = true; }, missingProfile: () => { missingProfile = true; } };
 }
 
@@ -123,6 +125,24 @@ test("confirmation-required signup does not claim the user is signed in", async 
     const result = await createAccount(fixture().client(), { name: "Test", email: "test@example.test", password: "valid-password" });
     assert.equal(result.requiresEmailConfirmation, true);
     assert.equal(result.user, null);
+  } finally {
+    if (previous === undefined) delete process.env.LEELA_APP_URL;
+    else process.env.LEELA_APP_URL = previous;
+  }
+});
+
+test("duplicate signup gives a clear sign-in message instead of check-email instructions", async () => {
+  const previous = process.env.LEELA_APP_URL;
+  process.env.LEELA_APP_URL = "https://leela.example";
+  const f = fixture();
+  f.duplicateSignup();
+  try {
+    await assert.rejects(
+      createAccount(f.client(), { name: "Test", email: "test@example.test", password: "valid-password" }),
+      (error: unknown) => error instanceof AccountError &&
+        error.status === 409 &&
+        error.message.includes("already exists")
+    );
   } finally {
     if (previous === undefined) delete process.env.LEELA_APP_URL;
     else process.env.LEELA_APP_URL = previous;

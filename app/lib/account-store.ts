@@ -59,6 +59,12 @@ export async function createAccount(client: SupabaseClient, input: {
     options: { data: { name }, emailRedirectTo: new URL("/auth/confirm", appUrl).href },
   });
   if (error) authFailure(error, true);
+  // Supabase intentionally avoids exposing duplicate signups as a normal error
+  // when email confirmation is enabled. In that case, it can return a user with
+  // no identities, which means this email already belongs to an auth account.
+  if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+    throw new AccountError("An account already exists with this email. Please sign in instead.", 409);
+  }
   // Email confirmation remains enabled; never create an unverified session ourselves.
   if (!data.session) return { user: null, requiresEmailConfirmation: true,
     message: "Check your email to confirm your account, then return to Leela and sign in." };
