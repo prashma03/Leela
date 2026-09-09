@@ -6,6 +6,23 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
+def releaseTaskRequested = gradle.startParameter.taskNames.any { taskName ->
+    taskName.toLowerCase().contains('release')
+}
+if (releaseTaskRequested) {
+    if (!keystorePropertiesFile.exists()) {
+        throw new GradleException('Release signing is not configured. Copy keystore.properties.example to keystore.properties and add the private upload-key values.')
+    }
+    ['storeFile', 'storePassword', 'keyAlias', 'keyPassword'].each { propertyName ->
+        if (!keystoreProperties[propertyName]) {
+            throw new GradleException("Release signing property '${propertyName}' is missing from keystore.properties.")
+        }
+    }
+    if (!rootProject.file(keystoreProperties['storeFile']).isFile()) {
+        throw new GradleException('The release upload keystore configured by storeFile does not exist.')
+    }
+}
+
 android {
     namespace = "com.pronita.leela"
     compileSdk = rootProject.ext.compileSdkVersion

@@ -7,6 +7,7 @@ import { resolveStoryImage, STORY_IMAGE_FALLBACK } from "./story-image-config";
 import VerseOfTheDay from "./components/VerseOfTheDay";
 import { bhagavadGita } from "./data/bhagavadGita";
 import { completeMemory } from "./lib/account-memory";
+import { getShortChatReply } from "./lib/chat-short-replies";
 const wisdom=[
 {theme:"Action",situations:["Purpose","Work"],ref:"Bhagavad Gita 2.47",quote:"Focus on the work in front of you, not on controlling its reward.",meaning:"Give your best to what you can do today. Your effort and intention are yours.",practice:"Before your next task, take one breath and decide what doing it with care looks like.",reflect:"What result am I trying too hard to control?"},
 {theme:"Calm",situations:["Anxiety","Fear"],ref:"Bhagavad Gita 2.70",quote:"Peace comes when every passing desire does not pull us away.",meaning:"We become steadier when every wish, fear, or outcome does not decide our mood.",practice:"Name one thing you can do now, and let the rest wait for a moment.",reflect:"What would one steady step look like today?"},
@@ -76,6 +77,8 @@ const forestSpots:Record<string,{label:string;line:string}>={tree:{label:"Wish t
 function makeKidStory(name:string,animal:string,activity:string){const child=name.trim()||"little friend";const friend=animal.trim()||"calf";const joy=activity.trim()||"drawing";return [`One morning in Vrindavan, Krishna met ${child} near the Yamuna with a gentle ${friend} walking close behind.`,`Krishna noticed that ${child} loved ${joy}, so he turned the moment into a small adventure full of music, kindness, and bright courage.`,`When someone nearby needed help, Krishna smiled and said, "Let us use what you love to make someone's heart lighter."`,`So ${child}, Krishna, and the ${friend} shared one kind action together. By sunset, Vrindavan felt a little warmer because ${child} had brought goodness into the day.`]}
 function makeKrishnaReply(input:string){
  const q=input.toLowerCase().trim();
+ const shortReply=getShortChatReply(input);
+ if(shortReply)return {text:shortReply};
  if(["anxious","anxiety","worried","worry","scared","fear","afraid","nervous"].some(k=>q.includes(k))){const story=stories.find(s=>s.title.includes("Govardhan"))||stories[0];return {text:"When your heart feels worried, read Lifting Govardhan.\n\nIt is about Krishna creating shelter during a storm. It reminds us that fear becomes smaller when we find one safe step and stay close to people who care.\n\nTry this before you read: breathe in slowly, breathe out slowly, and name one thing that makes you feel safe.",story}}
  if(["angry","mad","fight","mean","forgive"].some(k=>q.includes(k))){const story=stories.find(s=>s.title.includes("Kaliya"))||stories[1];return {text:"When anger feels hot, read Krishna and Kaliya.\n\nIt shows strength becoming calm instead of cruel. Krishna does not let harm continue, but he also teaches a better way forward.\n\nTry this first: unclench your hands, take one breath, and wait before speaking.",story}}
  if(["friend","lonely","alone","miss","share"].some(k=>q.includes(k))){const story=stories.find(s=>s.title.includes("Sudama"))||stories[4];return {text:"For friendship, read Krishna and Sudama.\n\nIt is a gentle story about love that does not depend on gifts, money, or showing off.\n\nAfter reading, send one kind message or smile to someone you care about.",story}}

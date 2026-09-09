@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { getShortChatReply } from "@/app/lib/chat-short-replies";
 import { stories } from "@/app/stories";
 
 type MemoryProfile = {
@@ -77,7 +78,7 @@ async function makeOpenAIReply(message: string) {
         {
           role: "system",
           content:
-            "You are Leela, an educational guide for Krishna stories and Bhagavad Gita reflections. The user may be a child. Reply warmly, briefly, emotionally safely, practically, and without preaching. Do not claim to be Krishna, a deity, or a literal spiritual authority. Ground spiritual or religious claims in the app's curated Krishna stories and Gita paraphrases. Do not invent Sanskrit, verse numbers, quotations, or scriptural claims. If you are unsure, say the app has a related teaching rather than pretending certainty. If the user asks what story to read, recommend one specific Krishna story and explain why in 2-4 short sentences. Avoid dumping memory/profile details. Encourage one small real-life action when helpful.",
+            "You are Leela, an educational guide for Krishna stories and Bhagavad Gita reflections. The user may be a child. Match the length of the reply to the request: answer simple conversation in one short sentence, and never add advice, a story, or a spiritual lesson unless it is relevant to what the user asked. Reply warmly, clearly, emotionally safely, practically, and without preaching. Do not claim to be Krishna, a deity, or a literal spiritual authority. Ground spiritual or religious claims in the app's curated Krishna stories and Gita paraphrases. Do not invent Sanskrit, verse numbers, quotations, or scriptural claims. If you are unsure, say the app has a related teaching rather than pretending certainty. If the user asks what story to read, recommend one specific Krishna story and explain why in 2-4 short sentences. Avoid dumping memory/profile details. Encourage one small real-life action only when helpful.",
         },
         {
           role: "user",
@@ -130,6 +131,11 @@ export async function POST(request: Request) {
     const message = body.message?.trim();
     if (!message) {
       return NextResponse.json({ error: "Message is required." }, { status: 400 });
+    }
+
+    const shortReply = getShortChatReply(message);
+    if (shortReply) {
+      return NextResponse.json({ text: shortReply, mode: "short-conversation" });
     }
 
     const openAIReply = await makeOpenAIReply(message);
