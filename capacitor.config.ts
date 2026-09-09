@@ -6,7 +6,8 @@ const config: CapacitorConfig = {
   webDir: "public",
   loggingBehavior: "none",
   server: {
-    url: "https://krishnaleelas.com",
+    url: "https://www.krishnaleelas.com",
+    allowNavigation: ["krishnaleelas.com", "www.krishnaleelas.com"],
     cleartext: false,
     errorPath: "offline.html",
   },
