@@ -6,6 +6,7 @@ export type AccountMemory = {
   goodDeeds?: string[];
   treasures?: string[];
   savedStories?: string[];
+  readStories?: string[];
   dailyAdventureDone?: boolean;
 };
 
@@ -42,7 +43,7 @@ export function normalizeMemory(value: unknown): AccountMemory {
       result[key] = source[key].trim().slice(0, limit);
     }
   }
-  for (const [key, limit] of [["goodDeeds", 80], ["treasures", 30], ["savedStories", 120]] as const) {
+  for (const [key, limit] of [["goodDeeds", 80], ["treasures", 30], ["savedStories", 120], ["readStories", 250]] as const) {
     const list = source[key];
     if (list !== undefined) {
       if (!Array.isArray(list) || list.some(item => typeof item !== "string")) {
@@ -62,7 +63,7 @@ export function normalizeMemory(value: unknown): AccountMemory {
 export function completeMemory(value: unknown, name: string): Required<AccountMemory> {
   return {
     mood: "happy", favoriteAnimal: "", favoriteActivity: "",
-    goodDeeds: [], treasures: [], savedStories: [], dailyAdventureDone: false,
+    goodDeeds: [], treasures: [], savedStories: [], readStories: [], dailyAdventureDone: false,
     ...normalizeMemory(value), name,
   };
 }

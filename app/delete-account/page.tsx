@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-const localJourneyKeys = ["leelaSaved", "leelaKidMood", "leelaGoodDeeds", "leelaKidName", "leelaKidAnimal", "leelaKidActivity", "leelaTreasures", "leelaAutoVoice", "leelaEntrySeen"];
+const localJourneyKeys = ["leelaSaved", "leelaReadStories", "leelaKidMood", "leelaGoodDeeds", "leelaKidName", "leelaKidAnimal", "leelaKidActivity", "leelaTreasures", "leelaAutoVoice", "leelaEntrySeen"];
 
 export default function DeleteAccountPage() {
   const [status, setStatus] = useState("");

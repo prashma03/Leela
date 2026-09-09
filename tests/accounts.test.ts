@@ -69,14 +69,17 @@ function fixture() {
 
 test("memory validation preserves missing fields and bounds untrusted values", () => {
   assert.deepEqual(normalizeMemory({ savedStories: ["a", "a", "b"], admin: true }), { savedStories: ["a", "b"] });
+  assert.deepEqual(normalizeMemory({ readStories: ["story-a", "story-a", "story-b"] }), { readStories: ["story-a", "story-b"] });
   assert.deepEqual(normalizeMemory({ mood: "calm" }), { mood: "calm" });
   assert.equal(normalizeMemory({ name: "x".repeat(100) }).name?.length, 60);
   assert.equal(normalizeMemory({ savedStories: Array.from({ length: 200 }, (_, i) => "" + i) }).savedStories?.length, 120);
+  assert.equal(normalizeMemory({ readStories: Array.from({ length: 300 }, (_, i) => "story-" + i) }).readStories?.length, 250);
   for (const value of [null, [], "text", { dailyAdventureDone: "false" }, { savedStories: [1] }]) {
     assert.throws(() => normalizeMemory(value), AccountError);
   }
   const empty = completeMemory({}, "New user");
   assert.deepEqual(empty.savedStories, []);
+  assert.deepEqual(empty.readStories, []);
   assert.equal(empty.favoriteAnimal, "");
   assert.equal(empty.name, "New user");
 });
