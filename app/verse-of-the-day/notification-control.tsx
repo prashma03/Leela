@@ -17,7 +17,7 @@ async function showBrowserVerseNotification() {
   if (window.localStorage.getItem(browserDeliveryKey) === todayKey()) return;
   const registration = await navigator.serviceWorker.ready;
   await registration.showNotification("Leela · Verse of the Day", {
-    body: "A gentle Gita reflection is ready for you.",
+    body: "Tap to read today's new verse and reflection.",
     icon: "/icons/leela-192.png",
     badge: "/icons/leela-192.png",
     tag: "leela-daily-verse",
@@ -49,7 +49,7 @@ export default function NotificationControl() {
           notifications: [{
             id: dailyNotificationId,
             title: "Leela · Verse of the Day",
-            body: "A gentle Gita reflection is ready for you.",
+            body: "Tap to read today's new verse and reflection.",
             schedule: { on: { hour: 9, minute: 0 }, repeats: true, allowWhileIdle: true },
           }],
         });

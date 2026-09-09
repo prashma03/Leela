@@ -48,14 +48,22 @@ export default function VerseOfTheDay({
 
   return (
     <section className={styles.card} aria-labelledby={titleId}>
+      <span className={styles.flute} aria-hidden="true" />
+      <span className={styles.flowerOne} aria-hidden="true" />
+      <span className={styles.flowerTwo} aria-hidden="true" />
       <Heading id={titleId} className={styles.heading}>{entry ? "Saved reflection" : "Verse of the Day"}</Heading>
-      <div className={styles.content} aria-busy={!daily}>
+      <Link
+        className={styles.content}
+        aria-busy={!daily}
+        aria-label={daily ? `Open detailed reflection for ${daily.reference}` : undefined}
+        href={daily ? `/verse-of-the-day?saved=${encodeURIComponent(daily.id)}` : "/verse-of-the-day"}
+      >
         {daily ? <>
           <p className={styles.reference}>{daily.reference}</p>
           <p className={styles.reflection}>{daily.reflection}</p>
-          <p className={styles.label}>{daily.contentType}</p>
+          <p className={styles.label}>{daily.contentType} · Tap for deeper meaning</p>
         </> : <p className={styles.placeholder} role="status">Preparing today’s reflection…</p>}
-      </div>
+      </Link>
       <div className={styles.actions}>
         <button type="button" onClick={listen} disabled={!daily}>Listen</button>
         {onSave && <button type="button" disabled={!daily}

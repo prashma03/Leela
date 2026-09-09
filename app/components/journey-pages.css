@@ -1,0 +1,26 @@
+.paged-sections { width: 100%; min-width: 0; }
+.section-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 16px; }
+.section-tabs button, .page-controls button { border: 1px solid #abc5bb; border-radius: 24px; padding: 12px 18px; min-height: 44px; background: #fffaf0; color: #105753; cursor: pointer; }
+.section-tabs button[aria-current="page"], .page-controls button:not(:disabled):hover { background: #105753; color: white; }
+.page-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 720px; margin: 20px auto; padding: 12px 20px; }
+.page-controls button:disabled { opacity: .4; cursor: default; }
+.animated-panel { animation: leela-page-enter .32s ease-out; scroll-margin-top: 95px; min-width: 0; }
+.animated-panel:focus-visible { outline: 2px solid #a87830; outline-offset: 4px; }
+@keyframes leela-page-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.daily-track { margin: 24px auto; padding: clamp(20px,4vw,40px); border-radius: 24px; background: linear-gradient(125deg,#fff0c9,#e6f1e7); border: 1px solid #d7c58e; color: #105753; }
+.daily-track h2 { font-size: clamp(26px,4vw,38px); margin: 8px 0; }
+.daily-track p { line-height: 1.6; }
+.streak-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 20px 0; }
+.streak-stats span { display: grid; gap: 6px; font-size: 13px; }
+.streak-stats b { font-size: 32px; }
+.streak-week { display: grid; grid-template-columns: repeat(7,1fr); padding: 0; list-style: none; gap: 6px; margin: 24px 0; }
+.streak-week li { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12px; }
+.streak-week b { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; border: 1px solid #aac1b4; }
+.streak-week .visited b { background: #105753; color: white; border-color: #105753; }
+.daily-track > small { display: block; line-height: 1.5; }
+.calm-path-challenge .animated-panel > article, .gita-page .animated-panel > article { padding: 24px; border: 1px solid #d8dcc9; border-radius: 20px; background: #fffdf6; line-height: 1.7; }
+.kids-magic { animation: leela-page-enter .32s ease-out; }
+.kids-magic [class*="kid-mobile-"] { display: none; }
+.kid-page-home .kid-mobile-home, .kid-page-stories .kid-mobile-stories, .kid-page-explore .kid-mobile-explore, .kid-page-create .kid-mobile-create, .kid-page-kindness .kid-mobile-kindness { display: block; }
+.kids-page-tabs { display: flex !important; flex-wrap: wrap; }
+@media (prefers-reduced-motion: reduce) { .animated-panel, .kids-magic { animation: none; } }
