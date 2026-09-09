@@ -6,7 +6,7 @@ const config: CapacitorConfig = {
   webDir: "public",
   loggingBehavior: "none",
   server: {
-    url: "https://leela-ruddy.vercel.app",
+    url: "https://krishnaleelas.com",
     cleartext: false,
     errorPath: "offline.html",
   },
