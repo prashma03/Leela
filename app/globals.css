@@ -980,6 +980,30 @@ main:has(>.home-hero)>.topbar .session-exit:hover{background:#f2eadb;color:var(-
 main:has(>.home-hero)>.topbar .settings-chip{max-width:118px}
 main:has(>.home-hero)>.topbar .settings-chip span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
+.home-welcome{
+ padding-top:clamp(28px,4vw,48px);
+ padding-bottom:clamp(10px,2vw,18px)
+}
+.home-welcome h1{
+ margin:8px 0 8px;
+ color:var(--teal);
+ font:400 clamp(36px,5vw,62px)/1.02 var(--serif);
+ letter-spacing:-.035em
+}
+.home-welcome p:not(.eyebrow){
+ max-width:560px;
+ color:#667773;
+ font:16px/1.6 var(--serif)
+}
+.home-daily-top{
+ padding-top:clamp(12px,2vw,20px);
+ padding-bottom:clamp(26px,4vw,44px)
+}
+.home-daily-top>section{
+ max-width:min(900px,calc(100vw - var(--page-gutter)*2));
+ margin:auto
+}
+
 .home-hero{
  min-height:0;
  display:block;
