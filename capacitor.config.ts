@@ -7,7 +7,7 @@ const config: CapacitorConfig = {
   loggingBehavior: "none",
   server: {
     url: "https://www.krishnaleelas.com",
-    allowNavigation: ["krishnaleelas.com", "www.krishnaleelas.com"],
+    allowNavigation: ["krishnaleelas.com", "*.krishnaleelas.com"],
     cleartext: false,
     errorPath: "offline.html",
   },
