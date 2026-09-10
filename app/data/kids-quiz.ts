@@ -1,0 +1,51 @@
+export type KidsQuizQuestion = {
+  question: string;
+  answer: string;
+  hint: string;
+  options: [string, string][];
+};
+
+type QuizFact = { answer: string; clue: string; wrong: [string, string]; prompts: string[] };
+
+const facts: QuizFact[] = [
+  { answer: "Butter", clue: "Think of Gokul and the butter pots.", wrong: ["A crown", "A drum"], prompts: ["What did Krishna love to eat?", "Which creamy treat is part of Krishna's childhood stories?", "What was hidden in the butter pots?", "What did little Krishna share with his friends?"] },
+  { answer: "Flute", clue: "Listen for music in Vrindavan.", wrong: ["A trumpet", "A bell"], prompts: ["What instrument does Krishna play?", "Which instrument makes Krishna's gentle music?", "What did Krishna hold near his lips in the forest?", "What instrument is also called a bansuri?"] },
+  { answer: "Govardhan Hill", clue: "Remember the shelter during the great storm.", wrong: ["A palace", "A river"], prompts: ["What did Krishna lift to shelter everyone?", "Which hill protected the people during the storm?", "What stood like an umbrella over the village?", "What did Krishna lift with his little finger?"] },
+  { answer: "Yashoda", clue: "She cared for Krishna in Gokul.", wrong: ["Arjuna", "Sudama"], prompts: ["Who loved Krishna with motherly care?", "Who was Krishna's loving mother in Gokul?", "Who looked after little Krishna?", "Who found Krishna's buttery smile?"] },
+  { answer: "Peacock feather", clue: "Look for a blue-green feather in Krishna's crown.", wrong: ["Lotus flower", "Butter pot"], prompts: ["What tiny treasure is often in Krishna's crown?", "What feather is connected with Krishna?", "What does Krishna often wear in his hair?", "Which bird's feather is part of Krishna's image?"] },
+  { answer: "Vrindavan", clue: "It is the forest home in many childhood stories.", wrong: ["Hastinapur", "Lanka"], prompts: ["Where did Krishna spend his playful childhood?", "What forest is filled with Krishna's flute music?", "Where did Krishna play with the cowherd friends?", "What place is known for Krishna's childhood leelas?"] },
+  { answer: "Cows", clue: "They grazed peacefully near Krishna and his friends.", wrong: ["Horses", "Elephants"], prompts: ["Which gentle animals did Krishna care for?", "What animals wandered near Krishna in the fields?", "What animals did the cowherd boys watch?", "Which animals are often beside Krishna in Vrindavan?"] },
+  { answer: "Sudama", clue: "He was Krishna's old friend.", wrong: ["Kaliya", "Indra"], prompts: ["Who was Krishna's childhood friend who visited him later?", "Which friend brought Krishna a humble gift of rice?", "Who did Krishna welcome with great love?", "Which friend reminds us that friendship is not about riches?"] },
+  { answer: "Arjuna", clue: "He listened to Krishna's guidance on the battlefield.", wrong: ["Nanda", "Balarama"], prompts: ["Who heard Krishna's guidance in the Bhagavad Gita?", "Who was Krishna's friend in the chariot?", "Who asked Krishna serious questions before the battle?", "Who listened to the Gita from Krishna?"] },
+  { answer: "The Yamuna", clue: "It is the river in many Krishna stories.", wrong: ["The Nile", "The Thames"], prompts: ["What river flows through Krishna's childhood stories?", "Which river is near Vrindavan?", "What river did Krishna's friends know in Gokul?", "Which river is linked with the Kaliya story?"] },
+  { answer: "Balarama", clue: "He is Krishna's older brother.", wrong: ["Duryodhana", "Akrura"], prompts: ["Who is Krishna's older brother?", "Which brother played beside Krishna?", "Who is often shown with Krishna in childhood stories?", "Who was a strong and caring brother to Krishna?"] },
+  { answer: "Kindness", clue: "It means helping and caring for others.", wrong: ["Teasing", "Ignoring"], prompts: ["What should you choose when someone feels sad?", "What grows a good friendship?", "What can make another person's day brighter?", "What should a brave heart show to others?"] },
+  { answer: "Truth", clue: "It means speaking honestly.", wrong: ["A trick", "A rumor"], prompts: ["What should you tell even when it feels hard?", "What helps people trust you?", "What should you choose instead of a lie?", "What is a brave way to speak?"] },
+  { answer: "Sharing", clue: "It means letting someone else enjoy what you have too.", wrong: ["Hiding", "Grabbing"], prompts: ["What can you do with a snack when a friend has none?", "What helps everyone feel included in a game?", "What is a kind choice with toys or books?", "What can turn one treat into a happy moment for two people?"] },
+  { answer: "A deep breath", clue: "It helps the body slow down when feelings are big.", wrong: ["A shout", "A stomp"], prompts: ["What can you take before answering when you feel angry?", "What can help a worried heart become calmer?", "What should you try before using harsh words?", "What quiet action helps when your feelings are too big?"] },
+  { answer: "Listening", clue: "Use your ears and patient attention.", wrong: ["Interrupting", "Laughing"], prompts: ["What should you do when a friend is telling you about a hard day?", "What kindness helps someone feel heard?", "What should happen before you rush to give advice?", "What can you give someone without spending any money?"] },
+  { answer: "Helping", clue: "A small useful action can matter a lot.", wrong: ["Complaining", "Walking away"], prompts: ["What can you do when someone needs a hand?", "What is a kind choice at home without being asked?", "What turns care into action?", "What can you do when you see a mess you can safely fix?"] },
+  { answer: "Saying sorry", clue: "It helps repair a hurt after a mistake.", wrong: ["Blaming", "Hiding"], prompts: ["What can you say after you hurt someone by mistake?", "What is the first step in making peace?", "What helps mend a friendship after unkind words?", "What should you do after noticing a mistake?"] },
+  { answer: "Patience", clue: "It means waiting calmly and giving things time.", wrong: ["Rushing", "Pushing"], prompts: ["What do you practice while waiting for your turn?", "What helps when something takes longer than you hoped?", "What gentle strength keeps you calm in a line?", "What can you choose instead of getting upset while waiting?"] },
+  { answer: "Gratitude", clue: "It means noticing and appreciating good things.", wrong: ["Jealousy", "Grumbling"], prompts: ["What feeling grows when you say thank you?", "What can you practice after someone helps you?", "What helps you notice the good things you already have?", "What can you offer a person who has been kind to you?"] },
+  { answer: "Courage", clue: "It is taking a good step even when you feel nervous.", wrong: ["Showing off", "Running away"], prompts: ["What helps you tell the truth when you are nervous?", "What do you show when you try something hard kindly?", "What is taking a small brave step called?", "What can you choose when fear says stop but the right thing is safe to do?"] },
+  { answer: "A smile", clue: "It is small, free, and can brighten a day.", wrong: ["A frown", "A complaint"], prompts: ["What can you share to welcome someone?", "What small gift can brighten a room?", "What can you offer a friend who seems shy?", "What can be kind without saying a word?"] },
+  { answer: "Respect", clue: "It means treating people and their things with care.", wrong: ["Mocking", "Bossing"], prompts: ["What should you show when someone has a different idea?", "What helps everyone feel safe in a group?", "What means using kind words even when you disagree?", "What should you give to people, animals, and shared spaces?"] },
+  { answer: "Peace", clue: "It grows when we choose calm, fair actions.", wrong: ["A fight", "A tantrum"], prompts: ["What can grow after friends solve a problem kindly?", "What do calm words help create?", "What can you choose after a disagreement?", "What feeling comes when a worried mind becomes steady?"] },
+  { answer: "A kind word", clue: "It can make someone feel noticed.", wrong: ["An insult", "A secret"], prompts: ["What can you offer to someone who has done well?", "What can make a lonely person feel welcome?", "What can you say to thank a helper?", "What can you use to build a friend up?"] },
+  { answer: "Forgiveness", clue: "It is letting go of the wish to stay angry after someone repairs a mistake.", wrong: ["Revenge", "Gossip"], prompts: ["What can you offer when someone sincerely says sorry?", "What helps a friendship heal after a mistake?", "What can make a heavy heart lighter after an apology?", "What do we practice when we choose not to keep anger forever?"] },
+  { answer: "Gentle words", clue: "They are calm and caring.", wrong: ["Mean jokes", "Loud yelling"], prompts: ["What should you use when you disagree with someone?", "What helps a hard conversation feel safer?", "What can you choose instead of shouting?", "What kind of words show a strong and caring heart?"] },
+  { answer: "A good deed", clue: "It is a helpful action you choose on purpose.", wrong: ["A messy room", "A broken promise"], prompts: ["What grows Krishna's kindness garden?", "What can you do to make a difference at home?", "What is helping someone without expecting a prize?", "What makes your heart and your community stronger?"] },
+  { answer: "Your best effort", clue: "You can care about your work even when the result is uncertain.", wrong: ["Giving up", "Cheating"], prompts: ["What can you offer when you study for a test?", "What should you focus on during a hard task?", "What matters before you can control the result?", "What is a fair and honest way to approach your work?"] },
+];
+
+const icons = ["butter", "fruit", "sweet"] as const;
+
+export const kidsQuizQuestions: KidsQuizQuestion[] = facts.flatMap((fact, factIndex) =>
+  fact.prompts.flatMap((prompt, promptIndex) => {
+    const choices = [fact.answer, ...fact.wrong];
+    const offset = (factIndex + promptIndex) % choices.length;
+    const rotated = [...choices.slice(offset), ...choices.slice(0, offset)];
+    return [prompt, `Choose the best answer: ${prompt}`, `Quick question: ${prompt}`].map(question => ({ question, answer: fact.answer, hint: fact.clue, options: rotated.map((choice, index) => [choice, icons[index]] as [string, string]) }));
+  }),
+);
