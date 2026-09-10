@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useId, useState } from "react";
 import { gitaSourceNote, type BhagavadGitaEntry } from "../data/bhagavadGita";
 import { useDailyVerse } from "../lib/useDailyVerse";
@@ -48,9 +49,9 @@ export default function VerseOfTheDay({
 
   return (
     <section className={styles.card} aria-labelledby={titleId}>
-      <span className={styles.flute} aria-hidden="true" />
-      <span className={styles.flowerOne} aria-hidden="true" />
-      <span className={styles.flowerTwo} aria-hidden="true" />
+      <figure className={styles.artwork} aria-hidden="true">
+        <Image src="/images/welcome/gita-manuscript-illustrated.jpg" alt="" fill sizes="190px" />
+      </figure>
       <Heading id={titleId} className={styles.heading}>{entry ? "Saved reflection" : "Verse of the Day"}</Heading>
       <Link
         className={styles.content}

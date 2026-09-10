@@ -460,6 +460,12 @@ main:has(.kids-magic) .mobile button:nth-child(5):after{font-size:7px}
 .forest-map .forest-peacock span:before{content:"";position:absolute;left:7px;top:3px;width:11px;height:18px;border-radius:70% 30% 70% 30%;background:radial-gradient(circle at 48% 34%,#123b42 0 16%,#d7ad46 18% 28%,#2e8791 30% 52%,#79a06c 54% 72%,transparent 74%);transform:rotate(22deg)}
 .forest-map .forest-temple span:before{content:"";position:absolute;left:5px;bottom:4px;width:15px;height:11px;background:#d8ad5f;clip-path:polygon(50% 0,100% 42%,88% 42%,88% 100%,12% 100%,12% 42%,0 42%)}
 
+/* Use archival artwork as the forest scene; the buttons are labels, not invented icon drawings. */
+.forest-map{background:linear-gradient(rgba(255,253,247,.14),rgba(255,253,247,.22)),url("/images/stories/flute.png") center/cover no-repeat!important}
+.forest-map .forest-spot{background:rgba(255,253,247,.92)!important;backdrop-filter:blur(3px)}
+.forest-map .forest-spot span{display:none}
+.forest-map .forest-spot span:before,.forest-map .forest-spot span:after{content:none!important}
+
 @media(max-width:768px){
  .kids-magic{padding-bottom:max(88px,calc(68px + env(safe-area-inset-bottom)))}
  .kids-page-tabs{top:58px;padding:4px;gap:2px;border-radius:12px}

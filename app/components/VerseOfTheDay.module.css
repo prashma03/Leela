@@ -5,10 +5,7 @@
   margin-inline: auto;
   padding: clamp(var(--space-3, 20px), 3vw, 32px);
   overflow: hidden;
-  background:
-    radial-gradient(circle at 94% 16%, rgba(216,173,95,.28) 0 62px, transparent 63px),
-    radial-gradient(circle at 8% 88%, rgba(13,85,84,.12) 0 86px, transparent 87px),
-    linear-gradient(135deg, #fffdf7 0%, #fff8e9 48%, #f5ead2 100%);
+  background: linear-gradient(135deg, #fffdf7 0%, #fff8e9 48%, #f5ead2 100%);
   border: 1px solid rgba(216,173,95,.42);
   border-top: 0;
   border-radius: 24px;
@@ -24,41 +21,20 @@
   border-radius: 18px;
   pointer-events: none;
 }
-.flute {
+.artwork {
   position: absolute;
-  right: 34px;
-  top: 34px;
-  width: 138px;
-  height: 9px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #8b5e24, #e0b75e, #8b5e24);
-  transform: rotate(-18deg);
-  opacity: .42;
+  top: 18px;
+  right: 18px;
+  width: 160px;
+  height: 112px;
+  margin: 0;
+  overflow: hidden;
+  border: 5px solid #fffdf7;
+  box-shadow: 0 12px 28px rgba(43,65,54,.17);
+  opacity: .78;
+  transform: rotate(3deg);
 }
-.flute::before, .flute::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #5c3c18;
-  box-shadow: 22px 0 #5c3c18, 44px 0 #5c3c18;
-}
-.flute::before { left: 24px; }
-.flute::after { right: 16px; box-shadow: none; }
-.flowerOne, .flowerTwo {
-  position: absolute;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle, #d8ad5f 0 6px, transparent 7px),
-    conic-gradient(from 20deg, #f4cf7a, #fff3c6, #f4cf7a, #fff3c6, #f4cf7a);
-  opacity: .4;
-}
-.flowerOne { right: 26px; bottom: 28px; }
-.flowerTwo { left: 24px; top: 28px; width: 30px; height: 30px; opacity: .24; }
+.artwork img { object-fit: cover; object-position: 49% 46%; filter: saturate(.82) contrast(.96); }
 .heading {
   margin: 0 0 12px;
   color: var(--teal);
@@ -79,7 +55,7 @@
   font: 600 13px/1.5 var(--sans);
 }
 .reflection {
-  max-width: 65ch;
+  max-width: min(65ch, calc(100% - 185px));
   margin: 0;
   font: 400 clamp(20px, 2.1vw, 26px)/1.5 var(--serif);
   overflow-wrap: anywhere;
@@ -125,6 +101,8 @@
 .audioStatus { margin: 0; color: var(--muted); font: 12px/1.5 var(--sans); }
 .audioStatus:not(:empty) { margin-block: 8px; }
 @media (max-width: 480px) {
+  .artwork { width: 92px; height: 76px; top: 16px; right: 14px; border-width: 3px; }
+  .reflection { max-width: calc(100% - 76px); }
   .content { min-height: 170px; }
   .actions { gap: 4px 20px; }
 }
