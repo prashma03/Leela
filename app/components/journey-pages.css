@@ -7,6 +7,19 @@
 .animated-panel { animation: leela-page-enter .32s ease-out; scroll-margin-top: 95px; min-width: 0; }
 .animated-panel:focus-visible { outline: 2px solid #a87830; outline-offset: 4px; }
 @keyframes leela-page-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.paged-sections--scroll { display: flex; flex-direction: column; min-height: calc(100dvh - 76px); overscroll-behavior-y: none; touch-action: pan-x; }
+.paged-sections--scroll .animated-panel { display: grid; flex: 1; align-content: center; width: 100%; }
+.paged-sections--scroll .page-controls { margin-top: auto; }
+.pull-refresh { height: 0; overflow: hidden; opacity: 0; color: #105753; font-size: 13px; font-weight: 700; letter-spacing: .05em; text-align: center; transition: height .18s ease, opacity .18s ease; }
+.pull-refresh.ready { height: 32px; opacity: 1; padding-top: 8px; }
+.paged-footer { display: grid; min-height: min(460px, 62dvh); align-content: center; justify-items: center; gap: 16px; padding: 40px 24px; border: 1px solid #d7c58e; border-radius: 24px; background: linear-gradient(140deg, #0c5854, #163f3c); color: #fffaf0; text-align: center; }
+.paged-footer b { font-family: Georgia, serif; font-size: clamp(42px, 8vw, 72px); }
+.paged-footer p { max-width: 420px; margin: 0; line-height: 1.65; }
+.paged-footer nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 18px; }
+.paged-footer a { color: #fff4c7; text-decoration: none; }
+.paged-footer a:hover, .paged-footer a:focus-visible { text-decoration: underline; }
+.paged-footer small { color: #e5cc86; letter-spacing: .13em; }
+main:has(.paged-sections--with-footer) > .site-footer { display: none; }
 .daily-track { margin: 24px auto; padding: clamp(20px,4vw,40px); border-radius: 24px; background: linear-gradient(125deg,#fff0c9,#e6f1e7); border: 1px solid #d7c58e; color: #105753; }
 .daily-track h2 { font-size: clamp(26px,4vw,38px); margin: 8px 0; }
 .daily-track p { line-height: 1.6; }
@@ -24,3 +37,4 @@
 .kid-page-home .kid-mobile-home, .kid-page-stories .kid-mobile-stories, .kid-page-explore .kid-mobile-explore, .kid-page-create .kid-mobile-create, .kid-page-kindness .kid-mobile-kindness { display: block; }
 .kids-page-tabs { display: flex !important; flex-wrap: wrap; }
 @media (prefers-reduced-motion: reduce) { .animated-panel, .kids-magic { animation: none; } }
+@media (max-width: 700px) { .paged-sections--scroll { min-height: calc(100dvh - 56px); } .section-tabs { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding-inline: 12px; } .section-tabs button { flex: 0 0 auto; } .paged-footer { min-height: 52dvh; } }
