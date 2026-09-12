@@ -20,6 +20,19 @@
 .paged-footer a:hover, .paged-footer a:focus-visible { text-decoration: underline; }
 .paged-footer small { color: #e5cc86; letter-spacing: .13em; }
 main:has(.paged-sections--with-footer) > .site-footer { display: none; }
+.challenge-detail { position: fixed; z-index: 120; inset: 0; display: grid; place-items: center; padding: 22px; overflow: auto; background: rgba(6, 42, 41, .58); backdrop-filter: blur(5px); }
+.challenge-detail article { width: min(680px, 100%); padding: clamp(26px, 6vw, 52px); border-radius: 28px; background: #fffaf0; box-shadow: 0 28px 80px rgba(0, 0, 0, .3); color: #174944; }
+.challenge-detail p:first-of-type { margin: 0 0 12px; color: #9a7131; font-size: 11px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.challenge-detail h2 { margin: 0; font: 400 clamp(34px, 7vw, 56px)/1.05 Georgia, serif; color: #105753; }
+.challenge-detail article > span { display: inline-block; margin: 16px 0; color: #8a6a35; font-size: 13px; font-weight: 800; }
+.challenge-detail article > p:not(:first-of-type) { color: #536a64; font: 17px/1.65 Georgia, serif; }
+.challenge-detail ol { display: grid; gap: 10px; margin: 28px 0; padding: 0; list-style: none; counter-reset: day; }
+.challenge-detail li { display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 15px; border: 1px solid #ded3b9; border-radius: 14px; background: #fffdf7; }
+.challenge-detail li b { color: #105753; font-size: 13px; }
+.challenge-detail li small { color: #61726d; font-size: 13px; line-height: 1.45; }
+.challenge-back, .challenge-start { border: 0; cursor: pointer; }
+.challenge-back { margin-bottom: 26px; padding: 0; background: transparent; color: #105753; font-weight: 800; }
+.challenge-start { min-height: 46px; padding: 0 20px; border-radius: 24px; background: #105753; color: white; font-weight: 800; }
 .daily-track { margin: 24px auto; padding: clamp(20px,4vw,40px); border-radius: 24px; background: linear-gradient(125deg,#fff0c9,#e6f1e7); border: 1px solid #d7c58e; color: #105753; }
 .daily-track h2 { font-size: clamp(26px,4vw,38px); margin: 8px 0; }
 .daily-track p { line-height: 1.6; }
