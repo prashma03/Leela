@@ -189,10 +189,11 @@ export default function Home(){
  },[account,kidsSession,kidName,kidAnimal,kidActivity,kidMood,goodDeeds,collectedTreasures,saved,readStories,adventureDone]);
  const toneLabels=categoryLabels as Record<string,string>;
  const normalizedStoryQuery=storyQuery.toLowerCase().trim();
- const filteredStories=useMemo(()=>stories.filter(story=>(storyTone==="All"||storyCategory(story)===storyTone)&&(storySearchIndex.get(story.id)?.includes(normalizedStoryQuery)??false)),[storyTone,normalizedStoryQuery]);
+ const filteredStories=useMemo(()=>stories.filter(story=>(storyTone==="All"||storyCategory(story)===storyTone)&&(storySearchIndex.get(story.id)?.includes(normalizedStoryQuery)??false)).sort((first,second)=>Number(readStories.includes(first.id))-Number(readStories.includes(second.id))),[storyTone,normalizedStoryQuery,readStories]);
  const visibleStories=filteredStories;
  const homeFeelings=showMoreFeelings?needToday:needToday.slice(0,6);
- const featuredStory=stories[homeVisit%stories.length]||stories[0];
+ const unreadStories=stories.filter(story=>!readStories.includes(story.id));
+ const featuredStory=(unreadStories.length?unreadStories:stories)[homeVisit%(unreadStories.length||stories.length)]||stories[0];
  const homeVerse=bhagavadGita[homeVisit%bhagavadGita.length];
  const displayName=(account?.name||kidName||"little friend").trim();
  const homeGreeting=(new Date().getHours()<12?"Good morning":new Date().getHours()<17?"Good afternoon":new Date().getHours()<21?"Good evening":"Namaste")+", "+displayName+".";
