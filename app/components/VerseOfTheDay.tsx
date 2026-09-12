@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useId, useState } from "react";
 import { gitaSourceNote, type BhagavadGitaEntry } from "../data/bhagavadGita";
 import { useDailyVerse } from "../lib/useDailyVerse";
+import { syncVerseScheduleToAndroid } from "../lib/native-verse";
 import styles from "./VerseOfTheDay.module.css";
 
 interface VerseOfTheDayProps {
@@ -28,6 +29,8 @@ export default function VerseOfTheDay({
   useEffect(() => () => {
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
   }, [daily?.id]);
+
+  useEffect(() => { syncVerseScheduleToAndroid().catch(() => {}); }, [daily?.id]);
 
   function listen() {
     if (!daily) return;

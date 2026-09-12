@@ -2,6 +2,7 @@ import Link from "next/link";
 import VerseOfTheDay from "../components/VerseOfTheDay";
 import { bhagavadGita } from "../data/bhagavadGita";
 import NotificationControl from "./notification-control";
+import WidgetControl from "./widget-control";
 
 export default async function VerseOfTheDayPage({
   searchParams,
@@ -26,6 +27,7 @@ export default async function VerseOfTheDayPage({
       </section>}
       {entry && <Link className="daily-verse-return" href="/verse-of-the-day">Return to today’s reflection →</Link>}
       <NotificationControl />
+      <WidgetControl />
     </div>
   </main>;
 }

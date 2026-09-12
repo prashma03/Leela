@@ -4,4 +4,5 @@
     <string name="title_activity_main">Leela</string>
     <string name="package_name">com.pronita.leela</string>
     <string name="custom_url_scheme">com.pronita.leela</string>
+    <string name="leela_verse_wallpaper_description">A daily Leela verse on a deep green background.</string>
 </resources>
