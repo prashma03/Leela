@@ -6,6 +6,7 @@ type VerseEntry = { date: string; reference: string; reflection: string };
 type LeelaVersePlugin = {
   saveVerseSchedule(options: { entries: VerseEntry[] }): Promise<void>;
   openWallpaperChooser(): Promise<void>;
+  speak(options: { text: string; rate?: number }): Promise<void>;
 };
 
 const LeelaVerse = registerPlugin<LeelaVersePlugin>("LeelaVerse");
@@ -30,5 +31,11 @@ export async function syncVerseScheduleToAndroid() {
 export async function openVerseWallpaperChooser() {
   if (!Capacitor.isNativePlatform() || Capacitor.getPlatform() !== "android") return false;
   await LeelaVerse.openWallpaperChooser();
+  return true;
+}
+
+export async function speakWithAndroidTts(text: string, rate = 0.88) {
+  if (!Capacitor.isNativePlatform() || Capacitor.getPlatform() !== "android") return false;
+  await LeelaVerse.speak({ text, rate });
   return true;
 }

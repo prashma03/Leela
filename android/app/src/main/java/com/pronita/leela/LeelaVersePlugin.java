@@ -4,6 +4,9 @@ import android.app.WallpaperManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.speech.tts.TextToSpeech;
+
+import java.util.Locale;
 
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
@@ -16,6 +19,7 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 public class LeelaVersePlugin extends Plugin {
     static final String PREFS = "leela_daily_verse";
     static final String SCHEDULE = "schedule";
+    private TextToSpeech narrator;
 
     @PluginMethod
     public void saveVerseSchedule(PluginCall call) {
@@ -33,5 +37,32 @@ public class LeelaVersePlugin extends Plugin {
         intent.putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT, new ComponentName(getContext(), LeelaVerseWallpaperService.class));
         getActivity().startActivity(intent);
         call.resolve();
+    }
+
+    @PluginMethod
+    public void speak(PluginCall call) {
+        String text = call.getString("text", "").trim();
+        if (text.isEmpty()) { call.reject("Nothing to read aloud."); return; }
+        double rate = call.getDouble("rate", 0.88);
+        if (narrator == null) {
+            narrator = new TextToSpeech(getContext(), status -> {
+                if (status != TextToSpeech.SUCCESS) { call.reject("Android text-to-speech is not available."); return; }
+                readAloud(call, text, rate);
+            });
+        } else readAloud(call, text, rate);
+    }
+
+    private void readAloud(PluginCall call, String text, double rate) {
+        narrator.setLanguage(Locale.getDefault());
+        narrator.setSpeechRate((float) Math.max(0.5, Math.min(1.25, rate)));
+        int result = narrator.speak(text, TextToSpeech.QUEUE_FLUSH, null, "leela-narration");
+        if (result == TextToSpeech.ERROR) call.reject("Android text-to-speech could not start.");
+        else call.resolve();
+    }
+
+    @Override
+    protected void handleOnDestroy() {
+        if (narrator != null) { narrator.stop(); narrator.shutdown(); narrator = null; }
+        super.handleOnDestroy();
     }
 }

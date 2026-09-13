@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { mantras, type MantraEntry } from "../data/mantras";
+import { speakWithAndroidTts } from "../lib/native-verse";
 import styles from "./MantraLibrary.module.css";
 
 export default function MantraLibrary({ compact = false }: { compact?: boolean }) {
@@ -13,8 +14,9 @@ export default function MantraLibrary({ compact = false }: { compact?: boolean }
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
   }, []);
 
-  function listen(item: MantraEntry) {
+  async function listen(item: MantraEntry) {
     if (!("speechSynthesis" in window)) {
+      try { if (await speakWithAndroidTts(item.roman.replaceAll("\n", ". "), 0.68)) { setStatus(`Playing a slow pronunciation guide for ${item.title}.`); return; } } catch { /* Show the same clear fallback below. */ }
       setStatus("Slow audio guidance is not available in this browser.");
       return;
     }

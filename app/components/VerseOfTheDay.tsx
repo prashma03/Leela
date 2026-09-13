@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useId, useState } from "react";
 import { gitaSourceNote, type BhagavadGitaEntry } from "../data/bhagavadGita";
 import { useDailyVerse } from "../lib/useDailyVerse";
-import { syncVerseScheduleToAndroid } from "../lib/native-verse";
+import { speakWithAndroidTts, syncVerseScheduleToAndroid } from "../lib/native-verse";
 import styles from "./VerseOfTheDay.module.css";
 
 interface VerseOfTheDayProps {
@@ -32,9 +32,10 @@ export default function VerseOfTheDay({
 
   useEffect(() => { syncVerseScheduleToAndroid().catch(() => {}); }, [daily?.id]);
 
-  function listen() {
+  async function listen() {
     if (!daily) return;
     if (!("speechSynthesis" in window)) {
+      try { if (await speakWithAndroidTts(daily.reference + ". " + daily.contentType + ". " + daily.reflection)) { setAudioStatus("Reading the reflection."); return; } } catch { /* Show the same clear fallback below. */ }
       setAudioStatus("Read-aloud is not supported in this browser.");
       return;
     }
