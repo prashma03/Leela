@@ -100,9 +100,26 @@
 .source p { max-width: 75ch; margin: 4px 0 8px; }
 .audioStatus { margin: 0; color: var(--muted); font: 12px/1.5 var(--sans); }
 .audioStatus:not(:empty) { margin-block: 8px; }
+.homeCard { min-height: 420px; padding: clamp(28px, 5vw, 54px); border: 0; border-radius: 30px; background: linear-gradient(150deg, #e9b36e 0%, #bd7782 48%, #263c64 100%); color: #fffaf0; box-shadow: 0 28px 70px rgba(56, 48, 67, .24); }
+.homeCard::before { inset: 0; border: 0; border-radius: inherit; background: radial-gradient(circle at 12% 15%, rgba(255,221,136,.86) 0 2px, transparent 3px), radial-gradient(circle at 82% 18%, rgba(255,241,190,.72) 0 1px, transparent 2px), radial-gradient(circle at 66% 38%, rgba(255,241,190,.68) 0 2px, transparent 3px); }
+.homeCard .artwork { display: none; }
+.homeCard .heading { position: relative; margin: 50px 0 14px; color: rgba(255,250,240,.78); font-size: 14px; letter-spacing: .02em; text-transform: none; }
+.homeCard .content { min-height: 0; padding: clamp(25px, 5vw, 42px); border-radius: 32px; background: rgba(255,250,240,.94); color: #1d3443; box-shadow: 0 14px 34px rgba(41, 48, 64, .12); }
+.homeCard .reference { color: #c36875; font-size: 14px; }
+.homeCard .reflection { max-width: 28ch; font-size: clamp(27px, 4vw, 39px); line-height: 1.18; }
+.homeCard .label { margin-top: 16px; color: #617181; font-size: 14px; }
+.homeCard .actions { position: relative; margin-top: 18px; padding: 12px 16px; border: 0; border-radius: 18px; background: rgba(255,250,240,.18); }
+.homeCard .actions button, .homeCard .actions a { color: #fffaf0; }
+.homeCard .source, .homeCard .audioStatus { position: relative; color: rgba(255,250,240,.82); }
+.themePicker { position: absolute; z-index: 2; top: 24px; left: clamp(28px, 5vw, 54px); display: flex; gap: 10px; }
+.themeChoice { width: 38px; height: 38px; padding: 0; border: 1px solid rgba(255,250,240,.5); border-radius: 50%; cursor: pointer; box-shadow: inset 0 0 0 3px rgba(255,250,240,.14); }
+.themeChoice[aria-pressed="true"] { outline: 3px solid #fff6d5; outline-offset: 3px; }
+.swatchSunrise { background: linear-gradient(145deg, #f4c66b, #d99366); }.swatchRose { background: linear-gradient(145deg, #e9a0a1, #9b5c7e); }.swatchForest { background: linear-gradient(145deg, #9dc797, #17645d); }.swatchNight { background: linear-gradient(145deg, #7799c8, #26345e); }
+.themeRose { background: linear-gradient(150deg, #e5aaa2 0%, #aa647b 50%, #49315f 100%); }.themeForest { background: linear-gradient(150deg, #b8ca8b 0%, #4d927d 50%, #174a55 100%); }.themeNight { background: linear-gradient(150deg, #91a9d1 0%, #5969a1 50%, #273052 100%); }
 @media (max-width: 480px) {
   .artwork { width: 92px; height: 76px; top: 16px; right: 14px; border-width: 3px; }
   .reflection { max-width: calc(100% - 76px); }
   .content { min-height: 170px; }
   .actions { gap: 4px 20px; }
+  .homeCard { min-height: 395px; padding: 24px 18px; }.homeCard .heading { margin-top: 50px; }.themePicker { left: 24px; top: 20px; }.homeCard .content { padding: 26px; border-radius: 28px; }.homeCard .reflection { max-width: none; font-size: 28px; }
 }

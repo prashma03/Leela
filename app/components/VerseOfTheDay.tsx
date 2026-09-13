@@ -15,22 +15,35 @@ interface VerseOfTheDayProps {
   onReadAnother?: () => void;
   showDailyLink?: boolean;
   entry?: BhagavadGitaEntry;
+  homeThemePicker?: boolean;
 }
 
 export default function VerseOfTheDay({
-  headingLevel = 2, savedIds = [], onSave, onReadAnother, showDailyLink = true, entry,
+  headingLevel = 2, savedIds = [], onSave, onReadAnother, showDailyLink = true, entry, homeThemePicker = false,
 }: VerseOfTheDayProps) {
   const today = useDailyVerse();
   const daily = entry ?? today;
   const titleId = useId();
   const Heading = headingLevel === 1 ? "h1" : "h2";
   const [audioStatus, setAudioStatus] = useState("");
+  const [theme, setTheme] = useState("sunrise");
+  const isHomeVerse = homeThemePicker || showDailyLink;
 
   useEffect(() => () => {
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
   }, [daily?.id]);
 
   useEffect(() => { syncVerseScheduleToAndroid().catch(() => {}); }, [daily?.id]);
+  useEffect(() => {
+    if (!isHomeVerse) return;
+    const frame = window.requestAnimationFrame(() => setTheme(window.localStorage.getItem("leelaVerseTheme") || "sunrise"));
+    return () => window.cancelAnimationFrame(frame);
+  }, [isHomeVerse]);
+
+  function chooseTheme(nextTheme: string) {
+    setTheme(nextTheme);
+    window.localStorage.setItem("leelaVerseTheme", nextTheme);
+  }
 
   async function listen() {
     if (!daily) return;
@@ -52,7 +65,10 @@ export default function VerseOfTheDay({
   }
 
   return (
-    <section className={styles.card} aria-labelledby={titleId}>
+    <section className={`${styles.card} ${isHomeVerse ? `${styles.homeCard} ${styles[`theme${theme[0].toUpperCase()}${theme.slice(1)}`]}` : ""}`} aria-labelledby={titleId}>
+      {isHomeVerse && <div className={styles.themePicker} aria-label="Choose a color for today's verse">
+        {[['sunrise', 'Sunrise gold'], ['rose', 'Rose dawn'], ['forest', 'Forest green'], ['night', 'Moonlit blue']].map(([value, label]) => <button key={value} type="button" className={`${styles.themeChoice} ${styles[`swatch${value[0].toUpperCase()}${value.slice(1)}`]}`} aria-label={label} aria-pressed={theme === value} onClick={() => chooseTheme(value)} />)}
+      </div>}
       <figure className={styles.artwork} aria-hidden="true">
         <Image src="/images/welcome/gita-manuscript-illustrated.jpg" alt="" fill sizes="190px" />
       </figure>
