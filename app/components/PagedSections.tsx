@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Children, type ReactNode, useRef, useState } from "react";
 
 export default function PagedSections({ children, labels, title = "Explore", initialPage = 0, pageIndex, onPageChange, scrollNavigation = false, onRefresh, showFooter = false }: { children: ReactNode; labels?: string[]; title?: string; initialPage?: number; pageIndex?: number; onPageChange?: (page: number) => void; scrollNavigation?: boolean; onRefresh?: () => void; showFooter?: boolean }) {
@@ -7,7 +8,18 @@ export default function PagedSections({ children, labels, title = "Explore", ini
   const usesScrollNavigation = scrollNavigation;
   const includesFooter = showFooter || title === "Home";
   const usesFooterGesture = includesFooter && title === "Home";
-  const footer = <footer className="paged-footer"><b>Leela</b><p>Stories that bring ancient wisdom a little closer.</p><nav aria-label="Leela links"><a href="/about">About</a><a href="/sources">Sources</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="mailto:hello@leela.app">Contact</a></nav><small>MADE WITH CARE FOR CURIOUS HEARTS.</small></footer>;
+  const footer = <footer className="paged-footer">
+    <div className="paged-footer-brand">
+      <Image src="/brand-mark.svg" alt="" width={30} height={30} aria-hidden="true" />
+      <b>Leela</b>
+    </div>
+    <p>Stories that bring ancient wisdom a little closer.</p>
+    <nav aria-label="Leela links">
+      <a href="/about">About</a><a href="/sources">Sources</a><a href="/artwork">Artwork Credits</a><a href="/privacy">Privacy</a><a href="/delete-account">Delete Account</a><a href="/terms">Terms</a><a href="mailto:hello@leela.app">Contact</a>
+    </nav>
+    <a className="paged-footer-credit" href="https://commons.wikimedia.org/" target="_blank" rel="noreferrer">Historic artwork via Wikimedia Commons - Hero courtesy Wellcome Collection (CC BY 4.0), resized and cropped</a>
+    <small>MADE WITH CARE FOR CURIOUS HEARTS.</small>
+  </footer>;
   const pages = includesFooter ? [...contentPages, footer] : contentPages;
   const labelFor = (index: number) => labels?.[index] || (includesFooter && index === pages.length - 1 ? "About Leela" : `Page ${index + 1}`);
   const [page, setPage] = useState(initialPage);

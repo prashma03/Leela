@@ -1680,6 +1680,12 @@ main:has(>.kids-magic)>.site-footer:after{right:-38px;transform:scaleX(-1) rotat
 .magic-forest-card{display:none!important}
 .kids-magic-grid>.kid-mobile-explore{grid-column:1/-1}
 
+/* Put the two play activities on Kids Home as well as keeping discovery in Explore.
+   The game is a clear next step for children without taking Vrindavan's map away. */
+@media(max-width:768px){
+ .kids-magic.kid-page-home .kids-magic-grid>.quiz.kid-mobile-explore{display:block!important;width:100%;margin:0}
+}
+
 /* Kids Create: normal document flow on narrow screens.  These rules deliberately
    avoid positioning the form, idea chips, category label, or title. */
 .kids-magic .story-maker-card,

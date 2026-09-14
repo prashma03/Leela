@@ -43,7 +43,7 @@ export default function FindKrishnasCows() {
   };
   const restart = () => { setFound([]); setHinted(null); setMessage("Five gentle friends have wandered through Vrindavan."); };
 
-  return <><VrindavanExplorer/><section className={`${styles.game} magical-card kid-mobile-explore`} aria-label="Find Krishna's cows game">
+  return <><VrindavanExplorer/><section className={`${styles.game} magical-card kid-mobile-home`} aria-label="Find Krishna's cows game">
     <div className={styles.heading}>
       <div><p>MORE TO PLAY</p><h2>Find Krishna&apos;s cows</h2><small>Five little cows wandered away. Can you help Krishna find them?</small></div>
       {playing && <button className={styles.hintButton} type="button" onClick={() => nextCow && (setHinted(nextCow.id), setMessage(nextCow.clue))}>Give a clue</button>}
