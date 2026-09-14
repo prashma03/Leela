@@ -1815,6 +1815,70 @@ main:has(>.kids-magic)>.site-footer:after{right:-38px;transform:scaleX(-1) rotat
   .kids-magic .coloring-card h2{font-size:27px}
 }
 
+/* Kids Stories — composed like a single illustrated storybook page rather than a stack of app cards. */
+.kids-magic.kid-page-stories{gap:clamp(20px,3vw,32px);background:radial-gradient(circle at 12% 8%,rgba(255,255,255,.74) 0 1px,transparent 1.5px) 0 0/13px 13px,#fff8e9}
+.kids-magic.kid-page-stories .kids-page-tabs{align-self:stretch;justify-content:center;gap:4px;margin:0 auto 2px;padding:5px;max-width:620px;border:1px solid rgba(121,95,47,.16);border-radius:999px;background:rgba(255,253,247,.78);box-shadow:none}
+.kids-magic.kid-page-stories .kids-page-tabs button{min-height:40px;border:0;border-radius:999px;background:transparent;color:#65766e;font-size:10px;font-weight:800}
+.kids-magic.kid-page-stories .kids-page-tabs button.active{background:#f2e3bc;color:var(--teal);box-shadow:inset 0 0 0 1px rgba(183,137,58,.34)}
+.kids-magic.kid-page-stories .kids-page-back{order:-3;margin:0;color:#42625c;font-size:11px;letter-spacing:.02em}
+.kids-magic.kid-page-stories .kids-magic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(22px,3vw,34px);margin-top:0}
+.kids-magic.kid-page-stories .bedtime{grid-column:1/-1;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(260px,.86fr);min-height:0;padding:0;overflow:hidden;border:1px solid #e4cf9f;border-radius:24px;background:#fffaf0;box-shadow:none}
+.kids-magic.kid-page-stories .bedtime>div:first-child{align-self:center;padding:clamp(28px,5vw,56px);background:linear-gradient(90deg,#fffaf0 74%,rgba(255,250,240,.12))}
+.kids-magic.kid-page-stories .bedtime>div:first-child>p{margin:0 0 12px;color:#9a7135;font-size:9px;font-weight:900;letter-spacing:.16em}
+.kids-magic.kid-page-stories .bedtime h2{max-width:460px;margin:0 0 12px;color:#104f4d;font:400 clamp(32px,4.3vw,54px)/1.03 var(--serif)}
+.kids-magic.kid-page-stories .bedtime small{display:block;max-width:430px;color:#63766e;font:15px/1.6 var(--serif)}
+.kids-magic.kid-page-stories .bedtime .art{width:100%;height:100%;min-height:310px;border-radius:0;transform:none}
+.kids-magic.kid-page-stories .bedtime .art:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,250,240,.56),transparent 42%);pointer-events:none}
+.kids-magic.kid-page-stories .bedtime .storybook-krishna{display:none}
+.kids-magic.kid-page-stories .bedtime-actions{gap:10px;margin-top:24px}
+.kids-magic.kid-page-stories .bedtime-actions button{min-height:42px;padding:0 17px;border:1px solid var(--teal);border-radius:999px;background:var(--teal);color:#fffdf7;box-shadow:none;font-size:10px;font-weight:900}
+.kids-magic.kid-page-stories .bedtime-actions button+button{background:transparent;color:var(--teal);border-color:rgba(13,85,84,.35)}
+.kids-magic.kid-page-stories .kids-mantra-card{grid-column:1/-1;padding:6px;border:1px solid #d9c790;border-radius:22px;background:#f6eddb;box-shadow:none}
+.kids-magic.kid-page-stories .kids-mantra-card>*{border-radius:17px}
+.kids-magic.kid-page-stories .living-story-card{grid-column:1/-1;min-height:0;padding:clamp(26px,4vw,42px);border:1px solid #e5d3ac;border-radius:22px;background:#fffaf0;box-shadow:none}
+.kids-magic.kid-page-stories .living-story-card:before{width:210px;height:210px;right:-58px;top:-70px;background:radial-gradient(circle,rgba(229,190,96,.16),transparent 70%)}
+.kids-magic.kid-page-stories .living-story-card>p{margin:0 0 13px;padding:0;background:transparent;color:#9a7135;font-size:9px;letter-spacing:.16em}
+.kids-magic.kid-page-stories .living-story-card h2{max-width:600px;margin:0;color:#104f4d;font-size:clamp(30px,4vw,47px)}
+.kids-magic.kid-page-stories .living-story-card small{margin-top:8px;color:#6a796f}
+.kids-magic.kid-page-stories .living-choices{grid-template-columns:repeat(3,minmax(0,1fr));max-width:720px;gap:10px;margin:24px 0 14px}
+.kids-magic.kid-page-stories .living-choices button{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:8px;min-height:58px;border-radius:14px;padding:10px 12px;background:#fffdf7;color:#315b55;text-align:left;font-size:11px}
+.kids-magic.kid-page-stories .living-choices button:before{display:grid;place-items:center;width:26px;height:26px;border:1px solid rgba(183,137,58,.45);border-radius:50%;color:#a97931;font:16px/1 var(--serif);content:"?"}
+.kids-magic.kid-page-stories .living-choices button:nth-child(1):before{content:"✦"}.kids-magic.kid-page-stories .living-choices button:nth-child(2):before{content:"◌"}.kids-magic.kid-page-stories .living-choices button:nth-child(3):before{content:"✿"}
+.kids-magic.kid-page-stories .living-choices button.active{border-color:#c99b43;background:var(--teal);color:#fffdf7;box-shadow:inset 0 0 0 1px #e4c475}
+.kids-magic.kid-page-stories .living-choices button.active:before{border-color:#e4c475;color:#f5dfa0}
+.kids-magic.kid-page-stories .living-story-card aside{max-width:780px;margin-top:18px;border:0;border-top:1px solid rgba(183,137,58,.48);padding:20px 0 0;background:transparent}
+.kids-magic.kid-page-stories .living-story-card aside:before{content:"→";display:inline-block;margin-right:8px;color:#c09243;font:24px/1 var(--serif);vertical-align:middle}
+.kids-magic.kid-page-stories .daily-adventure-card.kid-mobile-kindness{display:grid!important;grid-template-columns:1fr;grid-column:1/-1;order:4;min-height:0;padding:0;border:1px solid #e3cfaa;border-radius:24px;background:#fffaf0;box-shadow:none;overflow:hidden}
+.kids-magic.kid-page-stories .daily-adventure-card>p,.kids-magic.kid-page-stories .daily-adventure-card>h2,.kids-magic.kid-page-stories .daily-adventure-card>small,.kids-magic.kid-page-stories .daily-adventure-card>button{z-index:2;grid-column:1;margin-left:clamp(24px,5vw,56px);margin-right:clamp(24px,5vw,56px)}
+.kids-magic.kid-page-stories .daily-adventure-card>p{margin-top:clamp(28px,5vw,48px);margin-bottom:12px;background:#ebcc82}
+.kids-magic.kid-page-stories .daily-adventure-card>h2{max-width:610px;margin-bottom:13px;color:#104f4d}
+.kids-magic.kid-page-stories .daily-adventure-card>small{max-width:610px;margin-bottom:0}
+.kids-magic.kid-page-stories .daily-adventure-card>button{margin-top:22px;margin-bottom:28px}
+.kids-magic.kid-page-stories .daily-adventure-card:after{position:relative;grid-column:1/-1;right:auto;top:auto;width:100%;height:280px;background:linear-gradient(180deg,#fff6df 0%,rgba(255,246,223,.08) 24%),url('/images/stories/krishna-childhood.png') center 42%/cover no-repeat}
+.kids-magic.kid-page-stories .daily-adventure-card:before,.kids-magic.kid-page-stories .adventure-feather{display:none}
+
+@media(max-width:768px){
+ .kids-magic.kid-page-stories{padding-top:14px;padding-bottom:max(100px,calc(76px + env(safe-area-inset-bottom)))}
+ .kids-magic.kid-page-stories .kids-page-tabs{position:sticky;top:58px;z-index:8;justify-content:flex-start;overflow-x:auto;width:100%;max-width:none;border-radius:13px}
+ .kids-magic.kid-page-stories .kids-page-tabs button{flex:0 0 68px;min-height:44px;padding:3px;font-size:8px}
+ .kids-magic.kid-page-stories .kids-page-back{margin:3px 3px 0}
+ .kids-magic.kid-page-stories .kids-magic-grid{display:flex!important;flex-direction:column;gap:24px}
+ .kids-magic.kid-page-stories .bedtime{display:flex!important;flex-direction:column}
+ .kids-magic.kid-page-stories .bedtime>div:first-child{padding:28px 22px 22px}
+ .kids-magic.kid-page-stories .bedtime h2{font-size:clamp(31px,9vw,42px)}
+ .kids-magic.kid-page-stories .bedtime .art{min-height:230px;height:230px;order:2}
+ .kids-magic.kid-page-stories .bedtime .art:after{background:linear-gradient(180deg,rgba(255,250,240,.42),transparent 35%)}
+ .kids-magic.kid-page-stories .bedtime-actions{display:flex;gap:8px;margin-top:20px}
+ .kids-magic.kid-page-stories .bedtime-actions button{flex:1;min-height:43px;padding:0 10px;font-size:9px}
+ .kids-magic.kid-page-stories .kids-mantra-card{padding:5px}
+ .kids-magic.kid-page-stories .living-story-card{padding:26px 22px}
+ .kids-magic.kid-page-stories .living-choices{grid-template-columns:1fr;gap:8px;margin-top:20px}
+ .kids-magic.kid-page-stories .living-choices button{min-height:51px}
+ .kids-magic.kid-page-stories .daily-adventure-card>p,.kids-magic.kid-page-stories .daily-adventure-card>h2,.kids-magic.kid-page-stories .daily-adventure-card>small,.kids-magic.kid-page-stories .daily-adventure-card>button{margin-left:22px;margin-right:22px}
+ .kids-magic.kid-page-stories .daily-adventure-card>h2{font-size:clamp(31px,9vw,42px)}
+ .kids-magic.kid-page-stories .daily-adventure-card:after{height:205px}
+}
+
 /* Adult story reader: a richer reflective layer after the story. */
 .adult-story-note{margin:24px 0;padding:22px 24px;border:1px solid rgba(216,173,95,.36);border-left:4px solid var(--gold);background:linear-gradient(135deg,#fffdf7,#fff6de);box-shadow:0 16px 34px rgba(43,65,54,.06)}
 .adult-story-note p:not(.eyebrow){margin:12px 0 0;color:#405c56;font:16px/1.72 var(--serif)}
