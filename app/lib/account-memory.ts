@@ -1,3 +1,5 @@
+export type ChatHistoryMessage = { id: number; role: "user" | "ai"; text: string; storyId?: string };
+
 export type AccountMemory = {
   name?: string;
   mood?: string;
@@ -8,6 +10,7 @@ export type AccountMemory = {
   savedStories?: string[];
   readStories?: string[];
   dailyAdventureDone?: boolean;
+  chatHistory?: ChatHistoryMessage[];
 };
 
 export type PublicAccount = {
@@ -56,6 +59,17 @@ export function normalizeMemory(value: unknown): AccountMemory {
     if (typeof source.dailyAdventureDone !== "boolean") throw new AccountError("Invalid adventure status.");
     result.dailyAdventureDone = source.dailyAdventureDone;
   }
+  if (source.chatHistory !== undefined) {
+    if (!Array.isArray(source.chatHistory)) throw new AccountError("Saved chats must be a list.");
+    result.chatHistory = source.chatHistory.map((item, index) => {
+      if (!item || typeof item !== "object" || Array.isArray(item)) throw new AccountError("A saved chat is invalid.");
+      const message = item as Record<string, unknown>;
+      const role = message.role;
+      if ((role !== "user" && role !== "ai") || typeof message.text !== "string") throw new AccountError("A saved chat is invalid.");
+      const safeRole: ChatHistoryMessage["role"] = role;
+      return { id: typeof message.id === "number" && Number.isFinite(message.id) ? message.id : index + 1, role: safeRole, text: message.text.trim().slice(0, 1600), ...(typeof message.storyId === "string" ? { storyId: message.storyId.trim().slice(0, 120) } : {}) };
+    }).filter(message => message.text).slice(-80);
+  }
   return result;
 }
 
@@ -63,7 +77,7 @@ export function normalizeMemory(value: unknown): AccountMemory {
 export function completeMemory(value: unknown, name: string): Required<AccountMemory> {
   return {
     mood: "happy", favoriteAnimal: "", favoriteActivity: "",
-    goodDeeds: [], treasures: [], savedStories: [], readStories: [], dailyAdventureDone: false,
+    goodDeeds: [], treasures: [], savedStories: [], readStories: [], dailyAdventureDone: false, chatHistory: [],
     ...normalizeMemory(value), name,
   };
 }

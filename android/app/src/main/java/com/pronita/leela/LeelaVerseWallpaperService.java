@@ -6,12 +6,16 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.os.Handler;
 
 public class LeelaVerseWallpaperService extends WallpaperService {
     @Override public Engine onCreateEngine() { return new VerseEngine(); }
     private class VerseEngine extends Engine {
-        @Override public void onVisibilityChanged(boolean visible) { if (visible) draw(); }
+        private final Handler handler = new Handler();
+        private final Runnable dailyRefresh = new Runnable() { @Override public void run() { draw(); handler.postDelayed(this, 30 * 60 * 1000L); } };
+        @Override public void onVisibilityChanged(boolean visible) { if (visible) { draw(); handler.removeCallbacks(dailyRefresh); handler.postDelayed(dailyRefresh, 30 * 60 * 1000L); } else handler.removeCallbacks(dailyRefresh); }
         @Override public void onSurfaceChanged(SurfaceHolder holder, int format, int width, int height) { draw(); }
+        @Override public void onDestroy() { handler.removeCallbacks(dailyRefresh); super.onDestroy(); }
         private void draw() {
             SurfaceHolder holder = getSurfaceHolder();
             Canvas canvas = null;

@@ -201,6 +201,7 @@ main{overflow-x:hidden}.topbar{position:sticky;top:0;z-index:80;min-height:72px;
 .ask-preview>div>p:not(.eyebrow){max-width:540px;font:17px/1.65 var(--serif);color:#667773}.ask-preview>div>div{display:grid;gap:9px;margin:24px 0}.ask-preview>div>div button{min-height:42px;border:1px solid rgba(13,85,84,.16);background:#f7f1e4;color:var(--teal);text-align:left;padding:0 14px;font-size:12px;cursor:pointer}.ask-preview>div>div button:hover{border-color:var(--gold);background:#fff8e8}.ask-preview .animated-krishna{max-width:330px;margin:auto}
 .kids-home-preview{overflow:hidden}.kids-home-preview>.art{height:100%;min-height:320px}.kids-preview-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.kids-preview-actions button:last-child{min-height:48px;border:1px solid rgba(13,85,84,.18);background:#fffdf7;color:var(--teal);display:inline-flex;align-items:center;gap:8px;padding:0 16px;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;cursor:pointer}
 .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin:8px 0}.footer-links a,.footer-links button{border:0;background:none;color:#f0d28e;text-decoration:none;font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}.footer-links a:hover,.footer-links button:hover{text-decoration:underline}
+.chat-history-actions{display:flex;align-items:center;gap:9px}.chat-history-actions button{min-height:30px;border:1px solid rgba(13,85,84,.18);border-radius:999px;background:#fffdf7;color:var(--teal);padding:0 10px;font-size:9px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}.chat-history-actions button:disabled{opacity:.55;cursor:not-allowed}
 .info-page{min-height:100vh;width:min(820px,100%);margin:auto;padding:clamp(42px,7vw,90px) clamp(20px,5vw,52px);color:var(--ink)}.info-back{display:inline-flex;margin-bottom:42px;color:var(--teal);font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;text-decoration:none}.info-page h1{font:400 clamp(42px,6vw,72px)/.98 var(--serif);color:var(--teal);letter-spacing:-.035em;margin:0 0 24px}.info-page p,.info-page li{font:17px/1.75 var(--serif);color:#5f716b}.info-page code{background:#fffdf7;border:1px solid #eadfcb;padding:2px 5px;color:var(--teal)}
 @media(max-width:900px){.need-today,.ask-preview{grid-template-columns:1fr}.need-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ask-preview .animated-krishna{max-width:300px}.kids-home-preview>.art{height:290px}.daily footer{height:auto;min-height:64px;padding:14px 0}.daily footer div{justify-content:center}}
 @media(max-width:620px){.journey-chip{display:none}.need-grid{grid-template-columns:1fr}.need-grid button{min-height:64px}.home-story-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.home-story-filters button{min-height:38px}.ask-preview{padding-top:38px;padding-bottom:42px}.kids-preview-actions{display:grid}.kids-preview-actions button{width:100%;justify-content:center}.footer-links{gap:10px 14px}.info-page p,.info-page li{font-size:16px}}
@@ -334,6 +335,12 @@ main:has(.kids-magic) .mobile button:nth-child(5):after{font-size:7px}
 .kids-magic .story-maker-fields{grid-template-columns:repeat(3,minmax(0,1fr))}
 .kids-magic .treasure-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 .kids-magic .personal-story{max-height:230px;overflow:auto}
+
+/* Kids storybook garden: an original Leela treatment inspired by warm paper, meadow colours, and playful Krishna storybooks. */
+.kids-magic:not(.bedtime-mode){position:relative;border:1px solid #ead8ad;border-radius:24px;background:radial-gradient(circle at 12% 11%,rgba(255,255,255,.88) 0 1px,transparent 1.4px) 0 0/11px 11px,linear-gradient(180deg,#fffaf0 0%,#fff7e7 52%,#f4eccb 100%);box-shadow:0 24px 58px rgba(117,85,39,.1)}
+.kids-magic:not(.bedtime-mode):before,.kids-magic:not(.bedtime-mode):after{content:"";position:absolute;z-index:0;pointer-events:none;opacity:.78}.kids-magic:not(.bedtime-mode):before{left:-12px;right:-12px;bottom:-1px;height:112px;background:radial-gradient(ellipse at 4% 100%,#5c9e56 0 16%,transparent 17%),radial-gradient(ellipse at 11% 100%,#8bc65c 0 12%,transparent 13%),radial-gradient(ellipse at 24% 100%,#e9aa38 0 3%,transparent 4%),radial-gradient(ellipse at 29% 100%,#7d6ce2 0 3%,transparent 4%),radial-gradient(ellipse at 43% 100%,#f0bd37 0 4%,transparent 5%),radial-gradient(ellipse at 71% 100%,#799fce 0 4%,transparent 5%),radial-gradient(ellipse at 84% 100%,#f19655 0 3%,transparent 4%),linear-gradient(180deg,transparent 20%,rgba(113,175,69,.34) 21% 100%)}.kids-magic:not(.bedtime-mode):after{right:3%;top:18px;width:170px;height:96px;background:radial-gradient(ellipse at 20% 62%,transparent 0 31%,rgba(232,203,130,.6) 32% 34%,transparent 35%),radial-gradient(ellipse at 52% 38%,transparent 0 34%,rgba(232,203,130,.52) 35% 37%,transparent 38%),radial-gradient(ellipse at 82% 67%,transparent 0 28%,rgba(232,203,130,.5) 29% 31%,transparent 32%);filter:blur(.1px)}
+.kids-magic:not(.bedtime-mode)>:not(.kids-night-sky){position:relative;z-index:1}.kids-magic:not(.bedtime-mode) .kids-storybook{border:1px solid #efd8a1;border-radius:20px;background:#f4d99e;color:#244b45;box-shadow:0 18px 38px rgba(119,77,26,.12)}.kids-magic:not(.bedtime-mode) .kids-storybook:before{background:linear-gradient(90deg,rgba(255,250,237,.96),rgba(255,250,237,.68) 53%,rgba(255,250,237,.12)),radial-gradient(circle at 22% 26%,rgba(246,187,71,.34),transparent 20%)}.kids-magic:not(.bedtime-mode) .kids-storybook h1{color:#e7584c;text-shadow:none}.kids-magic:not(.bedtime-mode) .kids-storybook p{color:#47635b}.kids-magic:not(.bedtime-mode) .kids-storybook span{background:#fff2c9;color:#a45a32}.kids-magic:not(.bedtime-mode) .kids-storybook .primary{background:#e7584c;color:#fff9ed;box-shadow:0 12px 24px rgba(204,76,64,.2)}.kids-magic:not(.bedtime-mode) .kids-activities button{border-color:#ecd6a8;background:linear-gradient(165deg,#fffdf6,#fff3d9)}.kids-magic:not(.bedtime-mode) .kids-activities span{background:#f8e4aa;color:#0c625c}.kids-magic:not(.bedtime-mode) .magic-forest-card{border:1px solid #d4c47b;background:linear-gradient(135deg,#1b7064,#257b69 48%,#f3c773);box-shadow:0 17px 36px rgba(54,105,76,.13)}
+@media(max-width:700px){.kids-magic:not(.bedtime-mode){border-radius:18px}.kids-magic:not(.bedtime-mode):after{width:110px;height:74px;right:1%;top:8px}.kids-magic:not(.bedtime-mode):before{height:76px}.kids-magic:not(.bedtime-mode) .kids-storybook{border-radius:16px}}
 
 @media(max-width:768px){
  .kids-magic{padding:24px 16px max(92px,calc(76px + env(safe-area-inset-bottom)))}
@@ -1668,6 +1675,139 @@ main:has(>.kids-magic)>.site-footer:after{right:-38px;transform:scaleX(-1) rotat
 .story-maker-quickpicks span{align-self:center;margin-right:2px;color:#735f38;font-size:9px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
 .story-maker-quickpicks button{min-height:34px;border:1px solid rgba(13,85,84,.16);border-radius:999px;background:#fffdf7;color:var(--teal);padding:0 12px;font-size:12px;font-weight:800;text-transform:capitalize;cursor:pointer;box-shadow:0 7px 16px rgba(43,65,54,.06)}
 .story-maker-quickpicks button:hover{border-color:rgba(216,173,95,.65);background:#fff3cf;transform:translateY(-1px)}
+
+/* Replaced by the illustrated, tap-to-discover Vrindavan scene. */
+.magic-forest-card{display:none!important}
+.kids-magic-grid>.kid-mobile-explore{grid-column:1/-1}
+
+/* Kids Create: normal document flow on narrow screens.  These rules deliberately
+   avoid positioning the form, idea chips, category label, or title. */
+.kids-magic .story-maker-card,
+.kids-magic .coloring-card,
+.kids-magic .daily-adventure-card{
+  box-sizing:border-box;
+  width:100%;
+  min-height:0;
+}
+.kids-magic .story-maker-fields{
+  align-items:start;
+  gap:12px;
+}
+.kids-magic .story-maker-fields label{
+  gap:7px;
+}
+.kids-magic .story-maker-fields input{
+  width:100%;
+}
+.kids-magic .story-maker-quickpicks{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:9px;
+  margin:18px 0 16px;
+}
+.kids-magic .story-maker-quickpicks span{
+  flex:0 0 100%;
+  margin:0 0 1px;
+}
+.kids-magic .story-maker-quickpicks button{
+  flex:0 0 auto;
+  max-width:100%;
+  margin:0;
+  white-space:nowrap;
+}
+.kids-magic .coloring-card{
+  display:block;
+  margin-top:28px;
+  padding:clamp(24px,5vw,32px);
+}
+.kids-magic .coloring-card>p{
+  position:static;
+  display:inline-flex;
+  width:auto;
+  margin:0 0 12px;
+}
+.kids-magic .coloring-card h2{
+  position:static;
+  margin:0 0 20px;
+  font-size:clamp(27px,7vw,38px);
+  line-height:1.14;
+}
+.kids-magic .coloring-layout{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  width:100%;
+}
+.kids-magic .coloring-preview{
+  width:100%;
+  min-height:0;
+  aspect-ratio:16 / 10;
+}
+.kids-magic .coloring-tools{
+  width:100%;
+  gap:14px;
+}
+.kids-magic .coloring-tools>div{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  padding-top:2px;
+}
+.kids-magic .coloring-tools button{
+  flex:0 0 38px;
+  width:38px;
+  height:38px;
+}
+.kids-magic .daily-adventure-card{
+  margin-top:28px;
+}
+
+@media(max-width:768px){
+  .kids-magic{
+    padding-left:clamp(20px,5vw,24px);
+    padding-right:clamp(20px,5vw,24px);
+    padding-bottom:max(100px,calc(76px + env(safe-area-inset-bottom)));
+  }
+  .kids-magic.kid-page-create .story-maker-card,
+  .kids-magic.kid-page-create .coloring-card{
+    margin-bottom:28px;
+  }
+  .kids-magic .story-maker-card{
+    padding:26px 22px;
+  }
+  .kids-magic .story-maker-fields{
+    grid-template-columns:1fr;
+  }
+  .kids-magic .story-maker-quickpicks{
+    gap:8px;
+    margin-top:18px;
+    margin-bottom:18px;
+  }
+  .kids-magic .story-maker-quickpicks button{
+    min-height:36px;
+    padding-inline:12px;
+  }
+  .kids-magic .coloring-card{
+    margin-top:0;
+    padding:26px 22px;
+  }
+  .kids-magic .coloring-preview{
+    aspect-ratio:15 / 10;
+  }
+  .kids-magic .daily-adventure-card{
+    min-height:0;
+    margin-top:28px;
+  }
+}
+
+@media(max-width:360px){
+  .kids-magic{padding-left:20px;padding-right:20px}
+  .kids-magic .story-maker-card,
+  .kids-magic .coloring-card{padding:22px 18px}
+  .kids-magic .story-maker-quickpicks button{font-size:11px;padding-inline:10px}
+  .kids-magic .coloring-card h2{font-size:27px}
+}
 
 /* Adult story reader: a richer reflective layer after the story. */
 .adult-story-note{margin:24px 0;padding:22px 24px;border:1px solid rgba(216,173,95,.36);border-left:4px solid var(--gold);background:linear-gradient(135deg,#fffdf7,#fff6de);box-shadow:0 16px 34px rgba(43,65,54,.06)}

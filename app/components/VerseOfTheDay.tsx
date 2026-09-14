@@ -66,8 +66,8 @@ export default function VerseOfTheDay({
 
   return (
     <section className={`${styles.card} ${isHomeVerse ? `${styles.homeCard} ${styles[`theme${theme[0].toUpperCase()}${theme.slice(1)}`]}` : ""}`} aria-labelledby={titleId}>
-      {isHomeVerse && <div className={styles.themePicker} aria-label="Choose a color for today's verse">
-        {[['sunrise', 'Sunrise gold'], ['rose', 'Rose dawn'], ['forest', 'Forest green'], ['night', 'Moonlit blue']].map(([value, label]) => <button key={value} type="button" className={`${styles.themeChoice} ${styles[`swatch${value[0].toUpperCase()}${value.slice(1)}`]}`} aria-label={label} aria-pressed={theme === value} onClick={() => chooseTheme(value)} />)}
+      {isHomeVerse && <div className={styles.themePicker} aria-label="Choose a verse mood">
+        {[['sunrise', 'Sunrise'], ['rose', 'Blossom'], ['forest', 'Forest'], ['night', 'Moonlight']].map(([value, label]) => <button key={value} type="button" className={`${styles.themeChoice} ${styles[`swatch${value[0].toUpperCase()}${value.slice(1)}`]}`} aria-label={label} aria-pressed={theme === value} onClick={() => chooseTheme(value)} />)}
       </div>}
       <figure className={styles.artwork} aria-hidden="true">
         <Image src="/images/welcome/gita-manuscript-illustrated.jpg" alt="" fill sizes="190px" />

@@ -11,6 +11,7 @@ type MemoryProfile = {
   goodDeeds?: string[];
   treasures?: string[];
 };
+type ChatTurn = { role: "user" | "ai"; text: string };
 
 const wisdom = [
   "Focus on the kind action in front of you, not on controlling every result.",
@@ -62,7 +63,7 @@ function extractOutputText(data: unknown) {
   return output?.flatMap((item) => item.content || []).map((item) => item.text || "").join("").trim() || "";
 }
 
-async function makeOpenAIReply(message: string) {
+async function makeOpenAIReply(message: string, history: ChatTurn[] = []) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) return null;
 
@@ -73,8 +74,12 @@ async function makeOpenAIReply(message: string) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: process.env.OPENAI_KRISHNA_MODEL || "gpt-4.1-mini",
+      model: process.env.OPENAI_KRISHNA_MODEL || "gpt-5-nano",
       input: [
+        ...history.map(turn => ({
+          role: turn.role,
+          content: turn.text,
+        })),
         {
           role: "system",
           content:
@@ -127,7 +132,7 @@ function makeServerReply(message: string, memory: MemoryProfile) {
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json() as { message?: string; memory?: MemoryProfile };
+    const body = await request.json() as { message?: string; memory?: MemoryProfile; history?: ChatTurn[] };
     const message = body.message?.trim();
     if (!message) {
       return NextResponse.json({ error: "Message is required." }, { status: 400 });
@@ -138,7 +143,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ text: shortReply, mode: "short-conversation" });
     }
 
-    const openAIReply = await makeOpenAIReply(message);
+    const history = Array.isArray(body.history) ? body.history.filter(turn => turn && (turn.role === "user" || turn.role === "ai") && typeof turn.text === "string").slice(-12).map(turn => ({ role: turn.role, text: turn.text.slice(0, 1600) })) : [];
+    const openAIReply = await makeOpenAIReply(message, history);
     return NextResponse.json(openAIReply || makeServerReply(message, body.memory || {}));
   } catch {
     return NextResponse.json({ error: "Unable to prepare Ask Leela response." }, { status: 500 });

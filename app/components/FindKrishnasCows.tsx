@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import styles from "./FindKrishnasCows.module.css";
+import VrindavanExplorer from "./VrindavanExplorer";
 
 type Cow = { id: string; name: string; clue: string; x: string; y: string; coat: string };
 
@@ -42,9 +43,9 @@ export default function FindKrishnasCows() {
   };
   const restart = () => { setFound([]); setHinted(null); setMessage("Five gentle friends have wandered through Vrindavan."); };
 
-  return <section className={`${styles.game} magical-card kid-mobile-explore`} aria-label="Find Krishna's cows game">
+  return <><VrindavanExplorer/><section className={`${styles.game} magical-card kid-mobile-explore`} aria-label="Find Krishna's cows game">
     <div className={styles.heading}>
-      <div><p>VRINDAVAN PLAY</p><h2>Find Krishna&apos;s cows</h2><small>A gentle hidden-object story for curious little eyes.</small></div>
+      <div><p>MORE TO PLAY</p><h2>Find Krishna&apos;s cows</h2><small>Five little cows wandered away. Can you help Krishna find them?</small></div>
       {playing && <button className={styles.hintButton} type="button" onClick={() => nextCow && (setHinted(nextCow.id), setMessage(nextCow.clue))}>Give a clue</button>}
     </div>
     {!playing ? <div className={styles.intro}>
@@ -64,5 +65,5 @@ export default function FindKrishnasCows() {
       <div className={styles.herdList}>{herd.map(cow => <span key={cow.id} className={found.includes(cow.id) ? styles.done : ""}>{found.includes(cow.id) ? cow.name : "?"}</span>)}</div>
       {complete && <div className={styles.complete} aria-live="polite"><div><p>THE HERD IS HOME</p><h3>You found every friend.</h3><p>Krishna&apos;s meadow is full again. Careful eyes and a kind heart always notice who needs help.</p><button type="button" className="primary" onClick={restart}>Play again</button></div><Image src="/images/stories/hero-krishna.png" alt="Traditional painting of Krishna" fill sizes="(max-width: 700px) 100vw, 480px"/></div>}
     </>}
-  </section>;
+  </section></>;
 }

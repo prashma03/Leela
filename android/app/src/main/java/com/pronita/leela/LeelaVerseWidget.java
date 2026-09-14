@@ -4,6 +4,8 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.app.PendingIntent;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
 import org.json.JSONArray;
@@ -41,6 +43,10 @@ public class LeelaVerseWidget extends AppWidgetProvider {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.leela_verse_widget);
             views.setTextViewText(R.id.verse_reference, verse[0]);
             views.setTextViewText(R.id.verse_reflection, verse[1]);
+            Intent openLeela = new Intent(context, MainActivity.class);
+            openLeela.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            PendingIntent openApp = PendingIntent.getActivity(context, id, openLeela, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+            views.setOnClickPendingIntent(R.id.leela_verse_widget_root, openApp);
             manager.updateAppWidget(id, views);
         }
     }
