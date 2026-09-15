@@ -525,6 +525,318 @@ main:has(.kids-magic) .mobile button:nth-child(5):after{font-size:7px}
  .forest-map .forest-spot{width:calc(50% - 14px);font-size:8px;padding-inline:6px}
 }
 
+/* Kids Game page: compact storybook layout with natural document flow. */
+main:has(>.kids-magic)>.topbar{
+ min-height:62px;
+ height:auto;
+ padding:9px clamp(16px,4vw,28px);
+ border-bottom-color:rgba(13,85,84,.12)
+}
+main:has(>.kids-magic)>.topbar .brand{font-size:21px}
+main:has(>.kids-magic)>.topbar .brand>span.brand-mark{width:34px;height:34px}
+.kids-magic.kid-page-game{
+ width:min(980px,100%);
+ max-width:980px;
+ margin:0 auto;
+ padding:18px clamp(16px,3vw,24px) 30px;
+ gap:14px;
+ border:0;
+ border-radius:0;
+ background:linear-gradient(180deg,#fffaf0 0%,#fbf3df 58%,#f4ebd6 100%);
+ box-shadow:none
+}
+.kids-magic.kid-page-game:before,.kids-magic.kid-page-game:after{display:none}
+.kids-magic.kid-page-game .kids-night-sky{display:none}
+.kids-magic.kid-page-game .kids-page-tabs{
+ position:relative;
+ top:auto;
+ display:grid!important;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:8px;
+ width:100%;
+ margin:0;
+ padding:10px;
+ border:1px solid rgba(181,148,84,.22);
+ border-radius:18px;
+ background:#fffdf7;
+ box-shadow:0 10px 26px rgba(42,65,54,.07)
+}
+.kids-magic.kid-page-game .kids-page-tabs button{
+ min-width:0;
+ min-height:66px;
+ padding:8px 6px;
+ border:1px solid rgba(13,85,84,.08);
+ border-radius:13px;
+ background:#fbf7ec;
+ color:#536b65;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ gap:5px;
+ font-size:11px;
+ font-weight:800;
+ line-height:1.1;
+ box-shadow:none
+}
+.kids-magic.kid-page-game .kids-page-tabs button svg{width:20px;height:20px;stroke-width:1.65}
+.kids-magic.kid-page-game .kids-page-tabs button.active{
+ border-color:rgba(186,139,60,.28);
+ background:#f3e4bd;
+ color:var(--teal);
+ box-shadow:inset 0 0 0 1px rgba(255,253,247,.72),0 8px 18px rgba(109,82,34,.07)
+}
+.kids-magic.kid-page-game .kids-page-back{
+ order:-3;
+ align-self:flex-start;
+ min-height:36px;
+ margin:0 0 4px 2px;
+ padding:0;
+ border:0;
+ background:transparent;
+ color:#476861;
+ font-size:12px;
+ font-weight:800;
+ cursor:pointer
+}
+.kids-magic.kid-page-game .kids-magic-top,
+.kids-magic.kid-page-game>.friendship-card,
+.kids-magic.kid-page-game>.memory-card,
+.kids-magic.kid-page-game>.magic-forest-card,
+.kids-magic.kid-page-game .kids-activities{display:none!important}
+.kids-magic.kid-page-game .kids-magic-grid{
+ display:block!important;
+ margin:0;
+ padding:0;
+ overflow:visible
+}
+.kids-magic.kid-page-game .kids-magic-grid>.bedtime,
+.kids-magic.kid-page-game .kids-magic-grid>.kids-mantra-card,
+.kids-magic.kid-page-game .kids-magic-grid>.living-story-card,
+.kids-magic.kid-page-game .kids-magic-grid>.kids-create-subhead,
+.kids-magic.kid-page-game .kids-magic-grid>.story-maker-card,
+.kids-magic.kid-page-game .kids-magic-grid>.coloring-card,
+.kids-magic.kid-page-game .kids-magic-grid>.quest-card,
+.kids-magic.kid-page-game .kids-magic-grid>.treasure-card,
+.kids-magic.kid-page-game .kids-magic-grid>.daily-adventure-card,
+.kids-magic.kid-page-game .kids-magic-grid>.quiz{display:none!important}
+.kids-magic.kid-page-game .kids-game-page{
+ display:block!important;
+ width:100%;
+ margin:0
+}
+.kids-game-page{position:relative}
+.kids-game-hero{
+ padding:6px 2px 14px;
+ text-align:left
+}
+.kids-game-hero p{
+ margin:0 0 7px;
+ color:#98783f;
+ font-size:9px;
+ font-weight:900;
+ letter-spacing:.16em;
+ text-transform:uppercase
+}
+.kids-game-hero h1{
+ margin:0;
+ color:var(--teal);
+ font:400 clamp(38px,7vw,58px)/1.02 var(--serif)
+}
+.kids-game-hero span{
+ display:block;
+ margin-top:8px;
+ color:#61746d;
+ font:16px/1.45 var(--serif)
+}
+.kids-game-shelf{display:grid;gap:14px}
+.kids-game-feature{
+ display:grid;
+ grid-template-columns:minmax(0,.92fr) minmax(0,1fr);
+ gap:0;
+ padding:0;
+ overflow:hidden;
+ border:1px solid #e5d2aa;
+ border-radius:22px;
+ background:#fffdf7;
+ box-shadow:0 16px 38px rgba(45,70,56,.09)
+}
+.kids-game-preview{
+ position:relative;
+ min-height:270px;
+ overflow:hidden;
+ background:#dcebdc
+}
+.kids-game-preview img{object-fit:cover;object-position:center}
+.kids-game-preview:after{
+ content:"";
+ position:absolute;
+ inset:0;
+ background:linear-gradient(180deg,rgba(255,253,247,.02),rgba(48,69,44,.18));
+ pointer-events:none
+}
+.kids-game-preview i,.kids-game-preview b,.kids-game-preview em{
+ position:absolute;
+ z-index:1;
+ display:block;
+ pointer-events:none
+}
+.kids-game-preview i{left:18px;bottom:22px;width:72px;height:24px;border-bottom:2px solid rgba(13,85,84,.32);border-radius:50%;transform:rotate(-8deg)}
+.kids-game-preview b{right:22px;top:18px;width:42px;height:58px;border-radius:70% 30% 70% 30%;background:radial-gradient(circle at 48% 34%,#123b42 0 15%,#d7ad46 17% 28%,#2e8791 30% 51%,#79a06c 53% 71%,transparent 73%);transform:rotate(20deg)}
+.kids-game-preview em{right:58px;bottom:32px;width:92px;height:24px;border-radius:50%;background:rgba(255,253,247,.72);box-shadow:18px -9px 0 2px rgba(255,253,247,.58);font-style:normal}
+.kids-game-copy{
+ display:flex;
+ flex-direction:column;
+ align-items:flex-start;
+ justify-content:center;
+ padding:clamp(24px,4vw,42px)
+}
+.kids-game-copy p{
+ margin:0 0 10px;
+ color:#9a7135;
+ font-size:9px;
+ font-weight:900;
+ letter-spacing:.16em;
+ text-transform:uppercase
+}
+.kids-game-copy h2{
+ margin:0;
+ color:var(--teal);
+ font:400 clamp(30px,4.6vw,48px)/1.04 var(--serif)
+}
+.kids-game-copy>span{
+ margin-top:9px;
+ padding:6px 10px;
+ border:1px solid rgba(13,85,84,.12);
+ border-radius:999px;
+ background:#eef4e9;
+ color:#355f56;
+ font-size:11px;
+ font-weight:850
+}
+.kids-game-copy small{
+ display:block;
+ margin:16px 0 20px;
+ color:#5f706b;
+ font:15px/1.55 var(--serif)
+}
+.kids-game-copy .primary{
+ border-radius:999px;
+ background:var(--teal);
+ color:#fffdf7;
+ box-shadow:0 10px 22px rgba(13,85,84,.16)
+}
+.kids-mini-games{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:12px
+}
+.kids-mini-games article{
+ min-width:0;
+ padding:18px 16px;
+ border:1px solid rgba(181,148,84,.2);
+ border-radius:18px;
+ background:#fffaf0;
+ box-shadow:0 8px 22px rgba(45,70,56,.055)
+}
+.kids-mini-games p{
+ margin:10px 0 7px;
+ color:#9a7135;
+ font-size:8px;
+ font-weight:900;
+ letter-spacing:.13em
+}
+.kids-mini-games h3{
+ margin:0;
+ color:var(--teal);
+ font:400 22px/1.08 var(--serif)
+}
+.kids-mini-games small{
+ display:block;
+ margin-top:8px;
+ color:#68786f;
+ font-size:12px;
+ line-height:1.45
+}
+.mini-game-icon{
+ position:relative;
+ display:block;
+ width:42px;
+ height:42px;
+ border-radius:50%;
+ background:#e8f0de
+}
+.mini-game-icon.flute:before{content:"";position:absolute;left:8px;top:19px;width:28px;height:5px;border-radius:999px;background:#c9903f;transform:rotate(-18deg);box-shadow:8px 0 0 -3px #7a5328}
+.mini-game-icon.lotus:before{content:"";position:absolute;left:9px;top:11px;width:24px;height:22px;background:radial-gradient(ellipse at 50% 80%,#d89491 0 28%,transparent 30%),radial-gradient(ellipse at 28% 62%,#e7b5b0 0 30%,transparent 32%),radial-gradient(ellipse at 72% 62%,#e7b5b0 0 30%,transparent 32%)}
+.mini-game-icon.feather:before{content:"";position:absolute;left:15px;top:7px;width:14px;height:28px;border-radius:70% 30% 70% 30%;background:radial-gradient(circle at 48% 34%,#123b42 0 17%,#d7ad46 19% 30%,#2e8791 32% 56%,#79a06c 58% 78%,transparent 80%);transform:rotate(22deg)}
+.kids-game-shelf .find-cows-game{
+ margin-top:4px;
+ scroll-margin-top:16px
+}
+
+@media(max-width:700px){
+ main:has(>.kids-magic)>.topbar{min-height:56px;padding:7px 16px}
+ main:has(>.kids-magic)>.topbar .brand small{display:none}
+ .kids-magic.kid-page-game{
+  width:100%;
+  padding:12px 16px 24px;
+  gap:10px
+ }
+ .kids-magic.kid-page-game .kids-page-tabs{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:7px;
+  padding:8px;
+  border-radius:16px
+ }
+ .kids-magic.kid-page-game .kids-page-tabs button{
+  min-height:58px;
+  padding:7px 4px;
+  font-size:10px
+ }
+ .kids-magic.kid-page-game .kids-page-back{margin-top:0;margin-bottom:2px}
+ .kids-game-hero{padding-bottom:10px}
+ .kids-game-hero h1{font-size:42px}
+ .kids-game-hero span{font-size:15px}
+ .kids-game-feature{
+  grid-template-columns:1fr;
+  border-radius:20px
+ }
+ .kids-game-preview{min-height:210px}
+ .kids-game-copy{padding:22px 20px}
+ .kids-game-copy h2{font-size:32px}
+ .kids-game-copy small{font-size:14px;margin-bottom:18px}
+ .kids-game-copy .primary{width:100%;justify-content:center}
+ .kids-mini-games{grid-template-columns:1fr;gap:10px}
+ .kids-mini-games article{
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr);
+  gap:2px 12px;
+  align-items:center;
+  padding:14px
+ }
+ .kids-mini-games .mini-game-icon{grid-row:1/4}
+ .kids-mini-games p,.kids-mini-games h3,.kids-mini-games small{grid-column:2;margin:0}
+ .kids-mini-games h3{font-size:20px}
+ main:has(>.kids-magic)>.site-footer{
+  display:flex!important;
+  min-height:0;
+  margin:0;
+  padding:24px 18px 22px
+ }
+ main:has(>.kids-magic)>.site-footer>p{font-size:14px}
+}
+
+@media(max-width:430px){
+ .kids-magic.kid-page-game{padding-left:16px;padding-right:16px}
+ .kids-magic.kid-page-game .kids-page-tabs{gap:6px;padding:7px}
+ .kids-magic.kid-page-game .kids-page-tabs button{min-height:56px;font-size:9px;border-radius:11px}
+ .kids-magic.kid-page-game .kids-page-tabs button svg{width:18px;height:18px}
+ .kids-game-hero h1{font-size:38px}
+ .kids-game-preview{min-height:188px}
+ .kids-game-copy{padding:20px 18px}
+ .kids-game-copy h2{font-size:30px}
+}
+
 .story-audio-player{position:fixed;z-index:130;left:50%;bottom:max(18px,env(safe-area-inset-bottom));display:grid;grid-template-columns:48px minmax(0,1fr) 38px;align-items:center;gap:12px;width:min(520px,calc(100vw - 28px));padding:10px 12px;border:1px solid rgba(13,85,84,.18);border-radius:18px;background:rgba(255,253,247,.96);box-shadow:0 18px 48px rgba(12,50,48,.22);backdrop-filter:blur(16px);transform:translateX(-50%)}
 .story-audio-cover{width:48px;height:48px;border:0;border-radius:14px;background:linear-gradient(145deg,#0d5554,#174b48);color:#fff7dc;display:grid;place-items:center;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(240,210,142,.18)}
 .story-audio-player div{min-width:0;display:grid;gap:2px}.story-audio-player small{color:#a17633;font-size:8px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}.story-audio-player b{overflow:hidden;color:#0d5554;font:700 14px/1.2 var(--serif);text-overflow:ellipsis;white-space:nowrap}.story-audio-player span{overflow:hidden;color:#6c7a73;font-size:11px;text-overflow:ellipsis;white-space:nowrap}.story-audio-close{width:38px;height:38px;border:1px solid rgba(13,85,84,.12);border-radius:50%;background:#fffaf0;color:#47645d;display:grid;place-items:center;cursor:pointer}
@@ -1966,3 +2278,88 @@ main:has(>.kids-magic)>.site-footer:after{right:-38px;transform:scaleX(-1) rotat
 .calm-path-note{margin:8px 0 0;color:#7f8b84;font-size:11px;line-height:1.45}
 @media(max-width:900px){.calm-path-intro{grid-template-columns:1fr}.calm-path-intro>div{grid-column:1;grid-row:auto;justify-items:start}.calm-path-days{grid-template-columns:repeat(7, minmax(210px, 78vw))}}
 @media(max-width:620px){.calm-path-challenge{margin-bottom:20px;padding:18px 14px}.calm-path-intro h2{font-size:28px}.calm-path-intro>p{font-size:14px}.calm-path-days article{min-height:268px}.calm-path-note{font-size:10px}}
+
+/* Final mobile fixes for the Kids Game page. Keep these at the end so older Kids rules cannot reopen the layout. */
+@media(max-width:768px){
+ main:has(>.kids-magic) .mobile{
+  position:static!important;
+  display:grid!important;
+  grid-template-columns:minmax(120px,180px)!important;
+  justify-content:center!important;
+  margin:0!important;
+  padding:12px 16px max(14px,env(safe-area-inset-bottom))!important;
+  border-top:1px solid rgba(230,221,206,.9)!important;
+  background:#fffaf0!important;
+  box-shadow:none!important
+ }
+ main:has(>.kids-magic) .mobile button:nth-child(5){
+  min-height:40px!important;
+  border:1px solid rgba(13,85,84,.14)!important;
+  border-radius:999px!important;
+  background:#fffdf7!important;
+  color:var(--teal)!important;
+  padding:0 14px!important;
+  font-size:0!important
+ }
+ main:has(>.kids-magic) .mobile button:nth-child(5):after{
+  content:"Parent area";
+  font-size:10px!important;
+  font-weight:900!important
+ }
+ main:has(>.kids-magic)>.site-footer{margin-bottom:0!important}
+ .kids-magic.kid-page-game{
+  display:flex!important;
+  flex-direction:column!important;
+  padding:12px 16px 24px!important;
+  gap:10px!important
+ }
+ .kids-magic.kid-page-game .kids-page-tabs{
+  position:relative!important;
+  top:auto!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:7px!important;
+  overflow:visible!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:8px!important;
+  border-radius:16px!important
+ }
+ .kids-magic.kid-page-game .kids-page-tabs button{
+  flex:initial!important;
+  width:auto!important;
+  min-width:0!important;
+  min-height:58px!important;
+  padding:7px 4px!important;
+  font-size:10px!important;
+  white-space:normal!important
+ }
+ .kids-magic.kid-page-game .kids-page-back{
+  order:-3!important;
+  margin:0 0 2px 2px!important
+ }
+ .kids-magic.kid-page-game .kids-magic-grid{
+  display:block!important;
+  margin:0!important;
+  padding:0!important
+ }
+ .kids-magic.kid-page-game .kids-magic-grid>.bedtime,
+ .kids-magic.kid-page-game .kids-magic-grid>.kids-mantra-card,
+ .kids-magic.kid-page-game .kids-magic-grid>.living-story-card,
+ .kids-magic.kid-page-game .kids-magic-grid>.kids-create-subhead,
+ .kids-magic.kid-page-game .kids-magic-grid>.story-maker-card,
+ .kids-magic.kid-page-game .kids-magic-grid>.coloring-card,
+ .kids-magic.kid-page-game .kids-magic-grid>.quest-card,
+ .kids-magic.kid-page-game .kids-magic-grid>.treasure-card,
+ .kids-magic.kid-page-game .kids-magic-grid>.daily-adventure-card,
+ .kids-magic.kid-page-game .kids-magic-grid>.quiz,
+ .kids-magic.kid-page-game .kids-activities{
+  display:none!important
+ }
+ .kids-magic.kid-page-game .kids-game-page{
+  display:block!important;
+  width:100%!important;
+  margin:0!important
+ }
+}

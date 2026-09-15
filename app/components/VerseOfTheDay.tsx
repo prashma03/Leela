@@ -92,7 +92,7 @@ export default function VerseOfTheDay({
           onClick={() => daily && onSave(daily.id)}
         >{daily && savedIds.includes(daily.id) ? "Saved" : "Save"}</button>}
         {onReadAnother && <button type="button" onClick={onReadAnother}>Read another teaching <span aria-hidden="true">→</span></button>}
-        {showDailyLink && <Link href="/verse-of-the-day">Daily reminders <span aria-hidden="true">→</span></Link>}
+        {showDailyLink && <Link href="/verse-of-the-day">Add to Home screen <span aria-hidden="true">→</span></Link>}
       </div>
       <p className={styles.audioStatus} role="status">{audioStatus}</p>
       <details className={styles.source}>

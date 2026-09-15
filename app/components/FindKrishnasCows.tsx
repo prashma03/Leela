@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./FindKrishnasCows.module.css";
-import VrindavanExplorer from "./VrindavanExplorer";
 
 type Cow = { id: string; name: string; clue: string; x: number; y: number; coat: string };
 type Level = { title: string; place: string; time: number; cows: Cow[] };
@@ -123,7 +122,7 @@ export default function FindKrishnasCows() {
     setMessage(nextCow.clue);
   };
 
-  return <><VrindavanExplorer/><section className={`${styles.game} magical-card kid-mobile-home ${levelIndex === 2 ? styles.night : ""}`} aria-label="Find Krishna's cows game">
+  return <section className={`${styles.game} magical-card ${levelIndex === 2 ? styles.night : ""}`} aria-label="Find Krishna's cows game">
     <div className={styles.heading}>
       <div><p>{playing ? `ROUND ${levelIndex + 1} OF ${levels.length}` : "MORE TO PLAY"}</p><h2>Find Krishna&apos;s cows</h2><small>{playing ? `${level.title} - ${level.place}` : "A full hidden-object meadow game with rounds, clues, combos, and badges."}</small></div>
       {playing && !finished && <div className={styles.topActions}><button className={styles.hintButton} type="button" disabled={!nextCow || levelComplete || gameOver} onClick={clue}>Clue -30</button><button className={styles.hintButton} type="button" onClick={start}>Restart</button></div>}
@@ -153,5 +152,5 @@ export default function FindKrishnasCows() {
       {levelComplete && !finished && !gameOver && <div className={styles.complete} aria-live="polite"><div><p>ROUND CLEAR</p><h3>{levelIndex === levels.length - 1 ? "The whole herd is home." : "The bells are getting closer."}</h3><p>{levelIndex === levels.length - 1 ? `Final rank: ${rank}. Score: ${score}.` : "Keep your streak alive in the next part of Vrindavan."}</p><button type="button" className="primary" onClick={nextLevel}>{levelIndex === levels.length - 1 ? "Finish game" : "Next round"}</button></div><Image src="/images/stories/hero-krishna.png" alt="Traditional painting of Krishna" fill sizes="(max-width: 700px) 100vw, 480px"/></div>}
       {finished && <div className={styles.complete} aria-live="polite"><div><p>GAME COMPLETE</p><h3>{rank}</h3><p>Final score: {score}. Best combo: {bestStreak}x. Hints used: {hintsUsed}.</p><button type="button" className="primary" onClick={start}>Play again</button></div><Image src="/images/stories/hero-krishna.png" alt="Traditional painting of Krishna" fill sizes="(max-width: 700px) 100vw, 480px"/></div>}
     </>}
-  </section></>;
+  </section>;
 }
