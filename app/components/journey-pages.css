@@ -50,7 +50,7 @@ main:has(.paged-sections--with-footer) > .site-footer { display: none; }
 .calm-path-challenge .animated-panel > article, .gita-page .animated-panel > article { padding: 24px; border: 1px solid #d8dcc9; border-radius: 20px; background: #fffdf6; line-height: 1.7; }
 .kids-magic { animation: leela-page-enter .32s ease-out; }
 .kids-magic [class*="kid-mobile-"] { display: none; }
-.kid-page-home .kid-mobile-home, .kid-page-stories .kid-mobile-stories, .kid-page-explore .kid-mobile-explore, .kid-page-create .kid-mobile-create, .kid-page-kindness .kid-mobile-kindness { display: block; }
+.kid-page-home .kid-mobile-home, .kid-page-stories .kid-mobile-stories, .kid-page-explore .kid-mobile-explore, .kid-page-game .kid-mobile-game, .kid-page-create .kid-mobile-create, .kid-page-kindness .kid-mobile-kindness { display: block; }
 .kids-page-tabs { display: flex !important; flex-wrap: wrap; }
 @media (prefers-reduced-motion: reduce) { .animated-panel, .kids-magic { animation: none; } }
 @media (max-width: 700px) { .paged-sections--scroll { min-height: calc(100dvh - 56px); } .section-tabs { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding-inline: 12px; } .section-tabs button { flex: 0 0 auto; } .paged-footer { min-height: 0; gap: 17px; padding: 42px 24px max(94px, calc(34px + env(safe-area-inset-bottom))); } .paged-footer nav { max-width: 330px; gap: 12px 15px; } .paged-footer nav a { font-size: 8px; letter-spacing: .12em; } .paged-footer-credit { font-size: 11px; } }
