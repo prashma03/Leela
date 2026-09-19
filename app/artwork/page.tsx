@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function ArtworkPage() {
   return (
     <main className="info-page">
-      <Link href="/" className="info-back">Back to Leela</Link>
+      <Link href="/" className="info-back">Back to Home Page</Link>
       <p className="eyebrow">Artwork Credits</p>
       <h1>Historical artwork and devotional prints.</h1>
       <p>

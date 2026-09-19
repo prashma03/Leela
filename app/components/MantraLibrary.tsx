@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { mantras, type MantraEntry } from "../data/mantras";
 import { speakWithAndroidTts } from "../lib/native-verse";
+import { createGentleUtterance, gentleSpeechPitch, mantraSpeechRate, softenSpeechText } from "../lib/gentleSpeech";
 import styles from "./MantraLibrary.module.css";
 
 export default function MantraLibrary({ compact = false }: { compact?: boolean }) {
@@ -16,17 +17,15 @@ export default function MantraLibrary({ compact = false }: { compact?: boolean }
 
   async function listen(item: MantraEntry) {
     if (!("speechSynthesis" in window)) {
-      try { if (await speakWithAndroidTts(item.roman.replaceAll("\n", ". "), 0.68)) { setStatus(`Playing a slow pronunciation guide for ${item.title}.`); return; } } catch { /* Show the same clear fallback below. */ }
+      try { if (await speakWithAndroidTts(softenSpeechText(item.roman.replaceAll("\n", ". ")), mantraSpeechRate, gentleSpeechPitch)) { setStatus(`Playing a soft, slow pronunciation guide for ${item.title}.`); return; } } catch { /* Show the same clear fallback below. */ }
       setStatus("Slow audio guidance is not available in this browser.");
       return;
     }
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(item.roman.replaceAll("\n", ". "));
-    utterance.lang = "en-IN";
-    utterance.rate = 0.68;
+    const utterance = createGentleUtterance(item.roman.replaceAll("\n", ". "), { lang: "en-IN", rate: mantraSpeechRate });
     utterance.onend = () => setStatus("");
     utterance.onerror = () => setStatus("The audio guide stopped. You can try again.");
-    setStatus(`Playing a slow pronunciation guide for ${item.title}.`);
+    setStatus(`Playing a soft, slow pronunciation guide for ${item.title}.`);
     window.speechSynthesis.speak(utterance);
   }
 

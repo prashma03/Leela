@@ -84,7 +84,7 @@ export default function LoginPage() {
 
       <section className="login-card" aria-labelledby="login-title">
         <Link className="login-home" href="/">
-          Back to Leela
+          Back to Home Page
         </Link>
         <Image src="/brand-mark.svg" alt="Leela symbol" width={54} height={54} priority />
         <p>{mode === "login" ? "Continue your journey" : "Begin your journey"}</p>

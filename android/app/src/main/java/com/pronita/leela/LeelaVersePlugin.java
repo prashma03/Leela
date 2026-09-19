@@ -43,18 +43,20 @@ public class LeelaVersePlugin extends Plugin {
     public void speak(PluginCall call) {
         String text = call.getString("text", "").trim();
         if (text.isEmpty()) { call.reject("Nothing to read aloud."); return; }
-        double rate = call.getDouble("rate", 0.88);
+        double rate = call.getDouble("rate", 0.8);
+        double pitch = call.getDouble("pitch", 0.92);
         if (narrator == null) {
             narrator = new TextToSpeech(getContext(), status -> {
                 if (status != TextToSpeech.SUCCESS) { call.reject("Android text-to-speech is not available."); return; }
-                readAloud(call, text, rate);
+                readAloud(call, text, rate, pitch);
             });
-        } else readAloud(call, text, rate);
+        } else readAloud(call, text, rate, pitch);
     }
 
-    private void readAloud(PluginCall call, String text, double rate) {
+    private void readAloud(PluginCall call, String text, double rate, double pitch) {
         narrator.setLanguage(Locale.getDefault());
         narrator.setSpeechRate((float) Math.max(0.5, Math.min(1.25, rate)));
+        narrator.setPitch((float) Math.max(0.75, Math.min(1.15, pitch)));
         int result = narrator.speak(text, TextToSpeech.QUEUE_FLUSH, null, "leela-narration");
         if (result == TextToSpeech.ERROR) call.reject("Android text-to-speech could not start.");
         else call.resolve();

@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function TermsPage() {
   return (
     <main className="info-page">
-      <Link href="/" className="info-back">Back to Leela</Link>
+      <Link href="/" className="info-back">Back to Home Page</Link>
       <p className="eyebrow">Terms</p>
       <h1>Educational use.</h1>
       <p>

@@ -6,6 +6,7 @@ import { useEffect, useId, useState } from "react";
 import { gitaSourceNote, type BhagavadGitaEntry } from "../data/bhagavadGita";
 import { useDailyVerse } from "../lib/useDailyVerse";
 import { speakWithAndroidTts, syncVerseScheduleToAndroid } from "../lib/native-verse";
+import { createGentleUtterance, gentleSpeechPitch, gentleSpeechRate, softenSpeechText } from "../lib/gentleSpeech";
 import styles from "./VerseOfTheDay.module.css";
 
 interface VerseOfTheDayProps {
@@ -48,19 +49,17 @@ export default function VerseOfTheDay({
   async function listen() {
     if (!daily) return;
     if (!("speechSynthesis" in window)) {
-      try { if (await speakWithAndroidTts(daily.reference + ". " + daily.contentType + ". " + daily.reflection)) { setAudioStatus("Reading the reflection."); return; } } catch { /* Show the same clear fallback below. */ }
+      try { if (await speakWithAndroidTts(softenSpeechText(daily.reference + ". " + daily.contentType + ". " + daily.reflection), gentleSpeechRate, gentleSpeechPitch)) { setAudioStatus("Reading the reflection gently."); return; } } catch { /* Show the same clear fallback below. */ }
       setAudioStatus("Read-aloud is not supported in this browser.");
       return;
     }
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(
+    const utterance = createGentleUtterance(
       daily.reference + ". " + daily.contentType + ". " + daily.reflection,
     );
-    utterance.lang = "en";
-    utterance.rate = 0.88;
     utterance.onend = () => setAudioStatus("");
     utterance.onerror = () => setAudioStatus("Read-aloud stopped. You can try again.");
-    setAudioStatus("Reading the reflection.");
+    setAudioStatus("Reading the reflection gently.");
     window.speechSynthesis.speak(utterance);
   }
 

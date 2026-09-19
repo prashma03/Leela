@@ -27,7 +27,7 @@ export default function DeleteAccountPage() {
   }
 
   return <main className="legal-page">
-    <Link href="/">← Back to Leela</Link>
+    <Link href="/">← Back to Home Page</Link>
     <p className="eyebrow">Account and privacy</p>
     <h1>Delete your Leela account</h1>
     <p>This page is for an adult account holder. Sign in to Leela in this browser before continuing.</p>

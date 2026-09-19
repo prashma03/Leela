@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function SourcesPage() {
   return (
     <main className="info-page">
-      <Link href="/" className="info-back">Back to Leela</Link>
+      <Link href="/" className="info-back">Back to Home Page</Link>
       <p className="eyebrow">Sources</p>
       <h1>How Leela handles sacred content.</h1>
       <p>

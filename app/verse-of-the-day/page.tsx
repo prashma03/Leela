@@ -17,7 +17,7 @@ export default async function VerseOfTheDayPage({
     "A simple way to carry it today is to choose one action you can do with sincerity, complete it without theatrics, and let the result arrive without giving it ownership of your peace.",
   ] : [];
   return <main className="daily-verse-page">
-    <Link href="/">← Back to Leela</Link>
+    <Link href="/">← Back to Home Page</Link>
     <div className="daily-verse-page-content">
       <VerseOfTheDay headingLevel={1} showDailyLink={false} entry={entry} />
       {entry && <section className="verse-deeper-meaning" aria-label="Detailed verse meaning">
