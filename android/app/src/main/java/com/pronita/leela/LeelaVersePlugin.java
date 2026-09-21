@@ -1,9 +1,11 @@
 package com.pronita.leela;
 
 import android.app.WallpaperManager;
+import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.speech.tts.TextToSpeech;
 
 import java.util.Locale;
@@ -37,6 +39,26 @@ public class LeelaVersePlugin extends Plugin {
         intent.putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT, new ComponentName(getContext(), LeelaVerseWallpaperService.class));
         getActivity().startActivity(intent);
         call.resolve();
+    }
+
+    @PluginMethod
+    public void pinVerseWidget(PluginCall call) {
+        JSObject result = new JSObject();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            result.put("supported", false);
+            call.resolve(result);
+            return;
+        }
+        AppWidgetManager manager = getContext().getSystemService(AppWidgetManager.class);
+        ComponentName widget = new ComponentName(getContext(), LeelaVerseWidget.class);
+        if (manager == null || !manager.isRequestPinAppWidgetSupported()) {
+            result.put("supported", false);
+            call.resolve(result);
+            return;
+        }
+        manager.requestPinAppWidget(widget, null, null);
+        result.put("supported", true);
+        call.resolve(result);
     }
 
     @PluginMethod
