@@ -9,28 +9,28 @@ type Level = { title: string; place: string; time: number; cows: Cow[] };
 
 const levels: Level[] = [
   { title: "Morning Meadow", place: "Follow the bells through the grass.", time: 55, cows: [
-    { id: "gauri", name: "Gauri", clue: "Look near the flowering grove.", x: 18, y: 54, coat: "white" },
-    { id: "shyama", name: "Shyama", clue: "A gentle friend rests near the old tree.", x: 68, y: 38, coat: "brown" },
-    { id: "padma", name: "Padma", clue: "Listen for a splash near the lotus water.", x: 75, y: 70, coat: "spotted" },
-    { id: "champa", name: "Champa", clue: "Someone playful is hiding by the golden hay.", x: 41, y: 71, coat: "cream" },
-    { id: "malli", name: "Malli", clue: "A small bell is waiting near the little bridge.", x: 53, y: 43, coat: "white" },
+    { id: "gauri", name: "Gauri", clue: "Look low in the left meadow grass.", x: 18, y: 78, coat: "white" },
+    { id: "shyama", name: "Shyama", clue: "A gentle friend stands near the shaded trees.", x: 68, y: 64, coat: "brown" },
+    { id: "padma", name: "Padma", clue: "Listen for a soft bell near the right grass.", x: 77, y: 80, coat: "spotted" },
+    { id: "champa", name: "Champa", clue: "Someone playful is close to the golden path.", x: 42, y: 83, coat: "cream" },
+    { id: "malli", name: "Malli", clue: "A small bell waits near the middle meadow.", x: 53, y: 69, coat: "white" },
   ] },
   { title: "River Path", place: "The Yamuna is bright, but the herd is sneaky.", time: 48, cows: [
-    { id: "nila", name: "Nila", clue: "Try the cool shade near the left tree.", x: 12, y: 39, coat: "brown" },
-    { id: "kesar", name: "Kesar", clue: "A golden friend is low in the grass.", x: 29, y: 78, coat: "cream" },
-    { id: "tara", name: "Tara", clue: "Search where the river bends.", x: 83, y: 62, coat: "spotted" },
-    { id: "bindu", name: "Bindu", clue: "Someone tiny is near the bridge rail.", x: 58, y: 48, coat: "white" },
-    { id: "mira", name: "Mira", clue: "Look high, near the bright sky glow.", x: 76, y: 25, coat: "cream" },
-    { id: "sona", name: "Sona", clue: "The haystack is not as quiet as it looks.", x: 36, y: 64, coat: "brown" },
+    { id: "nila", name: "Nila", clue: "Try the cool shade near the left grass.", x: 12, y: 70, coat: "brown" },
+    { id: "kesar", name: "Kesar", clue: "A golden friend is low in the meadow.", x: 29, y: 85, coat: "cream" },
+    { id: "tara", name: "Tara", clue: "Search beside the quiet right-side path.", x: 83, y: 73, coat: "spotted" },
+    { id: "bindu", name: "Bindu", clue: "Someone tiny is near the center flowers.", x: 58, y: 67, coat: "white" },
+    { id: "mira", name: "Mira", clue: "Look under the warm sunlight, not in the sky.", x: 76, y: 56, coat: "cream" },
+    { id: "sona", name: "Sona", clue: "The grass near the middle-left is not as quiet as it looks.", x: 36, y: 76, coat: "brown" },
   ] },
   { title: "Moonlit Vrindavan", place: "Last round. Careful eyes win the flute song.", time: 42, cows: [
-    { id: "radha", name: "Radha", clue: "A friend waits at the very edge of the grove.", x: 9, y: 58, coat: "white" },
-    { id: "mani", name: "Mani", clue: "Check the soft shadow below the bridge.", x: 49, y: 57, coat: "spotted" },
-    { id: "rupa", name: "Rupa", clue: "The lotus pond is hiding a bell.", x: 73, y: 77, coat: "cream" },
-    { id: "dhara", name: "Dhara", clue: "Look between the old tree and the clouds.", x: 63, y: 31, coat: "brown" },
-    { id: "lila", name: "Lila", clue: "Someone is tucked behind the hay.", x: 33, y: 72, coat: "spotted" },
-    { id: "jyoti", name: "Jyoti", clue: "Search the glowing hill path.", x: 88, y: 39, coat: "white" },
-    { id: "megha", name: "Megha", clue: "A final friend is almost in the grass.", x: 22, y: 83, coat: "brown" },
+    { id: "radha", name: "Radha", clue: "A friend waits at the very edge of the meadow.", x: 9, y: 76, coat: "white" },
+    { id: "mani", name: "Mani", clue: "Check the soft shadow near the center grass.", x: 49, y: 72, coat: "spotted" },
+    { id: "rupa", name: "Rupa", clue: "The far-right meadow is hiding a bell.", x: 73, y: 84, coat: "cream" },
+    { id: "dhara", name: "Dhara", clue: "Look below the trees where the grass begins.", x: 63, y: 59, coat: "brown" },
+    { id: "lila", name: "Lila", clue: "Someone is tucked into the lower flower field.", x: 33, y: 81, coat: "spotted" },
+    { id: "jyoti", name: "Jyoti", clue: "Search the glowing meadow path.", x: 88, y: 65, coat: "white" },
+    { id: "megha", name: "Megha", clue: "A final friend is almost in the grass.", x: 22, y: 87, coat: "brown" },
   ] },
 ];
 
@@ -49,6 +49,16 @@ function CowIllustration({ coat }: { coat: string }) {
 
 function formatTime(seconds: number) {
   return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
+function MeadowAmbience() {
+  return <>
+    <span className={styles.sunFace} aria-hidden="true"/>
+    <span className={styles.bird} aria-hidden="true"/>
+    <span className={styles.butterfly} aria-hidden="true"/>
+    <span className={styles.butterflyTwo} aria-hidden="true"/>
+    <span className={styles.windLine} aria-hidden="true"/>
+  </>;
 }
 
 export default function FindKrishnasCows() {
@@ -124,19 +134,27 @@ export default function FindKrishnasCows() {
 
   return <section className={`${styles.game} magical-card ${levelIndex === 2 ? styles.night : ""}`} aria-label="Find Krishna's cows game">
     <div className={styles.heading}>
-      <div><p>{playing ? `ROUND ${levelIndex + 1} OF ${levels.length}` : "MORE TO PLAY"}</p><h2>Find Krishna&apos;s cows</h2><small>{playing ? `${level.title} - ${level.place}` : "A full hidden-object meadow game with rounds, clues, combos, and badges."}</small></div>
+      <div><p>{playing ? `ROUND ${levelIndex + 1} OF ${levels.length}` : "MORE TO PLAY"}</p><h2>Find Krishna&apos;s cows</h2><small>{playing ? `${level.title} - ${level.place}` : "A gentle meadow game with a tiny guide, grounded cows, clues, combos, and badges."}</small></div>
       {playing && !finished && <div className={styles.topActions}><button className={styles.hintButton} type="button" disabled={!nextCow || levelComplete || gameOver} onClick={clue}>Clue -30</button><button className={styles.hintButton} type="button" onClick={start}>Restart</button></div>}
     </div>
     {!playing ? <div className={styles.intro}>
-      <div className={styles.introScene}><Image src="/images/stories/krishna-childhood.png" alt="A traditional painting of young Krishna in Vrindavan" fill sizes="(max-width: 700px) 100vw, 680px"/><span/><i/><b/></div>
-      <div><h3>Can you bring the whole herd home?</h3><p>Play three timed rounds, uncover hidden cows, build a streak, spend clues carefully, and earn badges for sharp eyes.</p><button type="button" className="primary" onClick={start}>Begin the forest game</button></div>
+      <div className={styles.introScene}>
+        <Image src="/images/kids/cow-game-meadow.png" alt="A calm Vrindavan meadow with grass, trees, and sunlight" fill sizes="(max-width: 700px) 100vw, 680px"/>
+        <MeadowAmbience/>
+        <div className={styles.tutorialCard} aria-hidden="true">
+          <span>Watch the grass</span>
+          <span>Tap a cow</span>
+          <span>Use clues softly</span>
+        </div>
+      </div>
+      <div><h3>Can you bring the whole herd home?</h3><p>First, watch the meadow. When the round begins, the cows stand in the grass with little shadows, while birds, butterflies, sun, and wind keep the scene alive.</p><button type="button" className="primary" onClick={start}>Begin the forest game</button></div>
     </div> : <>
       <div className={styles.dashboard} aria-live="polite"><span><b>{score}</b> score</span><span><b>{formatTime(timeLeft)}</b> time</span><span><b>{streak}x</b> combo</span><span><b>{foundTotal}/{totalCows}</b> herd</span></div>
       <div className={styles.status}><b>{found.length} of {level.cows.length}</b><span>found in this round</span><p>{gameOver ? "Time is up. Try the round again." : message}</p></div>
       <button type="button" className={styles.scene} onClick={miss} disabled={levelComplete || gameOver || finished} aria-label="Vrindavan meadow. Search for hidden cows.">
-        <Image src="/images/stories/krishna-childhood.png" alt="Vrindavan meadow where Krishna's cows are hiding" fill sizes="(max-width: 700px) 100vw, 880px" priority/>
-        <div className={styles.skyGlow}/><i className={styles.cloudOne}/><i className={styles.cloudTwo}/><i className={styles.river}/>
-        <span className={styles.tree}/><span className={styles.haystack}/><span className={styles.bridge}/><span className={styles.lotus}/>
+        <Image src="/images/kids/cow-game-meadow.png" alt="Vrindavan meadow where Krishna's cows are hiding" fill sizes="(max-width: 700px) 100vw, 880px" priority/>
+        <div className={styles.skyGlow}/>
+        <MeadowAmbience/>
         {level.cows.map(cow => {
           const isFound = found.includes(cow.id);
           return <span key={cow.id} className={`${styles.cow} ${isFound ? styles.found : ""} ${hinted === cow.id ? styles.hinted : ""}`} style={{ left: `${cow.x}%`, top: `${cow.y}%` }} onClick={event => { event.stopPropagation(); findCow(cow); }} role="button" tabIndex={0} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); findCow(cow); } }} aria-label={isFound ? `${cow.name} found` : "Hidden cow"}>
