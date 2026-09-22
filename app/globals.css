@@ -99,6 +99,395 @@
  .kids-magic .adventure-feather{display:none!important}
 }
 
+/* Kids Home layout polish: compact header, single-row navigation, editorial cards. */
+main:has(>.kids-magic)>.topbar{
+ min-height:76px!important;
+ height:auto!important;
+ padding:10px clamp(20px,5vw,28px)!important;
+ display:flex!important;
+ align-items:center!important;
+ justify-content:space-between!important;
+ gap:12px!important;
+ background:#fbf7ec!important;
+ border-bottom:1px solid rgba(17,67,64,.12)!important;
+}
+main:has(>.kids-magic)>.topbar .brand{
+ display:flex!important;
+ align-items:center!important;
+ gap:10px!important;
+ min-width:0!important;
+ color:#123f3e!important;
+ font-size:22px!important;
+ line-height:1!important;
+ white-space:nowrap!important;
+}
+main:has(>.kids-magic)>.topbar .brand .brand-mark,
+main:has(>.kids-magic)>.topbar .brand>span{
+ width:38px!important;
+ height:38px!important;
+ flex:0 0 38px!important;
+ overflow:hidden!important;
+ border-radius:50%!important;
+ background:#0d5554!important;
+}
+main:has(>.kids-magic)>.topbar .brand small{display:none!important}
+main:has(>.kids-magic)>.topbar nav{display:none!important}
+main:has(>.kids-magic)>.topbar .head{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:flex-end!important;
+ gap:8px!important;
+ margin:0!important;
+ padding:0!important;
+ border:0!important;
+ flex:0 1 auto!important;
+}
+main:has(>.kids-magic)>.topbar .journey-chip,
+main:has(>.kids-magic)>.topbar .account-pill,
+main:has(>.kids-magic)>.topbar .session-exit,
+main:has(>.kids-magic)>.topbar .login-link{
+ min-height:40px!important;
+ padding:0 12px!important;
+ border:1px solid rgba(13,85,84,.12)!important;
+ border-radius:999px!important;
+ background:#fffdf7!important;
+ color:#315b55!important;
+ font-size:11px!important;
+ font-weight:850!important;
+ box-shadow:none!important;
+}
+
+.kids-magic{
+ width:min(100%,1040px)!important;
+ margin:0 auto!important;
+ padding:22px clamp(20px,5vw,24px) max(112px,calc(88px + env(safe-area-inset-bottom)))!important;
+ overflow:hidden!important;
+ background:
+  radial-gradient(circle at 10% 8%,rgba(216,173,95,.08),transparent 26%),
+  radial-gradient(circle at 92% 22%,rgba(188,93,84,.08),transparent 24%),
+  #fbf7ec!important;
+}
+.kids-magic .kids-page-tabs{
+ position:relative!important;
+ top:auto!important;
+ z-index:10!important;
+ display:grid!important;
+ grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ width:100%!important;
+ max-width:620px!important;
+ min-height:68px!important;
+ margin:0 auto 24px!important;
+ padding:6px!important;
+ gap:6px!important;
+ overflow:visible!important;
+ border:1px solid rgba(17,67,64,.12)!important;
+ border-radius:22px!important;
+ background:rgba(255,253,247,.82)!important;
+ box-shadow:0 14px 34px rgba(25,57,53,.08)!important;
+ backdrop-filter:blur(10px)!important;
+}
+.kids-magic .kids-page-tabs button{
+ display:flex!important;
+ min-width:0!important;
+ min-height:54px!important;
+ padding:7px 4px!important;
+ flex-direction:column!important;
+ align-items:center!important;
+ justify-content:center!important;
+ gap:4px!important;
+ border:0!important;
+ border-radius:16px!important;
+ background:transparent!important;
+ color:#78847e!important;
+ font-size:10px!important;
+ font-weight:850!important;
+ line-height:1.1!important;
+ text-align:center!important;
+ transition:background .18s ease,color .18s ease,transform .18s ease!important;
+}
+.kids-magic .kids-page-tabs button svg{
+ width:20px!important;
+ height:20px!important;
+ flex:0 0 auto!important;
+}
+.kids-magic .kids-page-tabs button.active,
+.kids-magic .kids-page-tabs button[aria-current="page"]{
+ background:#f4e7c9!important;
+ color:#0d5554!important;
+ box-shadow:inset 0 0 0 1px rgba(216,173,95,.32)!important;
+}
+.kids-magic .kids-page-tabs button:active{transform:scale(.98)!important}
+.kids-magic .kids-page-back{
+ margin:0 0 18px!important;
+ padding:0!important;
+ border:0!important;
+ background:transparent!important;
+ color:#42625c!important;
+ font-size:12px!important;
+ font-weight:850!important;
+}
+
+.kids-magic-top{
+ display:grid!important;
+ grid-template-columns:1fr!important;
+ gap:24px!important;
+ margin:0 0 32px!important;
+}
+.kids-storybook{
+ position:relative!important;
+ width:100%!important;
+ min-height:clamp(360px,58vw,520px)!important;
+ aspect-ratio:16/9!important;
+ overflow:hidden!important;
+ border:1px solid rgba(92,73,39,.14)!important;
+ border-radius:20px!important;
+ background:#e9dcc0!important;
+ box-shadow:0 18px 46px rgba(31,68,61,.12)!important;
+ isolation:isolate!important;
+}
+
+.kids-storybook img{
+ object-fit:cover!important;
+ object-position:center!important;
+ transform:none!important;
+ filter:saturate(.96) contrast(.96)!important;
+}
+.kids-storybook:after{
+ content:""!important;
+ position:absolute!important;
+ z-index:1!important;
+ inset:0!important;
+ background:linear-gradient(90deg,rgba(255,248,229,.94) 0%,rgba(255,248,229,.72) 34%,rgba(255,248,229,.18) 58%,transparent 78%)!important;
+ pointer-events:none!important;
+}
+.kids-storybook>div{
+ position:absolute!important;
+ z-index:4!important;
+ left:clamp(22px,5vw,56px)!important;
+ top:50%!important;
+ width:min(390px,56%)!important;
+ transform:translateY(-50%)!important;
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:flex-start!important;
+ gap:14px!important;
+ color:#0d5554!important;
+}
+.kids-storybook>div>span{
+ display:inline-flex!important;
+ width:max-content!important;
+ padding:7px 12px!important;
+ border-radius:999px!important;
+ background:#ebcc82!important;
+ color:#67491f!important;
+ font-size:10px!important;
+ font-weight:950!important;
+ letter-spacing:.14em!important;
+ text-transform:uppercase!important;
+}
+.kids-storybook h1{
+ max-width:100%!important;
+ margin:0!important;
+ color:#0d5554!important;
+ font:400 clamp(42px,8vw,48px)/.96 var(--serif)!important;
+ letter-spacing:-.045em!important;
+ text-wrap:balance!important;
+}
+.kids-storybook p{
+ max-width:330px!important;
+ margin:0!important;
+ color:#49635d!important;
+ font:16px/1.55 var(--serif)!important;
+}
+.kids-storybook .primary{
+ min-height:54px!important;
+ padding:0 20px!important;
+ border-radius:15px!important;
+ background:#c95f54!important;
+ color:#fffdf7!important;
+ box-shadow:0 12px 26px rgba(128,58,48,.18)!important;
+ font-size:12px!important;
+ letter-spacing:.04em!important;
+ transition:transform .18s ease,box-shadow .18s ease!important;
+}
+.kids-storybook .primary:active{transform:scale(.98)!important}
+.kids-storybook>i,.kids-storybook>b{opacity:.26!important;pointer-events:none!important}
+.daily-blessing{display:none!important}
+
+.kids-magic .daily-adventure-card{
+ display:grid!important;
+ grid-template-columns:minmax(0,1.08fr) minmax(250px,.92fr)!important;
+ gap:0!important;
+ min-height:0!important;
+ margin:32px 0 0!important;
+ padding:0!important;
+ overflow:hidden!important;
+ border:1px solid #e3cfaa!important;
+ border-radius:24px!important;
+ background:#fffaf0!important;
+ box-shadow:0 18px 42px rgba(31,68,61,.08)!important;
+ isolation:isolate!important;
+}
+.kids-magic .daily-adventure-card>p,
+.kids-magic .daily-adventure-card>h2,
+.kids-magic .daily-adventure-card>small,
+.kids-magic .daily-adventure-card>button{
+ position:relative!important;
+ z-index:3!important;
+ grid-column:1!important;
+ margin-left:clamp(24px,5vw,46px)!important;
+ margin-right:clamp(24px,5vw,46px)!important;
+}
+.kids-magic .daily-adventure-card>p{
+ justify-self:start!important;
+ margin-top:clamp(28px,5vw,44px)!important;
+ margin-bottom:16px!important;
+ padding:8px 13px!important;
+ border-radius:999px!important;
+ background:#ebcc82!important;
+ color:#67491f!important;
+ font-size:11px!important;
+ font-weight:950!important;
+ letter-spacing:.14em!important;
+ text-transform:uppercase!important;
+}
+.kids-magic .daily-adventure-card>h2{
+ max-width:520px!important;
+ margin-top:0!important;
+ margin-bottom:16px!important;
+ color:#0d5554!important;
+ font:400 clamp(42px,6vw,52px)/1.02 var(--serif)!important;
+ letter-spacing:-.045em!important;
+ text-wrap:balance!important;
+}
+.kids-magic .daily-adventure-card>small{
+ max-width:520px!important;
+ margin-bottom:0!important;
+ color:#536a63!important;
+ font:16px/1.65 var(--serif)!important;
+}
+.kids-magic .daily-adventure-card>button{
+ justify-self:start!important;
+ min-height:48px!important;
+ margin-top:24px!important;
+ margin-bottom:clamp(28px,5vw,44px)!important;
+ padding:0 18px!important;
+ border:0!important;
+ border-radius:999px!important;
+ background:#0d5554!important;
+ color:#fffdf7!important;
+ box-shadow:0 10px 22px rgba(13,85,84,.16)!important;
+ font-size:11px!important;
+ font-weight:950!important;
+ transition:transform .18s ease,box-shadow .18s ease!important;
+}
+.kids-magic .daily-adventure-card>button:active{transform:scale(.98)!important}
+.kids-magic .daily-adventure-card:after{
+ content:""!important;
+ position:relative!important;
+ z-index:1!important;
+ grid-column:2!important;
+ grid-row:1/6!important;
+ width:100%!important;
+ height:100%!important;
+ min-height:320px!important;
+ background:linear-gradient(90deg,#fffaf0 0%,rgba(255,250,240,.06) 22%),url('/images/stories/krishna-childhood.png') center 42%/cover no-repeat!important;
+ pointer-events:none!important;
+}
+.kids-magic .daily-adventure-card:before,
+.kids-magic .adventure-feather{display:none!important}
+.kids-magic-grid{
+ gap:24px!important;
+ margin-top:24px!important;
+}
+
+@media(max-width:700px){
+ main:has(>.kids-magic)>.topbar{
+  min-height:72px!important;
+  padding:10px 20px!important;
+ }
+ main:has(>.kids-magic)>.topbar .head{
+  display:none!important;
+ }
+ .kids-magic{
+  padding:18px 20px max(104px,calc(82px + env(safe-area-inset-bottom)))!important;
+ }
+ .kids-magic .kids-page-tabs{
+  position:relative!important;
+  top:auto!important;
+  min-height:66px!important;
+  margin-bottom:24px!important;
+  gap:5px!important;
+  padding:6px!important;
+  border-radius:20px!important;
+ }
+ .kids-magic .kids-page-tabs button{
+  min-height:52px!important;
+  padding:6px 2px!important;
+  font-size:9px!important;
+ }
+ .kids-storybook{
+  min-height:clamp(420px,112vw,500px)!important;
+  aspect-ratio:auto!important;
+  border-radius:18px!important;
+ }
+ 
+ .kids-storybook img{
+  object-position:58% center!important;
+ }
+ .kids-storybook:after{
+  background:linear-gradient(180deg,rgba(255,248,229,.94) 0%,rgba(255,248,229,.74) 45%,rgba(255,248,229,.12) 74%,transparent 100%)!important;
+ }
+ .kids-storybook>div{
+  left:22px!important;
+  right:22px!important;
+  top:28px!important;
+  width:auto!important;
+  transform:none!important;
+  gap:12px!important;
+ }
+ .kids-storybook h1{
+  font-size:clamp(42px,12vw,48px)!important;
+  max-width:310px!important;
+ }
+ .kids-storybook p{
+  max-width:300px!important;
+  font-size:15px!important;
+ }
+ .kids-storybook .primary{
+  min-height:52px!important;
+ }
+ .kids-magic .daily-adventure-card{
+  grid-template-columns:1fr!important;
+  border-radius:22px!important;
+ }
+ .kids-magic .daily-adventure-card>p,
+ .kids-magic .daily-adventure-card>h2,
+ .kids-magic .daily-adventure-card>small,
+ .kids-magic .daily-adventure-card>button{
+  margin-left:22px!important;
+  margin-right:22px!important;
+ }
+ .kids-magic .daily-adventure-card>h2{
+  font-size:clamp(40px,11vw,48px)!important;
+ }
+ .kids-magic .daily-adventure-card:after{
+  grid-column:1!important;
+  grid-row:auto!important;
+  height:205px!important;
+  min-height:205px!important;
+  background:linear-gradient(180deg,#fffaf0 0%,rgba(255,250,240,.08) 24%),url('/images/stories/krishna-childhood.png') center 42%/cover no-repeat!important;
+ }
+}
+
+@media(max-width:360px){
+ .kids-magic{padding-left:16px!important;padding-right:16px!important}
+ .kids-magic .kids-page-tabs{gap:4px!important}
+ .kids-magic .kids-page-tabs button svg{width:18px!important;height:18px!important}
+ .kids-storybook>div{left:18px!important;right:18px!important}
+ .kids-storybook h1{font-size:40px!important}
+}
+
 /* Magic forest */
 .magic-forest-card{margin-top:16px;display:grid;grid-template-columns:minmax(0,.75fr) minmax(360px,1fr);gap:22px;align-items:center;overflow:hidden;background:linear-gradient(135deg,#073f40,#115d58 48%,#e6d39c);border:0;border-radius:16px;padding:28px;color:white;position:relative}.magic-forest-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 24%,rgba(247,216,131,.24),transparent 24%),radial-gradient(circle at 18% 78%,rgba(255,255,255,.1),transparent 20%);pointer-events:none}.magic-forest-card>div{position:relative}.magic-forest-card p{display:inline-block;margin:0 0 12px;padding:7px 11px;border-radius:999px;background:#f0d28e;color:#704f21;font-size:8px;font-weight:900;letter-spacing:.12em}.magic-forest-card h2{font:400 clamp(32px,3.3vw,46px)/1.05 var(--serif);margin:0 0 10px;color:#fff7dc}.magic-forest-card small{display:block;font:16px/1.55 var(--serif);color:rgba(255,255,255,.78)}.forest-map{min-height:265px;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:linear-gradient(180deg,rgba(255,253,247,.12),rgba(255,253,247,.06));position:relative;padding:18px}.forest-map button{position:absolute;border:1px solid rgba(255,255,255,.18);background:rgba(255,253,247,.9);color:#0d5554;border-radius:999px;min-width:104px;min-height:42px;display:flex;align-items:center;gap:8px;padding:7px 12px;cursor:pointer;font-size:10px;font-weight:900;box-shadow:0 14px 28px rgba(3,32,35,.16)}.forest-map button.active{background:#f7d883;color:#173438;transform:translateY(-3px);box-shadow:0 0 0 4px rgba(247,216,131,.18),0 18px 34px rgba(3,32,35,.22)}.forest-map button span{position:relative;width:24px;height:24px;border-radius:50%;background:#e8f1e8}.forest-map .tree{left:10%;top:14%}.forest-map .cow{right:12%;top:20%}.forest-map .flute{left:38%;top:43%}.forest-map .peacock{left:14%;bottom:16%}.forest-map .temple{right:14%;bottom:14%}.forest-map .tree span:before{content:"";position:absolute;left:7px;top:3px;width:11px;height:15px;border-radius:50% 50% 44% 44%;background:#4d8b63;box-shadow:-6px 4px 0 #6ba06c,6px 4px 0 #6ba06c}.forest-map .cow span:before{content:"";position:absolute;left:4px;top:9px;width:17px;height:10px;border-radius:8px;background:#d9c6a8}.forest-map .cow span:after{content:"";position:absolute;right:2px;top:6px;width:7px;height:7px;border-radius:50%;background:#d9c6a8}.forest-map .flute span:before{content:"";position:absolute;left:1px;top:11px;width:22px;height:4px;border-radius:5px;background:#c9903f;transform:rotate(-18deg)}.forest-map .peacock span:before{content:"";position:absolute;left:7px;top:3px;width:11px;height:18px;border-radius:70% 30% 70% 30%;background:radial-gradient(circle at 48% 34%,#123b42 0 16%,#d7ad46 18% 28%,#2e8791 30% 52%,#79a06e 54% 72%,transparent 74%);transform:rotate(22deg)}.forest-map .temple span:before{content:"";position:absolute;left:5px;bottom:4px;width:15px;height:11px;background:#d8ad5f;clip-path:polygon(50% 0,100% 42%,88% 42%,88% 100%,12% 100%,12% 42%,0 42%)}@media(max-width:900px){.magic-forest-card{grid-template-columns:1fr}.forest-map{min-height:300px}}@media(max-width:700px){.magic-forest-card{padding:22px}.forest-map{min-height:360px}.forest-map button{min-width:96px}.forest-map .tree{left:8%;top:10%}.forest-map .cow{right:6%;top:24%}.forest-map .flute{left:28%;top:46%}.forest-map .peacock{left:8%;bottom:18%}.forest-map .temple{right:6%;bottom:12%}}
 
