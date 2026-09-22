@@ -172,7 +172,7 @@ main:has(>.kids-magic)>.topbar .login-link{
  top:auto!important;
  z-index:10!important;
  display:grid!important;
- grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
  width:100%!important;
  max-width:620px!important;
  min-height:68px!important;
@@ -701,7 +701,7 @@ main:has(.kids-magic) .mobile button:nth-child(5):after{font-size:7px}
 
 /* Kids: simple first screen, compact activity browsing, and child-sized feedback */
 .kids-magic{padding-top:clamp(28px,4vw,48px)}
-.kids-activities{order:-2;position:relative;top:auto;margin:0 0 20px;padding:0;border:0;border-radius:0;background:transparent;backdrop-filter:none;box-shadow:none;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kids-activities{order:1;position:relative;top:auto;margin:18px 0 0;padding:0;border:0;border-radius:0;background:transparent;backdrop-filter:none;box-shadow:none;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .kids-activities:before{content:"What would you like to do?";grid-column:1/-1;margin-bottom:2px;color:var(--teal);font:400 clamp(34px,4vw,50px)/1.05 var(--serif);letter-spacing:-.025em;text-align:center}
 .kids-activities:after{content:"Choose one to begin";grid-column:1/-1;grid-row:2;color:#667773;font:15px/1.4 var(--serif);text-align:center;margin:-8px 0 8px}
 .kids-activities button{position:relative;grid-row:3;min-height:126px;border-color:#e5d5b8;border-radius:14px;background:#fffdf7;padding:18px 12px;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;color:var(--teal);font-size:11px}
@@ -2863,3 +2863,98 @@ main:has(>.kids-magic)>.site-footer:after{right:-38px;transform:scaleX(-1) rotat
  .kids-magic.kid-page-create .story-maker-card,
  .kids-magic.kid-page-create .coloring-card{padding:24px 20px!important}
 }
+
+/* Kids mobile layout guard: keep navigation in document flow so it never
+   overlays the hero, cards, or half-screen layouts. */
+@media(max-width:768px){
+ .kids-magic,
+ .kids-magic.kid-page-game,
+ .kids-magic.kid-page-create,
+ .kids-magic.kid-page-stories{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:14px!important;
+  padding-top:12px!important;
+  overflow:visible!important;
+ }
+ .kids-magic .kids-page-tabs,
+ .kids-magic.kid-page-game .kids-page-tabs,
+ .kids-magic.kid-page-create .kids-page-tabs,
+ .kids-magic.kid-page-stories .kids-page-tabs{
+  order:-4!important;
+  position:relative!important;
+  top:auto!important;
+  z-index:2!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  align-self:stretch!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0 0 6px!important;
+  padding:6px!important;
+  gap:5px!important;
+  overflow:visible!important;
+  border-radius:15px!important;
+ }
+ .kids-magic .kids-page-tabs button,
+ .kids-magic.kid-page-game .kids-page-tabs button,
+ .kids-magic.kid-page-create .kids-page-tabs button,
+ .kids-magic.kid-page-stories .kids-page-tabs button{
+  flex:initial!important;
+  width:auto!important;
+  min-width:0!important;
+  min-height:50px!important;
+  padding:5px 3px!important;
+  font-size:9px!important;
+  line-height:1.05!important;
+  white-space:normal!important;
+ }
+ .kids-magic .kids-page-tabs button svg{width:18px!important;height:18px!important}
+ .kids-magic .kids-page-back,
+ .kids-magic.kid-page-game .kids-page-back,
+ .kids-magic.kid-page-create .kids-page-back,
+ .kids-magic.kid-page-stories .kids-page-back{
+  order:-3!important;
+  position:relative!important;
+  margin:0 2px 4px!important;
+  padding:5px 0!important;
+ }
+ .kids-magic .kids-magic-top,
+ .kids-magic .kids-magic-grid,
+ .kids-magic .magical-card,
+ .kids-magic .kids-game-page{
+  position:relative!important;
+  z-index:1!important;
+ }
+}
+
+/* Kids page isolation: only the selected Kids page should participate in
+   layout at any viewport width. This prevents Home, Quiz, Create, and
+   Kindness sections from stacking into each other on desktop, mobile, or
+   split-screen windows. */
+.kids-magic:not(.kid-page-home) .kid-mobile-home,
+.kids-magic:not(.kid-page-stories) .kid-mobile-stories,
+.kids-magic:not(.kid-page-explore) .kid-mobile-explore,
+.kids-magic:not(.kid-page-game) .kid-mobile-game,
+.kids-magic:not(.kid-page-quiz) .kid-mobile-quiz,
+.kids-magic:not(.kid-page-create) .kid-mobile-create,
+.kids-magic:not(.kid-page-kindness) .kid-mobile-kindness,
+.kids-magic:not(.kid-page-home)>.kids-activities{
+ display:none!important;
+}
+.kids-magic{display:flex!important;flex-direction:column!important}
+.kids-magic .kids-page-tabs{
+ order:-4!important;
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+.kids-magic .kids-page-back{order:-3!important}
+.kids-magic .kids-magic-top{order:-2!important}
+.kids-magic.kid-page-home>.kids-activities{
+ order:1!important;
+ position:relative!important;
+ top:auto!important;
+ z-index:1!important;
+ display:grid!important;
+ margin:18px 0 0!important;
+}
+
