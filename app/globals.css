@@ -539,6 +539,49 @@ main{overflow-x:hidden}.topbar{position:sticky;top:0;z-index:80;min-height:72px;
 .startup-splash{animation:none}
 @media(prefers-reduced-motion:reduce){.startup-splash{animation:none!important}}
 
+/* Interactive Kids Create studio */
+.kids-magic.kid-page-create .story-maker-card{
+ display:grid!important;
+ grid-template-columns:minmax(250px,.8fr) minmax(0,1.2fr)!important;
+ gap:clamp(18px,3vw,30px)!important;
+ align-items:center!important;
+ overflow:hidden!important;
+ background:linear-gradient(135deg,#0b4f50 0%,#e8f3ee 48%,#fff3d3 100%)!important;
+ color:var(--ink)!important;
+ box-shadow:0 22px 58px rgba(13,85,84,.13)!important
+}
+.story-maker-copy{position:relative;z-index:4;min-width:0}
+.story-maker-copy>p{display:inline-flex;margin:0 0 12px;padding:7px 11px;border-radius:999px;background:#f0d28e;color:#704f21;font-size:8px;font-weight:900;letter-spacing:.12em}
+.story-maker-copy h2{margin:0 0 14px;color:var(--teal);font:400 clamp(30px,3.4vw,44px)/1.06 var(--serif)}
+.create-stage{position:relative;z-index:1;min-height:330px;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#b9dee0 0 48%,#8fbd72 49% 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35),0 18px 38px rgba(7,63,64,.16)}
+.create-stage:before{content:"";position:absolute;left:-18%;right:-18%;bottom:58px;height:112px;border-radius:50% 50% 0 0;background:linear-gradient(145deg,#73a45e,#4d8651)}
+.create-stage:after{content:"";position:absolute;right:14%;top:30px;width:62px;height:62px;border-radius:50%;background:#f6d56e;box-shadow:0 0 0 14px rgba(255,244,188,.26)}
+.create-path{position:absolute;z-index:2;left:38%;bottom:-24px;width:31%;height:52%;background:linear-gradient(90deg,#d9b874,#f5dfa0,#c9954f);clip-path:polygon(38% 0,63% 0,100% 100%,0 100%);opacity:.9}
+.storybook-krishna.create{left:6%;right:auto;bottom:4px;top:auto;width:230px;height:270px;z-index:5}
+.storybook-krishna.create .storybook-portrait{left:29%;top:7%;width:47%}
+.storybook-krishna.create .storybook-portrait img{object-position:54% 45%;transform:scale(1.38)}
+.storybook-krishna.create .storybook-book{left:31%;bottom:15%;width:40%;height:17%}
+.storybook-krishna.create .storybook-calf{right:8%;bottom:12%;width:28%;height:18%}
+.create-charm{position:absolute;z-index:6;right:13%;bottom:72px;width:78px;height:78px;border-radius:50%;display:grid;place-items:center;background:rgba(255,253,247,.82);box-shadow:0 16px 32px rgba(28,78,65,.16);animation:createCharmFloat 3.4s ease-in-out infinite}
+.create-charm i,.create-charm b{position:absolute;display:block}
+.create-flute .create-charm i{width:62px;height:7px;border-radius:999px;background:linear-gradient(90deg,#7a4d24,#f0c866,#8b5528);transform:rotate(-18deg)}
+.create-flute .create-charm b{width:5px;height:5px;border-radius:50%;background:#70431f;box-shadow:15px -4px 0 #70431f}
+.create-lotus .create-charm i{width:23px;height:38px;border-radius:50%;background:#e88cab;box-shadow:-18px 12px 0 -3px #f2b7ca,18px 12px 0 -3px #cf6f91}
+.create-lotus .create-charm b{width:46px;height:24px;border-radius:50%;border-bottom:8px solid #d8ad5f;bottom:18px}
+.create-peacock .create-charm i{width:32px;height:62px;border-radius:70% 30% 70% 30%;background:radial-gradient(circle at 49% 30%,#143845 0 13%,#d5a948 15% 25%,#23808a 28% 51%,#7aa46e 53% 70%,transparent 73%);transform:rotate(21deg)}
+.create-peacock .create-charm b{width:2px;height:70px;background:#9f783d;transform:rotate(21deg);top:8px}
+.create-sparkles i{position:absolute;z-index:7;width:5px;height:5px;border-radius:50%;background:#fff4a8;box-shadow:0 0 13px #ffe883;animation:magicTwinkle 3.4s ease-in-out infinite}
+.create-sparkles i:nth-child(1){left:18%;top:20%}.create-sparkles i:nth-child(2){right:22%;top:38%;animation-delay:.7s}.create-sparkles i:nth-child(3){left:52%;bottom:25%;animation-delay:1.3s}
+.create-prompt-pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 15px}
+.create-prompt-pills button{min-height:36px;border:1px solid rgba(13,85,84,.16);border-radius:999px;background:#fffdf7;color:var(--teal);padding:0 13px;font-size:11px;font-weight:900;cursor:pointer}
+.create-prompt-pills button.active{background:var(--teal);border-color:var(--teal);color:white;box-shadow:0 10px 22px rgba(13,85,84,.18)}
+.kids-magic.kid-page-create .story-maker-card>.personal-story{grid-column:1/-1;z-index:5;margin-top:0}
+.storybook-portrait:after{content:"";position:absolute;right:18%;top:4%;width:30px;height:62px;border-radius:70% 30% 70% 30%;background:radial-gradient(circle at 49% 30%,#143845 0 13%,#d5a948 15% 25%,#23808a 28% 51%,#7aa46e 53% 70%,transparent 73%);transform:rotate(18deg);filter:drop-shadow(0 0 8px rgba(255,226,145,.4))}
+@keyframes createCharmFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(3deg)}}
+@media(max-width:860px){.kids-magic.kid-page-create .story-maker-card{grid-template-columns:1fr!important}.create-stage{min-height:300px}.storybook-krishna.create{left:5%;width:210px;height:250px}.create-charm{right:9%;bottom:62px}}
+@media(max-width:520px){.create-stage{min-height:260px}.storybook-krishna.create{left:-5%;bottom:-4px;transform:scale(.9)}.create-charm{width:64px;height:64px;right:8%;bottom:58px}.story-maker-copy h2{font-size:30px}.create-prompt-pills{display:grid;grid-template-columns:1fr}.create-prompt-pills button{width:100%}}
+@media(prefers-reduced-motion:reduce){.create-charm,.create-sparkles i{animation:none!important}}
+
 /* V1 content architecture: stories, life-situation Gita, journey */
 .reader-reflection{margin:34px 0;padding:26px;border:1px solid rgba(216,173,95,.34);background:linear-gradient(135deg,#fff8e8,#eef6f1);box-shadow:0 18px 45px rgba(43,65,54,.07)}
 .reader-reflection h2{max-width:680px;margin:0;font:400 clamp(24px,2.4vw,34px)/1.22 var(--serif);color:var(--teal)}
