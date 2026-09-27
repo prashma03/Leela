@@ -40,6 +40,14 @@ test("same local calendar day is stable across refresh times in multiple time zo
   }
 });
 
+test("home refresh counters do not change the daily verse", () => {
+  const day = getLocalDayNumber(new Date(2026, 8, 27, 9, 30));
+  const today = getVerseForDay(day);
+  for (const refreshCount of [0, 1, 2, 12, 99]) {
+    assert.equal(getVerseForDay(day).id, today.id, `refresh ${refreshCount}`);
+  }
+});
+
 test("leap day, month/year transitions, and DST advance by one calendar day", () => {
   const original = process.env.TZ;
   try {
