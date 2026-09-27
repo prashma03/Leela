@@ -195,6 +195,7 @@ export default function Home(){
  const narrationRef=useRef<SpeechSynthesisUtterance|null>(null);
  const lastMemoryPayload=useRef("");
  const askRequest=useRef<AbortController|null>(null);
+ const routeRef=useRef({ view, selected: null as Story|null, kidsSession, kidPage });
  const daily=dailyWisdom;
  const restoreAccount=useCallback((user:AccountSession)=>{setAccount(user);setShowEntry(false);setShowOpening(false);writeSaved("leelaEntrySeen","true");if(user.id==="demo")return;const memory=completeMemory(user.memory||{},user.name);lastMemoryPayload.current=JSON.stringify({memory:{name:memory.name,mood:memory.mood,favoriteAnimal:memory.favoriteAnimal,favoriteActivity:memory.favoriteActivity,goodDeeds:memory.goodDeeds,treasures:memory.treasures,savedStories:memory.savedStories,readStories:memory.readStories,dailyAdventureDone:memory.dailyAdventureDone}});setKidName(memory.name);setKidMood(memory.mood);setKidAnimal(memory.favoriteAnimal);setKidActivity(memory.favoriteActivity);setGoodDeeds(memory.goodDeeds);setCollectedTreasures(memory.treasures);setSaved(memory.savedStories);setReadStories(memory.readStories);setAdventureDone(memory.dailyAdventureDone)},[]);
  useEffect(()=>{let active=true;let timer:ReturnType<typeof setTimeout>|undefined;loadAccountSession().then(data=>{if(!active)return;const alreadyOpened=window.sessionStorage.getItem("leelaStartupSeen")==="true";window.sessionStorage.setItem("leelaStartupSeen","true");if(data.user){restoreAccount(data.user);if(!alreadyOpened){setStartupState("returning");timer=setTimeout(()=>{if(active)setStartupState("ready")},850)}else setStartupState("ready")}else setStartupState("ready")}).catch(error=>{if(active){setToast(error instanceof Error?error.message:"Unable to restore your session.");setStartupState("ready")}});return()=>{active=false;if(timer)clearTimeout(timer)}},[restoreAccount]);
@@ -210,6 +211,7 @@ export default function Home(){
  useEffect(()=>writeSaved("leelaAutoVoice",autoVoice?"true":""),[autoVoice]);
  useEffect(()=>writeSaved("leelaCalmPathDays",calmPathDays),[calmPathDays]);
  useEffect(()=>{if(view==="home"&&!showOpening&&!showEntry)window.sessionStorage.setItem("leelaHomeEntered","true")},[view,showOpening,showEntry]);
+ useEffect(()=>{routeRef.current={view,selected,kidsSession,kidPage}},[view,selected,kidsSession,kidPage]);
  useEffect(()=>{window.history.replaceState({leelaView:view,leelaKids:kidsSession,kidPage:kidPage},"",kidsSession?`#kids-${kidPage}`:`#${view}`)},[]);
  useEffect(()=>{
   const handlePopState=(event:PopStateEvent)=>{
@@ -227,6 +229,11 @@ export default function Home(){
   let lastBack=0;
   const listener=app.addListener("backButton",event=>{
    if(event.canGoBack){window.history.back();return}
+   const route=routeRef.current;
+   if(route.selected){setSelected(null);window.history.replaceState({leelaView:route.view},"",`#${route.view}`);return}
+   if(route.kidsSession&&route.kidPage!=="home"){setKidPage("home");window.history.replaceState({leelaKids:true,kidPage:"home"},"","#kids-home");return}
+   if(route.kidsSession){setKidsSession(false);setKidPage("home");setView("home");window.history.replaceState({leelaView:"home"},"","#home");return}
+   if(route.view!=="home"){setView("home");setSelected(null);window.history.replaceState({leelaView:"home"},"","#home");window.scrollTo({top:0,behavior:"smooth"});return}
    const now=Date.now();
    if(now-lastBack<1400){if(window.confirm("Exit Leela?"))app.exitApp?.();lastBack=0;return}
    lastBack=now;tell("Press back again to exit Leela.");
