@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { localDay, previousDay, streakStats } from "../lib/daily-streak";
 import JourneyGarden from "./JourneyGarden";
 
-type DailyTrackProps = { scope: string; visible: boolean; storiesRead: number; reflections: number; kindDeeds: number; treasures: number };
+type DailyTrackProps = { scope: string; visible: boolean; storiesRead: number; reflections: number; kindDeeds: number; treasures: number; bloomSignal?: number };
 
-export default function DailyTrack({ scope, visible, storiesRead, reflections, kindDeeds, treasures }: DailyTrackProps) {
+export default function DailyTrack({ scope, visible, storiesRead, reflections, kindDeeds, treasures, bloomSignal = 0 }: DailyTrackProps) {
   const [record, setRecord] = useState<{ days: string[]; today: string; stored: boolean }>({ days: [], today: "", stored: true });
   useEffect(() => {
     const key = `leelaDailyVisits:${scope}`;
@@ -34,7 +34,7 @@ export default function DailyTrack({ scope, visible, storiesRead, reflections, k
   const week = [record.today];
   while (week.length < 7) week.unshift(previousDay(week[0]));
   return <div className="content journey-daily-stack">
-    <JourneyGarden days={record.days} today={record.today} storiesRead={storiesRead} reflections={reflections} kindDeeds={kindDeeds} treasures={treasures}/>
+    <JourneyGarden days={record.days} today={record.today} storiesRead={storiesRead} reflections={reflections} kindDeeds={kindDeeds} treasures={treasures} bloomSignal={bloomSignal}/>
     <section className="daily-track" aria-labelledby="daily-track-title">
       <p className="eyebrow">Your daily rhythm</p><h2 id="daily-track-title">{stats.current} day{stats.current === 1 ? "" : "s"} of showing up</h2>
       <p>Today is checked in. A visit each day keeps your streak growing.</p>
