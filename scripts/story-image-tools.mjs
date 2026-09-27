@@ -3,7 +3,7 @@ import { dirname, join } from "node:path";
 
 const root = process.cwd();
 const storyFile = join(root, "app", "stories.ts");
-const placeholderDir = join(root, "public", "images", "stories", "placeholders");
+const placeholderDir = join(root, "public", "images", "stories", "manuscript");
 const manifestFile = join(root, "docs", "story-image-manifest.csv");
 const curatedIds = new Set(["butter", "kaliya", "govardhan", "flute", "sudama", "universe"]);
 const palettes = {
@@ -74,21 +74,25 @@ function placeholderSvg(story) {
   const [paper, accent, ink] = palettes[story.tone] || palettes.gold;
   const sunX = 100 + seed % 520;
   const hill = 120 + seed % 130;
+  const border = seed % 2 ? "#9f783d" : ink;
+  const secondary = seed % 3 ? "#fff7dc" : "#eadcc5";
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 900" role="img" aria-labelledby="title desc">
-  <title id="title">${escapeXml(story.title)}</title><desc id="desc">Temporary original illustration of ${escapeXml(scene)} ${escapeXml(setting)}.</desc>
-  <rect width="720" height="900" fill="${paper}"/><circle cx="${sunX}" cy="170" r="95" fill="${accent}" opacity=".34"/>
-  <path d="M0 ${610 + seed % 50} Q${hill} ${430 + seed % 80} ${hill * 2} ${620 - seed % 40} T720 580 V900 H0Z" fill="${accent}" opacity=".3"/>
-  <path d="M0 720 Q180 ${650 + seed % 55} 360 720 T720 700 V900 H0Z" fill="${ink}" opacity=".16"/>
-  ${motifMarkup(scene, seed, accent, ink)}
-  <rect x="42" y="42" width="636" height="816" rx="22" fill="none" stroke="${ink}" stroke-width="3" opacity=".22"/>
-  <text x="52" y="790" fill="${ink}" font-family="Georgia,serif" font-size="34">${escapeXml(story.title.length > 32 ? story.title.slice(0, 30) + "…" : story.title)}</text>
-  <text x="54" y="828" fill="${ink}" opacity=".72" font-family="Arial,sans-serif" font-size="16" letter-spacing="3">TEMPORARY LEELA ARTWORK</text>
+  <title id="title">${escapeXml(story.title)}</title><desc id="desc">Ancient book style miniature painting of ${escapeXml(scene)} ${escapeXml(setting)}.</desc>
+  <defs><filter id="paper"><feTurbulence baseFrequency=".018" numOctaves="3" seed="${seed % 97}"/><feColorMatrix type="saturate" values=".14"/><feBlend mode="multiply" in2="SourceGraphic"/></filter><pattern id="vine" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M4 26c14-2 16-15 34-13" fill="none" stroke="${border}" stroke-width="2" opacity=".42"/><circle cx="15" cy="20" r="3" fill="${accent}" opacity=".65"/><circle cx="30" cy="13" r="2.5" fill="${ink}" opacity=".38"/></pattern></defs>
+  <rect width="720" height="900" fill="#efe3c4"/><rect x="24" y="24" width="672" height="852" rx="18" fill="${paper}" filter="url(#paper)"/>
+  <rect x="45" y="45" width="630" height="810" rx="12" fill="none" stroke="${border}" stroke-width="8" opacity=".68"/><rect x="66" y="66" width="588" height="768" fill="none" stroke="url(#vine)" stroke-width="18" opacity=".78"/>
+  <rect x="93" y="104" width="534" height="626" rx="8" fill="${secondary}" stroke="${border}" stroke-width="4"/>
+  <circle cx="${sunX}" cy="190" r="70" fill="${accent}" opacity=".36"/><path d="M93 ${530 + seed % 54} Q${hill} ${382 + seed % 86} ${hill * 2} ${552 - seed % 34} T627 520 V730 H93Z" fill="${accent}" opacity=".34"/>
+  <path d="M93 640 Q226 ${590 + seed % 55} 360 646 T627 626 V730 H93Z" fill="${ink}" opacity=".18"/>
+  <g transform="translate(0 -20) scale(.84) translate(68 86)">${motifMarkup(scene, seed, accent, ink)}</g>
+  <path d="M158 742h404" stroke="${border}" stroke-width="3" opacity=".42"/><text x="360" y="785" fill="${ink}" font-family="Georgia,serif" font-size="32" text-anchor="middle">${escapeXml(story.title.length > 32 ? story.title.slice(0, 30) + "..." : story.title)}</text>
+  <text x="360" y="818" fill="${ink}" opacity=".7" font-family="Arial,sans-serif" font-size="13" text-anchor="middle" letter-spacing="3">LEELA MANUSCRIPT MINIATURE</text>
 </svg>\n`;
 }
 
 function generatedAlt(story) {
   const [scene, setting] = sceneFor(story.title, story.subtitle);
-  return `Original temporary storybook illustration of ${scene} ${setting} for ${story.title}, ${story.subtitle.toLowerCase()}`;
+  return `Ancient book style miniature painting of ${scene} ${setting} for ${story.title}, ${story.subtitle.toLowerCase()}`;
 }
 
 function generate() {
@@ -103,7 +107,7 @@ function generate() {
     if (!line.startsWith("{id:")) return line;
     const story = before.find(item => item.id === field(line, "id"));
     if (!story || curatedIds.has(story.id)) return line;
-    const replacement = `image:"/images/stories/placeholders/${story.id}.svg",imageAlt:"${generatedAlt(story)}"`;
+    const replacement = `image:"/images/stories/manuscript/${story.id}.svg",imageAlt:"${generatedAlt(story)}"`;
     return line.replace(/image:"[^"]+",imageAlt:"[^"]+"/, replacement);
   }).join("\n");
   writeFileSync(storyFile, source);
@@ -114,7 +118,7 @@ function writeManifest(stories) {
   mkdirSync(dirname(manifestFile), { recursive: true });
   const rows = ["story_id,title,status,image_path"];
   for (const story of stories) {
-    const status = curatedIds.has(story.id) ? "final-existing-artwork" : "temporary-needs-final-artwork";
+    const status = curatedIds.has(story.id) ? "final-existing-artwork" : "ancient-book-style-artwork";
     rows.push([story.id, story.title, status, story.image].map(value => `"${value.replaceAll('"', '""')}"`).join(","));
   }
   writeFileSync(manifestFile, rows.join("\n") + "\n");

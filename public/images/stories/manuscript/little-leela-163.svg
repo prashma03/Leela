@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 900" role="img" aria-labelledby="title desc">
+  <title id="title">Keshava and the child in tears</title><desc id="desc">Ancient book style miniature painting of friends gathered together in a village meeting place.</desc>
+  <defs><filter id="paper"><feTurbulence baseFrequency=".018" numOctaves="3" seed="63"/><feColorMatrix type="saturate" values=".14"/><feBlend mode="multiply" in2="SourceGraphic"/></filter><pattern id="vine" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M4 26c14-2 16-15 34-13" fill="none" stroke="#9f783d" stroke-width="2" opacity=".42"/><circle cx="15" cy="20" r="3" fill="#4f8d84" opacity=".65"/><circle cx="30" cy="13" r="2.5" fill="#d2a34f" opacity=".38"/></pattern></defs>
+  <rect width="720" height="900" fill="#efe3c4"/><rect x="24" y="24" width="672" height="852" rx="18" fill="#d7e8df" filter="url(#paper)"/>
+  <rect x="45" y="45" width="630" height="810" rx="12" fill="none" stroke="#9f783d" stroke-width="8" opacity=".68"/><rect x="66" y="66" width="588" height="768" fill="none" stroke="url(#vine)" stroke-width="18" opacity=".78"/>
+  <rect x="93" y="104" width="534" height="626" rx="8" fill="#eadcc5" stroke="#9f783d" stroke-width="4"/>
+  <circle cx="549" cy="190" r="70" fill="#4f8d84" opacity=".36"/><path d="M93 533 Q179 415 358 533 T627 520 V730 H93Z" fill="#4f8d84" opacity=".34"/>
+  <path d="M93 640 Q226 619 360 646 T627 626 V730 H93Z" fill="#d2a34f" opacity=".18"/>
+  <g transform="translate(0 -20) scale(.84) translate(68 86)"><g fill="#d2a34f"><circle cx="260" cy="425" r="58"/><circle cx="460" cy="425" r="58"/><path d="M170 650q15-165 90-165t90 165Z"/><path d="M370 650q15-165 90-165t90 165Z"/></g><path d="M295 505 Q360 555 425 505" fill="none" stroke="#4f8d84" stroke-width="18" stroke-linecap="round"/></g>
+  <path d="M158 742h404" stroke="#9f783d" stroke-width="3" opacity=".42"/><text x="360" y="785" fill="#d2a34f" font-family="Georgia,serif" font-size="32" text-anchor="middle">Keshava and the child in tears</text>
+  <text x="360" y="818" fill="#d2a34f" opacity=".7" font-family="Arial,sans-serif" font-size="13" text-anchor="middle" letter-spacing="3">LEELA MANUSCRIPT MINIATURE</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 900" role="img" aria-labelledby="title desc">
+  <title id="title">Hari and the shy song</title><desc id="desc">Ancient book style miniature painting of a flute and listening birds beneath a kadamba tree.</desc>
+  <defs><filter id="paper"><feTurbulence baseFrequency=".018" numOctaves="3" seed="64"/><feColorMatrix type="saturate" values=".14"/><feBlend mode="multiply" in2="SourceGraphic"/></filter><pattern id="vine" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M4 26c14-2 16-15 34-13" fill="none" stroke="#356d65" stroke-width="2" opacity=".42"/><circle cx="15" cy="20" r="3" fill="#ad8151" opacity=".65"/><circle cx="30" cy="13" r="2.5" fill="#356d65" opacity=".38"/></pattern></defs>
+  <rect width="720" height="900" fill="#efe3c4"/><rect x="24" y="24" width="672" height="852" rx="18" fill="#eadcc5" filter="url(#paper)"/>
+  <rect x="45" y="45" width="630" height="810" rx="12" fill="none" stroke="#356d65" stroke-width="8" opacity=".68"/><rect x="66" y="66" width="588" height="768" fill="none" stroke="url(#vine)" stroke-width="18" opacity=".78"/>
+  <rect x="93" y="104" width="534" height="626" rx="8" fill="#fff7dc" stroke="#356d65" stroke-width="4"/>
+  <circle cx="550" cy="190" r="70" fill="#ad8151" opacity=".36"/><path d="M93 534 Q180 416 360 532 T627 520 V730 H93Z" fill="#ad8151" opacity=".34"/>
+  <path d="M93 640 Q226 620 360 646 T627 626 V730 H93Z" fill="#356d65" opacity=".18"/>
+  <g transform="translate(0 -20) scale(.84) translate(68 86)"><g stroke="#356d65" stroke-width="18" stroke-linecap="round"><path d="M150 540 L560 410"/><circle cx="130" cy="478" r="8" fill="#ad8151"/><circle cx="212" cy="452" r="8" fill="#ad8151"/><circle cx="294" cy="426" r="8" fill="#ad8151"/></g></g>
+  <path d="M158 742h404" stroke="#356d65" stroke-width="3" opacity=".42"/><text x="360" y="785" fill="#356d65" font-family="Georgia,serif" font-size="32" text-anchor="middle">Hari and the shy song</text>
+  <text x="360" y="818" fill="#356d65" opacity=".7" font-family="Arial,sans-serif" font-size="13" text-anchor="middle" letter-spacing="3">LEELA MANUSCRIPT MINIATURE</text>
+</svg>
