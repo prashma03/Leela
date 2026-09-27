@@ -84,6 +84,12 @@ public class LeelaVersePlugin extends Plugin {
         else call.resolve();
     }
 
+    @PluginMethod
+    public void stopSpeaking(PluginCall call) {
+        if (narrator != null) narrator.stop();
+        call.resolve();
+    }
+
     @Override
     protected void handleOnDestroy() {
         if (narrator != null) { narrator.stop(); narrator.shutdown(); narrator = null; }
