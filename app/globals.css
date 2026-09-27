@@ -2967,3 +2967,7 @@ main:has(>.kids-magic)>.site-footer:after{right:-38px;transform:scaleX(-1) rotat
 @keyframes discoveryGlow{0%,100%{transform:scale(.92);box-shadow:0 0 0 5px rgba(255,232,146,.16),0 0 14px rgba(255,224,126,.35)}50%{transform:scale(1.06);box-shadow:0 0 0 9px rgba(255,232,146,.28),0 0 22px rgba(255,224,126,.6)}}@keyframes leafDrift{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(18px,12px) rotate(115deg)}}@keyframes riverShimmer{0%,100%{opacity:.55}50%{opacity:.9}}
 @media(max-width:700px){.vrindavan-explore{padding:18px 14px;border-radius:18px;gap:14px}.vrindavan-intro{align-items:start;flex-direction:column}.vrindavan-intro h1{font-size:40px}.vrindavan-progress{width:100%;grid-template-columns:auto 1fr;align-items:baseline}.little-adventure{align-items:flex-start;flex-direction:column;padding:16px}.little-adventure h2{font-size:25px}.vrindavan-map{min-height:475px}.vrindavan-spot b{display:none}.vrindavan-spot>span{width:38px;height:38px}.discovery-sheet{grid-template-columns:auto 1fr;padding:16px}.discovery-actions{grid-column:1/-1;justify-content:flex-start}.discovery-book-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.discovery-book-grid article{min-height:102px;padding:9px}.discovery-book-grid article b{font-size:9px}}
 
+/* Kids Corner hero: use one intentional image instead of a duplicate portrait overlay. */
+.kids-storybook>.storybook-krishna{display:none!important}
+.kids-storybook>div:not(.storybook-krishna){position:absolute!important;z-index:4!important}
+
