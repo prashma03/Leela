@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getShortChatReply } from "@/app/lib/chat-short-replies";
+import { getKrishnaFactReply, isFactualQuestion } from "@/app/lib/krishna-facts";
 import { stories } from "@/app/stories";
 
 type MemoryProfile = {
@@ -83,7 +84,7 @@ async function makeOpenAIReply(message: string, history: ChatTurn[] = []) {
         {
           role: "system",
           content:
-            "You are Leela, an educational guide for Krishna stories and Bhagavad Gita reflections. The user may be a child. Match the length of the reply to the request: answer simple conversation in one short sentence, and never add advice, a story, or a spiritual lesson unless it is relevant to what the user asked. Reply warmly, clearly, emotionally safely, practically, and without preaching. Do not claim to be Krishna, a deity, or a literal spiritual authority. Ground spiritual or religious claims in the app's curated Krishna stories and Gita paraphrases. Do not invent Sanskrit, verse numbers, quotations, or scriptural claims. If you are unsure, say the app has a related teaching rather than pretending certainty. If the user asks what story to read, recommend one specific Krishna story and explain why in 2-4 short sentences. Avoid dumping memory/profile details. Encourage one small real-life action only when helpful.",
+            "You are Leela, an educational guide for Krishna stories, the Mahabharata, and Bhagavad Gita reflections. The user may be a child. First identify the request type. If it is a factual who/what/where/when/how question, answer directly and briefly, with names or definitions first; do not start with emotional validation, advice, or a life lesson. If it is a story recommendation, recommend one specific story and explain why in 2-4 short sentences. If it is an emotional or advice request, respond warmly and practically. Match the length of the reply to the request. Never add advice, a story, or a spiritual lesson unless it is relevant to what the user asked. Do not claim to be Krishna, a deity, or a literal spiritual authority. Ground spiritual or religious claims in the app's curated Krishna stories and Gita paraphrases. Do not invent Sanskrit, verse numbers, quotations, or scriptural claims. If you are unsure, say you are not sure and offer a nearby related topic. Avoid dumping memory/profile details. Encourage one small real-life action only when helpful.",
         },
         {
           role: "user",
@@ -118,11 +119,14 @@ function makeServerReply(message: string, memory: MemoryProfile) {
   }
 
   const asksForStory = clean.includes("story") || clean.includes("read");
+  const asksFact = isFactualQuestion(message);
   const reminder = wisdom[Math.abs(message.length) % wisdom.length];
   const prefix = memory.name?.trim() ? `${memory.name.trim()}, ` : "";
 
   return {
-    text: asksForStory
+    text: asksFact
+      ? `${prefix}I am not fully sure about that from Leela's saved notes yet.\n\nYou can ask about Krishna, the Pandavas, the Kauravas, Arjuna, Draupadi, the Bhagavad Gita, the Mahabharata, dharma, karma, Vrindavan, or Gokul.`
+      : asksForStory
       ? `${prefix}I would read ${story.title}.\n\nIt is a good fit because: ${story.lesson}\n\nBefore you begin, take one quiet breath and let the story be small and gentle.`
       : `${prefix}I hear you.\n\nA small Krishna reminder: ${reminder}\n\nOne gentle next step: choose the kindest thing you can do in the next few minutes.\n\nA story that may help: ${story.title}.`,
     storyId: story.id,
@@ -141,6 +145,11 @@ export async function POST(request: Request) {
     const shortReply = getShortChatReply(message);
     if (shortReply) {
       return NextResponse.json({ text: shortReply, mode: "short-conversation" });
+    }
+
+    const factReply = getKrishnaFactReply(message);
+    if (factReply) {
+      return NextResponse.json(factReply);
     }
 
     const history = Array.isArray(body.history) ? body.history.filter(turn => turn && (turn.role === "user" || turn.role === "ai") && typeof turn.text === "string").slice(-12).map(turn => ({ role: turn.role, text: turn.text.slice(0, 1600) })) : [];

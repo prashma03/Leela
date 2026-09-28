@@ -737,7 +737,7 @@ main:has(.kids-magic) .mobile button:not(:nth-child(5)){display:none}
 main:has(.kids-magic) .mobile{justify-content:center}
 main:has(.kids-magic) .site-footer .footer-links,main:has(.kids-magic) .site-footer .art-credit{display:none}
 main:has(.kids-magic) .topbar nav button:nth-child(5),main:has(.kids-magic) .mobile button:nth-child(5){font-size:0}
-main:has(.kids-magic) .topbar nav button:nth-child(5):after,main:has(.kids-magic) .mobile button:nth-child(5):after{content:"Parent area";font-size:10px;font-weight:800}
+main:has(.kids-magic) .topbar nav button:nth-child(5):after,main:has(.kids-magic) .mobile button:nth-child(5):after{content:"Guardian section";font-size:10px;font-weight:800}
 main:has(.kids-magic) .mobile button:nth-child(5):after{font-size:7px}
 .kids-magic .coloring-tools label,.kids-magic .coloring-tools small{display:none}
 .kids-magic .coloring-tools:after{content:"Color choices stay on this device.";font:13px/1.55 var(--serif);color:#66766f}
@@ -2736,7 +2736,7 @@ main:has(>.kids-magic)>.site-footer:after{right:-38px;transform:scaleX(-1) rotat
   font-size:0!important
  }
  main:has(>.kids-magic) .mobile button:nth-child(5):after{
-  content:"Parent area";
+  content:"Guardian section";
   font-size:10px!important;
   font-weight:900!important
  }
@@ -3013,4 +3013,85 @@ main:has(>.kids-magic)>.site-footer:after{right:-38px;transform:scaleX(-1) rotat
 /* Kids Corner hero: use one intentional image instead of a duplicate portrait overlay. */
 .kids-storybook>.storybook-krishna{display:none!important}
 .kids-storybook>div:not(.storybook-krishna){position:absolute!important;z-index:4!important}
+
+.guardian-section{
+ order:-2;
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) minmax(300px,.82fr);
+ gap:18px;
+ align-items:center;
+ width:100%;
+ margin:2px 0 6px;
+ padding:18px;
+ border:1px solid rgba(13,85,84,.14);
+ border-radius:18px;
+ background:linear-gradient(135deg,#fffdf7,#eef6e7 54%,#dceeea);
+ box-shadow:0 16px 34px rgba(25,57,53,.08)
+}
+.guardian-section p{
+ margin:0 0 8px;
+ color:#9a7135;
+ font-size:9px;
+ font-weight:900;
+ letter-spacing:.16em
+}
+.guardian-section h2{
+ margin:0;
+ color:var(--teal);
+ font:400 clamp(25px,3.4vw,38px)/1.05 var(--serif)
+}
+.guardian-section small{
+ display:block;
+ margin-top:7px;
+ color:#60746d;
+ font-size:13px;
+ line-height:1.45
+}
+.guardian-stats{
+ display:grid;
+ grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:9px
+}
+.guardian-stats span{
+ min-height:74px;
+ padding:12px 8px;
+ border:1px solid rgba(13,85,84,.1);
+ border-radius:14px;
+ background:rgba(255,253,247,.82);
+ display:grid;
+ place-items:center;
+ text-align:center
+}
+.guardian-stats b{
+ max-width:100%;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+ color:var(--teal);
+ font:800 18px/1 var(--serif);
+ text-transform:capitalize
+}
+.guardian-stats small{
+ margin:5px 0 0;
+ color:#7b8b83;
+ font-size:8px;
+ font-weight:900;
+ letter-spacing:.08em;
+ text-transform:uppercase
+}
+
+@media(max-width:760px){
+ .guardian-section{
+  grid-template-columns:1fr;
+  gap:12px;
+  padding:15px;
+  border-radius:16px
+ }
+ .guardian-stats{
+  grid-template-columns:repeat(2,minmax(0,1fr))
+ }
+ .guardian-stats span{
+  min-height:62px
+ }
+}
 
