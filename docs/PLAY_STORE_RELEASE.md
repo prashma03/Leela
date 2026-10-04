@@ -8,7 +8,7 @@
 - Version name: `1.1`
 - Minimum Android API: `24`
 - Target Android API: `36`
-- Production origin: `https://leela-ruddy.vercel.app`
+- Production origin: `https://www.krishnaleelas.com`
 - Release output: `android/app/build/outputs/bundle/release/app-release.aab`
 
 The Android app is a Capacitor shell that loads the production HTTPS origin. The release build disables cleartext traffic, mixed content, WebView debugging, application backup, and Capacitor logging.
@@ -34,8 +34,8 @@ Before every later upload, increase `versionCode` in `android/app/build.gradle`.
 
 ## Play Console values
 
-- Privacy policy: `https://leela-ruddy.vercel.app/privacy`
-- Account deletion: `https://leela-ruddy.vercel.app/delete-account`
+- Privacy policy: `https://www.krishnaleelas.com/privacy`
+- Account deletion: `https://www.krishnaleelas.com/delete-account`
 - App category: Education
 - Contains ads: No
 - App access: explain that reviewers can use the visible demo experience without creating a personal account

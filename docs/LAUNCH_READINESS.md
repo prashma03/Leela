@@ -77,6 +77,11 @@ Optional knobs:
 - `LEELA_LOAD_TEST_CONCURRENCY=16`
 - `LEELA_LOAD_TEST_ASK=1` to include `/api/krishna` short-message traffic.
 
+Baseline from October 3, 2026 against `https://www.krishnaleelas.com`:
+
+- Public/auth smoke load: 3,904 requests over 30 seconds at concurrency 8, 0 failures, overall p95 93ms.
+- With `LEELA_LOAD_TEST_ASK=1`: public/auth stayed fast with 0 failures; Ask Leela returned 429 after the route limiter engaged. Treat that as a successful limiter test, not a normal user-traffic target.
+
 ## Android release QA
 
 Use a Play Internal testing build, not only `localhost` or a browser:
