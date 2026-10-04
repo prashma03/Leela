@@ -32,7 +32,7 @@ export default function VrindavanExplorer() {
       <small>Tap something magical in the garden to discover a little surprise.</small>
     </header>
     <div className={styles.scene} aria-label={remainingHint || "Every little discovery has been found."}>
-      <Image src="/images/kids/vrindavan-storybook-garden.png" alt="Original hand-painted Vrindavan garden with child Krishna, a calf, peacock, flute, lotus pond, and temple" fill sizes="(max-width: 700px) calc(100vw - 40px), 1080px" priority />
+      <Image src="/images/kids/vrindavan-storybook-garden.webp" alt="Original hand-painted Vrindavan garden with child Krishna, a calf, peacock, flute, lotus pond, and temple" fill sizes="(max-width: 700px) calc(100vw - 40px), 1080px" priority />
       <span className={styles.wash}/><span className={styles.path}/><span className={styles.lotus}/><span className={styles.butterfly}/>
       {discoveries.map(item => <button type="button" key={item.id} className={`${styles.discovery} ${styles[item.id]} ${found.includes(item.id) ? styles.found : ""}`} onClick={() => discover(item)} aria-label={`Discover ${item.title.replace("You found ", "")}`}>
         <i aria-hidden="true"/><b aria-hidden="true"/>

@@ -7,8 +7,8 @@ export const privateHeaders = {
   "Expires": "0",
 };
 
-export function accountJson(body: unknown, status = 200) {
-  return NextResponse.json(body, { status, headers: privateHeaders });
+export function accountJson(body: unknown, status = 200, headers?: HeadersInit) {
+  return NextResponse.json(body, { status, headers: { ...privateHeaders, ...headers } });
 }
 
 export function accountFailure(error: unknown) {

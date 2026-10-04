@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { getCurrentAccount, updateAccountMemory } from "@/app/lib/account-store";
 import { AccountError } from "@/app/lib/account-memory";
 import { accountFailure, accountJson, readAccountBody, requireSameOrigin } from "@/app/lib/account-http";
+import { checkRateLimit, rateLimitHeaders } from "@/app/lib/rate-limit";
 import { createSupabaseServer } from "@/app/lib/supabase/server";
 
 export const runtime = "nodejs";
@@ -26,6 +27,8 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    const rate = checkRateLimit(request, { scope: "memory:write", limit: 60, windowMs: 60_000 });
+    if (rate.limited) return accountJson({ error: "Journey saving is receiving too many updates. Please wait a moment." }, 429, rateLimitHeaders(rate));
     requireSameOrigin(request);
     const { client, account } = await authenticatedStore();
     const body = await readAccountBody(request);

@@ -391,7 +391,7 @@ main:has(>.kids-magic)>.topbar .login-link{
  width:100%!important;
  height:100%!important;
  min-height:320px!important;
- background:linear-gradient(90deg,#fffaf0 0%,rgba(255,250,240,.06) 22%),url('/images/stories/krishna-childhood.png') center 42%/cover no-repeat!important;
+ background:linear-gradient(90deg,#fffaf0 0%,rgba(255,250,240,.06) 22%),url('/images/stories/krishna-childhood.webp') center 42%/cover no-repeat!important;
  pointer-events:none!important;
 }
 .kids-magic .daily-adventure-card:before,
@@ -476,7 +476,7 @@ main:has(>.kids-magic)>.topbar .login-link{
   grid-row:auto!important;
   height:205px!important;
   min-height:205px!important;
-  background:linear-gradient(180deg,#fffaf0 0%,rgba(255,250,240,.08) 24%),url('/images/stories/krishna-childhood.png') center 42%/cover no-repeat!important;
+  background:linear-gradient(180deg,#fffaf0 0%,rgba(255,250,240,.08) 24%),url('/images/stories/krishna-childhood.webp') center 42%/cover no-repeat!important;
  }
 }
 
@@ -923,7 +923,7 @@ main:has(.kids-magic) .mobile button:nth-child(5):after{font-size:7px}
 .forest-map .forest-temple span:before{content:"";position:absolute;left:5px;bottom:4px;width:15px;height:11px;background:#d8ad5f;clip-path:polygon(50% 0,100% 42%,88% 42%,88% 100%,12% 100%,12% 42%,0 42%)}
 
 /* Use archival artwork as the forest scene; the buttons are labels, not invented icon drawings. */
-.forest-map{background:linear-gradient(rgba(255,253,247,.14),rgba(255,253,247,.22)),url("/images/stories/flute.png") center/cover no-repeat!important}
+.forest-map{background:linear-gradient(rgba(255,253,247,.14),rgba(255,253,247,.22)),url("/images/stories/flute.webp") center/cover no-repeat!important}
 .forest-map .forest-spot{background:rgba(255,253,247,.92)!important;backdrop-filter:blur(3px)}
 .forest-map .forest-spot span{display:none}
 .forest-map .forest-spot span:before,.forest-map .forest-spot span:after{content:none!important}
@@ -2369,7 +2369,7 @@ main:has(>.chat-page){height:100dvh;overflow:hidden}
 .kids-magic .daily-adventure-card>button:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(13,85,84,.2)}
 .kids-magic .daily-adventure-card>button:active{transform:translateY(0);box-shadow:0 6px 14px rgba(13,85,84,.17)}
 .kids-magic .daily-adventure-card>button:focus-visible{outline:3px solid #c99b43;outline-offset:3px}
-.kids-magic .daily-adventure-card:after{content:"";position:absolute;z-index:1;right:0;top:0;width:38%;height:100%;background:linear-gradient(90deg,#f7e7c8 0%,rgba(247,231,200,.12) 24%),url('/images/stories/krishna-childhood.png') center 39%/cover no-repeat;pointer-events:none}
+.kids-magic .daily-adventure-card:after{content:"";position:absolute;z-index:1;right:0;top:0;width:38%;height:100%;background:linear-gradient(90deg,#f7e7c8 0%,rgba(247,231,200,.12) 24%),url('/images/stories/krishna-childhood.webp') center 39%/cover no-repeat;pointer-events:none}
 .kids-magic .daily-adventure-card:before{content:"";position:absolute;z-index:2;right:31%;bottom:18px;width:92px;height:52px;border-bottom:2px solid rgba(61,113,79,.32);border-radius:0 0 70% 50%;transform:rotate(-8deg);box-shadow:30px 12px 0 -28px #76966c,-18px 15px 0 -28px #76966c;pointer-events:none}
 .kids-magic .adventure-feather{z-index:3;right:clamp(18px,3vw,40px);bottom:20px;width:70px;height:98px;opacity:.86;filter:drop-shadow(0 8px 16px rgba(44,67,53,.2))}
 
@@ -2406,7 +2406,7 @@ main:has(>.kids-magic)>.site-footer:after{right:-38px;transform:scaleX(-1) rotat
  .kids-magic .daily-adventure-card>p,.kids-magic .daily-adventure-card>h2,.kids-magic .daily-adventure-card>small,.kids-magic .daily-adventure-card>button{grid-column:1}
  .kids-magic .daily-adventure-card>h2,.kids-magic .quiz.magical-card>h2{font-size:clamp(2rem,9vw,2.7rem)}
  .kids-magic .daily-adventure-card>small{font-size:14px}
- .kids-magic .daily-adventure-card:after{top:auto;bottom:0;width:100%;height:185px;background:linear-gradient(180deg,#f7e7c8 0%,rgba(247,231,200,.06) 30%),url('/images/stories/krishna-childhood.png') center 40%/cover no-repeat}
+ .kids-magic .daily-adventure-card:after{top:auto;bottom:0;width:100%;height:185px;background:linear-gradient(180deg,#f7e7c8 0%,rgba(247,231,200,.06) 30%),url('/images/stories/krishna-childhood.webp') center 40%/cover no-repeat}
  .kids-magic .daily-adventure-card:before{right:18%;bottom:16px}
  .kids-magic .adventure-feather{right:18px;bottom:12px;width:58px;height:82px}
  .kids-magic .quiz.magical-card{padding:26px 22px}
@@ -2644,7 +2644,7 @@ main:has(>.kids-magic)>.site-footer:after{right:-38px;transform:scaleX(-1) rotat
 .kids-magic.kid-page-stories .daily-adventure-card>h2{max-width:610px;margin-bottom:13px;color:#104f4d}
 .kids-magic.kid-page-stories .daily-adventure-card>small{max-width:610px;margin-bottom:0}
 .kids-magic.kid-page-stories .daily-adventure-card>button{margin-top:22px;margin-bottom:28px}
-.kids-magic.kid-page-stories .daily-adventure-card:after{position:relative;grid-column:1/-1;right:auto;top:auto;width:100%;height:280px;background:linear-gradient(180deg,#fff6df 0%,rgba(255,246,223,.08) 24%),url('/images/stories/krishna-childhood.png') center 42%/cover no-repeat}
+.kids-magic.kid-page-stories .daily-adventure-card:after{position:relative;grid-column:1/-1;right:auto;top:auto;width:100%;height:280px;background:linear-gradient(180deg,#fff6df 0%,rgba(255,246,223,.08) 24%),url('/images/stories/krishna-childhood.webp') center 42%/cover no-repeat}
 .kids-magic.kid-page-stories .daily-adventure-card:before,.kids-magic.kid-page-stories .adventure-feather{display:none}
 
 @media(max-width:768px){

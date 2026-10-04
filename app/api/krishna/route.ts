@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { getShortChatReply } from "@/app/lib/chat-short-replies";
 import { getKrishnaFactReply, isFactualQuestion } from "@/app/lib/krishna-facts";
+import { checkRateLimit, rateLimitHeaders } from "@/app/lib/rate-limit";
 import { stories } from "@/app/stories";
 
 type MemoryProfile = {
@@ -93,9 +94,10 @@ async function makeOpenAIReply(message: string, history: ChatTurn[] = []) {
       ],
       max_output_tokens: 280,
     }),
-  });
+    signal: AbortSignal.timeout(12_000),
+  }).catch(() => null);
 
-  if (!response.ok) return null;
+  if (!response?.ok) return null;
   const data = await response.json();
   const text = extractOutputText(data);
   return text ? { text, mode: "openai-message-only" } : null;
@@ -136,6 +138,19 @@ function makeServerReply(message: string, memory: MemoryProfile) {
 
 export async function POST(request: Request) {
   try {
+    const rate = checkRateLimit(request, { scope: "krishna", limit: 24, windowMs: 60_000 });
+    if (rate.limited) {
+      return NextResponse.json(
+        { error: "Ask Leela is receiving too many messages. Please wait a moment and try again." },
+        { status: 429, headers: rateLimitHeaders(rate) },
+      );
+    }
+    if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) {
+      return NextResponse.json({ error: "Expected JSON." }, { status: 415 });
+    }
+    if (Number(request.headers.get("content-length")) > 32_768) {
+      return NextResponse.json({ error: "Request is too large." }, { status: 413 });
+    }
     const body = await request.json() as { message?: string; memory?: MemoryProfile; history?: ChatTurn[] };
     const message = body.message?.trim();
     if (!message) {

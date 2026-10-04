@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { authenticateAccount, createAccount, getCurrentAccount } from "@/app/lib/account-store";
 import { AccountError } from "@/app/lib/account-memory";
 import { accountFailure, accountJson, readAccountBody, requireSameOrigin } from "@/app/lib/account-http";
+import { checkRateLimit, rateLimitHeaders } from "@/app/lib/rate-limit";
 import { clearAccountCookies, createSupabaseAdmin, createSupabaseServer, hasSupabaseConfiguration, sessionCookieOptions } from "@/app/lib/supabase/server";
 
 export const runtime = "nodejs";
@@ -21,6 +22,8 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    const rate = checkRateLimit(request, { scope: "auth:write", limit: 12, windowMs: 60_000 });
+    if (rate.limited) return accountJson({ error: "Too many sign-in attempts. Please wait a moment." }, 429, rateLimitHeaders(rate));
     requireSameOrigin(request);
     const body = await readAccountBody(request);
     if (body.mode === "demo") {
@@ -41,6 +44,8 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
+    const rate = checkRateLimit(request, { scope: "auth:delete", limit: 8, windowMs: 60_000 });
+    if (rate.limited) return accountJson({ error: "Too many account requests. Please wait a moment." }, 429, rateLimitHeaders(rate));
     requireSameOrigin(request);
     const deleteAccount = new URL(request.url).searchParams.get("deleteAccount") === "true";
     const isDemo = (await cookies()).get(demoCookie)?.value === demoSession;
