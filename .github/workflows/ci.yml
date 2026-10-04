@@ -23,4 +23,5 @@ jobs:
       - run: npm run test:story-images
       - run: npm run test:daily
       - run: npm run test:accounts
+      - run: node --check scripts/load-test.mjs
       - run: npm run build

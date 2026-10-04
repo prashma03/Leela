@@ -38,14 +38,14 @@ Recommended production dashboards:
 
 ## Rate limiting
 
-Current in-app limits are process-local guardrails:
+Current in-app limits:
 
 - Ask Leela: 24 requests per minute per IP/user-agent bucket.
 - Auth writes: 12 requests per minute.
 - Account deletion/signout: 8 requests per minute.
 - Memory writes: 60 requests per minute.
 
-For multi-instance or serverless scale, replace or supplement this with a shared edge limiter such as hosting-provider WAF/rate limits, Redis/Upstash, Cloudflare, or Vercel Firewall. Process-local limits reduce accidental abuse but do not coordinate across regions or instances.
+By default, Leela uses process-local guardrails suitable for development and single-instance deployments. For multi-instance/serverless scale, set `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` to enable the shared Redis-backed limiter. Hosting-provider WAF/rate limits, Cloudflare, or Vercel Firewall are still recommended at the edge for volumetric attacks.
 
 ## Load testing plan
 
@@ -64,6 +64,18 @@ Minimum targets before public launch:
 - Error rate under 1% during a 30-minute staged test.
 
 Never load test production OpenAI/Supabase without explicit spend limits and test-user isolation.
+
+Built-in staging smoke load test:
+
+```bash
+LEELA_LOAD_TEST_URL=https://YOUR_STAGING_DOMAIN npm run load:test
+```
+
+Optional knobs:
+
+- `LEELA_LOAD_TEST_DURATION_MS=60000`
+- `LEELA_LOAD_TEST_CONCURRENCY=16`
+- `LEELA_LOAD_TEST_ASK=1` to include `/api/krishna` short-message traffic.
 
 ## Android release QA
 
@@ -85,8 +97,8 @@ Use a Play Internal testing build, not only `localhost` or a browser:
 
 ## Remaining scale work
 
-- Add shared/distributed rate limiting before large traffic.
+- Configure shared/distributed rate limiting before large traffic.
 - Add real crash/error reporting with privacy review.
 - Split `app/page.tsx` further into route-sized client modules.
 - Add automated Play release build verification in CI.
-- Add staging load-test scripts once the target host is finalized.
+- Run staging load tests from more than one region once the target host is finalized.

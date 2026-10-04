@@ -31,7 +31,7 @@ export async function GET() {
 export async function POST(request: Request) {
   return timedRoute("api/memory POST", async () => {
   try {
-    const rate = checkRateLimit(request, { scope: "memory:write", limit: 60, windowMs: 60_000 });
+    const rate = await checkRateLimit(request, { scope: "memory:write", limit: 60, windowMs: 60_000 });
     if (rate.limited) return accountJson({ error: "Journey saving is receiving too many updates. Please wait a moment." }, 429, rateLimitHeaders(rate));
     requireSameOrigin(request);
     const { client, account } = await authenticatedStore();

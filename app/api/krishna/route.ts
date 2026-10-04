@@ -140,7 +140,7 @@ function makeServerReply(message: string, memory: MemoryProfile) {
 export async function POST(request: Request) {
   return timedRoute("api/krishna POST", async () => {
   try {
-    const rate = checkRateLimit(request, { scope: "krishna", limit: 24, windowMs: 60_000 });
+    const rate = await checkRateLimit(request, { scope: "krishna", limit: 24, windowMs: 60_000 });
     if (rate.limited) {
       return NextResponse.json(
         { error: "Ask Leela is receiving too many messages. Please wait a moment and try again." },

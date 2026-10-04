@@ -11,7 +11,8 @@
     "check": "npm run lint && npm run typecheck && npm run build",
     "test:daily": "tsc --module commonjs --outDir .next/daily-tests --esModuleInterop --target es2020 --skipLibCheck tests/daily-verse.test.ts && node --test .next/daily-tests/tests/daily-verse.test.js",
     "test:accounts": "tsc --module commonjs --outDir .next/account-tests --esModuleInterop --target es2020 --skipLibCheck tests/accounts.test.ts && node --conditions=react-server --test .next/account-tests/tests/accounts.test.js",
-    "test:story-images": "node scripts/story-image-tools.mjs --verify"
+    "test:story-images": "node scripts/story-image-tools.mjs --verify",
+    "load:test": "node scripts/load-test.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.0",

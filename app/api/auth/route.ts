@@ -26,7 +26,7 @@ export async function GET() {
 export async function POST(request: Request) {
   return timedRoute("api/auth POST", async () => {
   try {
-    const rate = checkRateLimit(request, { scope: "auth:write", limit: 12, windowMs: 60_000 });
+    const rate = await checkRateLimit(request, { scope: "auth:write", limit: 12, windowMs: 60_000 });
     if (rate.limited) return accountJson({ error: "Too many sign-in attempts. Please wait a moment." }, 429, rateLimitHeaders(rate));
     requireSameOrigin(request);
     const body = await readAccountBody(request);
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
   return timedRoute("api/auth DELETE", async () => {
   try {
-    const rate = checkRateLimit(request, { scope: "auth:delete", limit: 8, windowMs: 60_000 });
+    const rate = await checkRateLimit(request, { scope: "auth:delete", limit: 8, windowMs: 60_000 });
     if (rate.limited) return accountJson({ error: "Too many account requests. Please wait a moment." }, 429, rateLimitHeaders(rate));
     requireSameOrigin(request);
     const deleteAccount = new URL(request.url).searchParams.get("deleteAccount") === "true";
