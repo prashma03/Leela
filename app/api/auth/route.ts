@@ -3,6 +3,7 @@ import { authenticateAccount, createAccount, getCurrentAccount } from "@/app/lib
 import { AccountError } from "@/app/lib/account-memory";
 import { accountFailure, accountJson, readAccountBody, requireSameOrigin } from "@/app/lib/account-http";
 import { checkRateLimit, rateLimitHeaders } from "@/app/lib/rate-limit";
+import { timedRoute } from "@/app/lib/server-timing";
 import { clearAccountCookies, createSupabaseAdmin, createSupabaseServer, hasSupabaseConfiguration, sessionCookieOptions } from "@/app/lib/supabase/server";
 
 export const runtime = "nodejs";
@@ -12,15 +13,18 @@ const demoSession = "leela-demo";
 const demoUser = { id: "demo", name: "Demo visitor", email: "demo@leela.app", memory: {} };
 
 export async function GET() {
+  return timedRoute("api/auth GET", async () => {
   try {
     if ((await cookies()).get(demoCookie)?.value === demoSession) return accountJson({ user: demoUser });
     if (!hasSupabaseConfiguration()) return accountJson({ user: null });
     const user = await getCurrentAccount(await createSupabaseServer());
     return accountJson({ user });
   } catch (error) { return accountFailure(error); }
+  });
 }
 
 export async function POST(request: Request) {
+  return timedRoute("api/auth POST", async () => {
   try {
     const rate = checkRateLimit(request, { scope: "auth:write", limit: 12, windowMs: 60_000 });
     if (rate.limited) return accountJson({ error: "Too many sign-in attempts. Please wait a moment." }, 429, rateLimitHeaders(rate));
@@ -40,9 +44,11 @@ export async function POST(request: Request) {
     (await cookies()).set(demoCookie, "", { ...sessionCookieOptions, maxAge: 0 });
     return accountJson(result);
   } catch (error) { return accountFailure(error); }
+  });
 }
 
 export async function DELETE(request: Request) {
+  return timedRoute("api/auth DELETE", async () => {
   try {
     const rate = checkRateLimit(request, { scope: "auth:delete", limit: 8, windowMs: 60_000 });
     if (rate.limited) return accountJson({ error: "Too many account requests. Please wait a moment." }, 429, rateLimitHeaders(rate));
@@ -65,4 +71,5 @@ export async function DELETE(request: Request) {
     await clearAccountCookies();
     return accountJson({ user: null, deleted: deleteAccount });
   } catch (error) { return accountFailure(error); }
+  });
 }

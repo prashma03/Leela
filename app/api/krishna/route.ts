@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { getShortChatReply } from "@/app/lib/chat-short-replies";
 import { getKrishnaFactReply, isFactualQuestion } from "@/app/lib/krishna-facts";
 import { checkRateLimit, rateLimitHeaders } from "@/app/lib/rate-limit";
+import { timedRoute } from "@/app/lib/server-timing";
 import { stories } from "@/app/stories";
 
 type MemoryProfile = {
@@ -137,6 +138,7 @@ function makeServerReply(message: string, memory: MemoryProfile) {
 }
 
 export async function POST(request: Request) {
+  return timedRoute("api/krishna POST", async () => {
   try {
     const rate = checkRateLimit(request, { scope: "krishna", limit: 24, windowMs: 60_000 });
     if (rate.limited) {
@@ -173,4 +175,5 @@ export async function POST(request: Request) {
   } catch {
     return NextResponse.json({ error: "Unable to prepare Ask Leela response." }, { status: 500 });
   }
+  });
 }

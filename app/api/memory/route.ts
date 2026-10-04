@@ -3,6 +3,7 @@ import { getCurrentAccount, updateAccountMemory } from "@/app/lib/account-store"
 import { AccountError } from "@/app/lib/account-memory";
 import { accountFailure, accountJson, readAccountBody, requireSameOrigin } from "@/app/lib/account-http";
 import { checkRateLimit, rateLimitHeaders } from "@/app/lib/rate-limit";
+import { timedRoute } from "@/app/lib/server-timing";
 import { createSupabaseServer } from "@/app/lib/supabase/server";
 
 export const runtime = "nodejs";
@@ -19,13 +20,16 @@ async function authenticatedStore() {
 }
 
 export async function GET() {
+  return timedRoute("api/memory GET", async () => {
   try {
     const { account } = await authenticatedStore();
     return accountJson({ profileId: account.id, memory: account.memory, storage: "supabase" });
   } catch (error) { return accountFailure(error); }
+  });
 }
 
 export async function POST(request: Request) {
+  return timedRoute("api/memory POST", async () => {
   try {
     const rate = checkRateLimit(request, { scope: "memory:write", limit: 60, windowMs: 60_000 });
     if (rate.limited) return accountJson({ error: "Journey saving is receiving too many updates. Please wait a moment." }, 429, rateLimitHeaders(rate));
@@ -36,4 +40,5 @@ export async function POST(request: Request) {
     const memory = await updateAccountMemory(client, body.memory);
     return accountJson({ profileId: account.id, memory, storage: "supabase" });
   } catch (error) { return accountFailure(error); }
+  });
 }
