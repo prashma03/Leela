@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
 
 import java.util.Locale;
 
@@ -22,6 +23,12 @@ public class LeelaVersePlugin extends Plugin {
     static final String PREFS = "leela_daily_verse";
     static final String SCHEDULE = "schedule";
     private TextToSpeech narrator;
+    private String currentSpeechText = "";
+    private double currentSpeechRate = 0.8;
+    private double currentSpeechPitch = 0.92;
+    private int speechBaseOffset = 0;
+    private int currentSpeechOffset = 0;
+    private boolean paused;
 
     @PluginMethod
     public void saveVerseSchedule(PluginCall call) {
@@ -76,17 +83,71 @@ public class LeelaVersePlugin extends Plugin {
     }
 
     private void readAloud(PluginCall call, String text, double rate, double pitch) {
+        currentSpeechText = text;
+        currentSpeechRate = rate;
+        currentSpeechPitch = pitch;
+        speechBaseOffset = 0;
+        currentSpeechOffset = 0;
+        paused = false;
+        configureNarrator(rate, pitch);
+        int result = narrator.speak(text, TextToSpeech.QUEUE_FLUSH, null, "leela-narration");
+        if (result == TextToSpeech.ERROR) call.reject("Android text-to-speech could not start.");
+        else call.resolve();
+    }
+
+    private void configureNarrator(double rate, double pitch) {
         narrator.setLanguage(Locale.getDefault());
         narrator.setSpeechRate((float) Math.max(0.5, Math.min(1.25, rate)));
         narrator.setPitch((float) Math.max(0.75, Math.min(1.15, pitch)));
-        int result = narrator.speak(text, TextToSpeech.QUEUE_FLUSH, null, "leela-narration");
-        if (result == TextToSpeech.ERROR) call.reject("Android text-to-speech could not start.");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            narrator.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+                @Override
+                public void onStart(String utteranceId) {}
+
+                @Override
+                public void onDone(String utteranceId) {
+                    if (!paused) currentSpeechOffset = 0;
+                }
+
+                @Override
+                public void onError(String utteranceId) {}
+
+                @Override
+                public void onRangeStart(String utteranceId, int start, int end, int frame) {
+                    int offset = speechBaseOffset + start;
+                    currentSpeechOffset = Math.max(0, Math.min(currentSpeechText.length(), offset));
+                }
+            });
+        }
+    }
+
+    @PluginMethod
+    public void pauseSpeaking(PluginCall call) {
+        paused = true;
+        if (narrator != null) narrator.stop();
+        call.resolve();
+    }
+
+    @PluginMethod
+    public void resumeSpeaking(PluginCall call) {
+        if (narrator == null || currentSpeechText.isEmpty()) { call.resolve(); return; }
+        paused = false;
+        configureNarrator(currentSpeechRate, currentSpeechPitch);
+        speechBaseOffset = Math.max(0, Math.min(currentSpeechText.length(), currentSpeechOffset));
+        String remaining = currentSpeechText.substring(speechBaseOffset).trim();
+        if (remaining.isEmpty()) { call.resolve(); return; }
+        int result = narrator.speak(remaining, TextToSpeech.QUEUE_FLUSH, null, "leela-narration-resume");
+        if (result == TextToSpeech.ERROR) call.reject("Android text-to-speech could not resume.");
         else call.resolve();
     }
 
     @PluginMethod
     public void stopSpeaking(PluginCall call) {
         if (narrator != null) narrator.stop();
+        currentSpeechText = "";
+        speechBaseOffset = 0;
+        currentSpeechOffset = 0;
+        paused = false;
         call.resolve();
     }
 

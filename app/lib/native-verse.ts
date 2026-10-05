@@ -8,6 +8,8 @@ type LeelaVersePlugin = {
   pinVerseWidget(): Promise<{ supported: boolean }>;
   openWallpaperChooser(): Promise<void>;
   speak(options: { text: string; rate?: number; pitch?: number }): Promise<void>;
+  pauseSpeaking(): Promise<void>;
+  resumeSpeaking(): Promise<void>;
   stopSpeaking(): Promise<void>;
 };
 
@@ -45,6 +47,18 @@ export async function pinVerseWidgetToHomeScreen() {
 export async function speakWithAndroidTts(text: string, rate = 0.8, pitch = 0.92) {
   if (!Capacitor.isNativePlatform() || Capacitor.getPlatform() !== "android") return false;
   await LeelaVerse.speak({ text, rate, pitch });
+  return true;
+}
+
+export async function pauseAndroidTts() {
+  if (!Capacitor.isNativePlatform() || Capacitor.getPlatform() !== "android") return false;
+  await LeelaVerse.pauseSpeaking();
+  return true;
+}
+
+export async function resumeAndroidTts() {
+  if (!Capacitor.isNativePlatform() || Capacitor.getPlatform() !== "android") return false;
+  await LeelaVerse.resumeSpeaking();
   return true;
 }
 
